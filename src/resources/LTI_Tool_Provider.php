@@ -1367,7 +1367,12 @@ EOF;
         $response = '';
       }
     }
-
+    
+    if ($response != TRUE) {
+      error_log("ERROR: Response received for action {$action} / user {$user} : {$response}");
+      error_log("ERROR: XML response: {$XML}");
+      error_log("ERROR: Params: " . print_r($params, TRUE));
+    }
     return $response;
 
   }
