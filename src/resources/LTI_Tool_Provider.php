@@ -1367,14 +1367,7 @@ EOF;
         $response = '';
       }
     }
-
-    if ($response != TRUE) {
-      error_log("ERROR: Response received for action {$action} / user {$user} : {$response}");
-      error_log("ERROR: XML response: {$xml}");
-      error_log("ERROR: Params: " . print_r($params, TRUE));
-    }
     return $response;
-
   }
 
 /**
@@ -1760,8 +1753,10 @@ EOF;
             $ok = TRUE;
           }
         } catch (Exception $e) {
+          error_log( print_r( $e, TRUE) );
         }
       }
+      error_log( print_r ($this, TRUE));
     }
     return $ok;
   }

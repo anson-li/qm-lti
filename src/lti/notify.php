@@ -78,7 +78,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
         $outcome->clearAccessedResult($consumer, $resource_link, $participant_id);
         $outcome->saveToResult($consumer, $resource_link, $participant_id, 1, $result_id);
       } else {
-        error_log("Failed to pass outcome of {$score} for {$result_id}. Variables set: Resource Link: " . print_r($resource_link, TRUE) . ", Consumer: " . print_r($consumer, TRUE) . " , Outcome: " . print_r($outcome, TRUE) . " POST: " . print_r($_POST, TRUE));
+        error_log("Failed to pass outcome of {$score} for {$result_id}.");
       }
     }
   } else {
