@@ -1733,6 +1733,8 @@ EOF;
       $hash = base64_encode(sha1($xmlRequest, TRUE));
       $params = array('oauth_body_hash' => $hash);
       // Add OAuth signature
+      error_log("This response:");
+      error_log( print_r ($xmlRequest, true));
       $hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
       $consumer = new OAuthConsumer($this->consumer->getKey(), $this->consumer->secret, NULL);
       $req = OAuthRequest::from_consumer_and_token($consumer, NULL, 'POST', $url, $params);
@@ -1753,10 +1755,8 @@ EOF;
             $ok = TRUE;
           }
         } catch (Exception $e) {
-          error_log( print_r( $e, TRUE) );
         }
       }
-      error_log( print_r ($this, TRUE));
     }
     return $ok;
   }
