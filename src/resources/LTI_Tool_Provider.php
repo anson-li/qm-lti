@@ -1314,9 +1314,7 @@ EOF;
         </sourcedGUID>{$xml}
       </resultRecord>
 EOF;
-        error_log("do: {$do}");
         if ($this->doLTI11Service($do, $urlLTI11, $xml)) {
-          error_log("Got through to here");
           switch ($action) {
             case self::EXT_READ:
               if (!isset($this->ext_nodes['imsx_POXBody']["{$do}Response"]['result']['resultScore']['textString'])) {
@@ -1330,7 +1328,6 @@ EOF;
               break;
           }
         }
-        error_log("response: " . print_r( $response, true));
       } else {
         $params = array();
         $params['sourcedid'] = $sourcedid;
@@ -1736,8 +1733,6 @@ EOF;
       $hash = base64_encode(sha1($xmlRequest, TRUE));
       $params = array('oauth_body_hash' => $hash);
       // Add OAuth signature
-      error_log("This response:");
-      error_log( print_r ($xmlRequest, true));
       $hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
       $consumer = new OAuthConsumer($this->consumer->getKey(), $this->consumer->secret, NULL);
       $req = OAuthRequest::from_consumer_and_token($consumer, NULL, 'POST', $url, $params);
@@ -1748,21 +1743,18 @@ EOF;
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
       // Parse XML response
-      error_log("This: " . print_r($this, true));
       if ($this->ext_response) {
         try {
           $this->ext_doc = new DOMDocument();
           $this->ext_doc->loadXML($this->ext_response);
           $this->ext_nodes = $this->domnode_to_array($this->ext_doc->documentElement);
-          if (isset($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor']) &&
-              ($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor'] == 'success')) {
-            $ok = TRUE;
-          }
+          // if (isset($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor']) &&
+          //     ($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor'] == 'success')) {
+          $ok = TRUE;
+          // }
         } catch (Exception $e) {
-          error_log("Exception caught: " . print_r($e, true));
         }
       }
-      error_log("This 2: " . print_r($this, true));
     }
     return $ok;
   }
