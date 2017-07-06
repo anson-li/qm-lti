@@ -1351,7 +1351,6 @@ EOF;
         if (!empty($lti_outcome->data_source)) {
           $params['result_datasource'] = $lti_outcome->data_source;
         }
-        error_log("params: " . print_r( $params, true ));
         if ($this->doService($do, $urlExt, $params)) {
           switch ($action) {
             case self::EXT_READ:
@@ -1365,8 +1364,6 @@ EOF;
               break;
           }
         }
-        error_log("Error: this response: " . print_r($this, true));
-        error_log("response 2: " . print_r( $response, true));
       }
       if (is_array($response) && (count($response) <= 0)) {
         $response = '';
@@ -1671,6 +1668,7 @@ EOF;
           }
         }
       }
+      error_log("Ready1: " . print_r($query_params, TRUE) );
       $params = $params + $query_params;
       // Add standard parameters
       $params['oauth_consumer_key'] = $this->consumer->getKey();
@@ -1686,8 +1684,10 @@ EOF;
       foreach (array_keys($query_params) as $name) {
         unset($params[$name]);
       }
+      error_log("Ready2: " . print_r($params, TRUE) );
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $params);
+      error_log("Ready2.5: " . print_r($this, TRUE));
       // Parse XML response
       if ($this->ext_response) {
         try {
@@ -1700,6 +1700,7 @@ EOF;
         } catch (Exception $e) {
         }
       }
+      error_log("Ready3: " . print_r($ok, TRUE) );
     }
     return $ok;
   }
