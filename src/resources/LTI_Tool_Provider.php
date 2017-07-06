@@ -1365,9 +1365,8 @@ EOF;
               break;
           }
         }
-        error_log("response 2: " . print_r( $response, true));
-      } else {
         error_log("Error: this response: " . print_r($this, true));
+        error_log("response 2: " . print_r( $response, true));
       }
       if (is_array($response) && (count($response) <= 0)) {
         $response = '';
