@@ -1316,6 +1316,7 @@ EOF;
 EOF;
         error_log("do: {$do}");
         if ($this->doLTI11Service($do, $urlLTI11, $xml)) {
+          error_log("Got through to here");
           switch ($action) {
             case self::EXT_READ:
               if (!isset($this->ext_nodes['imsx_POXBody']["{$do}Response"]['result']['resultScore']['textString'])) {
@@ -1351,7 +1352,6 @@ EOF;
         if (!empty($lti_outcome->data_source)) {
           $params['result_datasource'] = $lti_outcome->data_source;
         }
-        error_log("params: " . print_r( $params, true ));
         if ($this->doService($do, $urlExt, $params)) {
           switch ($action) {
             case self::EXT_READ:
@@ -1365,9 +1365,6 @@ EOF;
               break;
           }
         }
-        error_log("response 2: " . print_r( $response, true));
-      } else {
-        error_log("Error: this response: " . print_r($this));
       }
       if (is_array($response) && (count($response) <= 0)) {
         $response = '';
