@@ -1314,6 +1314,7 @@ EOF;
         </sourcedGUID>{$xml}
       </resultRecord>
 EOF;
+        error_log("do: {$do}");
         if ($this->doLTI11Service($do, $urlLTI11, $xml)) {
           switch ($action) {
             case self::EXT_READ:
@@ -1328,6 +1329,7 @@ EOF;
               break;
           }
         }
+        error_log("response: " . print_r( $response, true));
       } else {
         $params = array();
         $params['sourcedid'] = $sourcedid;
@@ -1349,6 +1351,7 @@ EOF;
         if (!empty($lti_outcome->data_source)) {
           $params['result_datasource'] = $lti_outcome->data_source;
         }
+        error_log("params: " . print_r( $params, true ));
         if ($this->doService($do, $urlExt, $params)) {
           switch ($action) {
             case self::EXT_READ:
@@ -1362,6 +1365,7 @@ EOF;
               break;
           }
         }
+        error_log("response 2: " . print_r( $response, true));
       }
       if (is_array($response) && (count($response) <= 0)) {
         $response = '';
