@@ -1790,7 +1790,7 @@ EOF;
     }
     $resp = '';
     // Try using curl if available
-    error_log("There")
+    error_log("There");
     if (function_exists('curl_init')) {
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
