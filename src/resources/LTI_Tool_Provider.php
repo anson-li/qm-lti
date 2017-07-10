@@ -1790,6 +1790,7 @@ EOF;
     }
     $resp = '';
     // Try using curl if available
+    error_log("There")
     if (function_exists('curl_init')) {
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
@@ -1815,6 +1816,7 @@ EOF;
       $this->ext_request_headers = str_replace("\r\n", "\n", curl_getinfo($ch, CURLINFO_HEADER_OUT));
       curl_close($ch);
     } else {
+      error_log("Here");
       // Try using fopen if curl was not available or did not work (could have been an SSL certificate issue)
       $opts = array('method' => 'POST',
                     'content' => $data
