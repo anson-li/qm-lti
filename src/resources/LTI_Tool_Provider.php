@@ -1755,9 +1755,15 @@ EOF;
           if (isset($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor']) &&
               ($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor'] == 'success')) {
           $ok = TRUE;
+          } else {
+            error_log("Didn't get the right values in DOM document.");
           }
         } catch (Exception $e) {
         }
+        error_log("Got dom document but didn't work.");
+      } else {
+        error_log("Didn't receive a DOM document.");
+        $ok = TRUE;
       }
       error_log("1debug4");
       error_log("debugmsg_ " . print_r($this, true));
