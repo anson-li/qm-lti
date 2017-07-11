@@ -1741,12 +1741,10 @@ EOF;
       $req->sign_request($hmac_method, $consumer, NULL);
       $params = $req->get_parameters();
       $header = $req->to_header();
-      error_log("1debug2");
       $header .= "\nContent-Type: application/xml";
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
       // Parse XML response
-      error_log("1debug3");
       if ($this->ext_response) {
         try {
           $this->ext_doc = new DOMDocument();
@@ -1754,20 +1752,11 @@ EOF;
           $this->ext_nodes = $this->domnode_to_array($this->ext_doc->documentElement);
           if (isset($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor']) &&
               ($this->ext_nodes['imsx_POXHeader']['imsx_POXResponseHeaderInfo']['imsx_statusInfo']['imsx_codeMajor'] == 'success')) {
-          $ok = TRUE;
-          } else {
-            error_log("Didn't get the right values in DOM document.");
+            $ok = TRUE;
           }
         } catch (Exception $e) {
         }
-        error_log("Got dom document but didn't work.");
-      } else {
-        error_log("Didn't receive a DOM document.");
-        $ok = TRUE;
       }
-      error_log("1debug4");
-      error_log("debugmsg_ " . print_r($this, true));
-      error_log("debugmsg_2 " . print_r($this->ext_nodes, true));
     }
     return $ok;
   }
@@ -1790,14 +1779,17 @@ EOF;
     }
     $resp = '';
     // Try using curl if available
-    error_log("There");
     if (function_exists('curl_init')) {
+      // Start of Bart issue
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
       if (!empty($header)) {
         $headers = explode("\n", $header);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
       }
+      error_log("CURL setopt begin");
+      error_log("headers: " . print_r($headers, true));
+      error_log("curl data init: " . print_r($ch, true));
       curl_setopt($ch, CURLOPT_POST, TRUE);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -1806,17 +1798,25 @@ EOF;
       curl_setopt($ch, CURLOPT_SSLVERSION,3);
       $ch_resp = curl_exec($ch);
       $ok = $ch_resp !== FALSE;
+      error_log("CURL configs set.");
+      error_log("curl data: " . print_r($ch, true));
+      error_log("Response: " . print_r($ch_resp, true));
+      error_log("OK parsed: " . print_r($ok, true));
       if ($ok) {
         $ch_resp = str_replace("\r\n", "\n", $ch_resp);
         $ch_resp_split = explode("\n\n", $ch_resp, 2);
         $this->ext_response_headers = $ch_resp_split[0];
         $resp = $ch_resp_split[1];
         $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE) < 400;
+        error_log("curl resp: " . print_r($ch_resp_split, true));
+        error_log("This response headers: " . print_r($this, true));
+        error_log("OK parsed 2: " . print_r($ok, true));
       }
       $this->ext_request_headers = str_replace("\r\n", "\n", curl_getinfo($ch, CURLINFO_HEADER_OUT));
+      error_log("Final This: " . print_r($this, true));
       curl_close($ch);
+      // End of Bart issue
     } else {
-      error_log("Here");
       // Try using fopen if curl was not available or did not work (could have been an SSL certificate issue)
       $opts = array('method' => 'POST',
                     'content' => $data
