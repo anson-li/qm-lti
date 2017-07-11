@@ -1788,6 +1788,7 @@ EOF;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
       }
       error_log("CURL setopt begin");
+      error_log("URL: " . $url);
       error_log("headers: " . print_r($headers, true));
       error_log("curl data init: " . print_r($ch, true));
       curl_setopt($ch, CURLOPT_POST, TRUE);
