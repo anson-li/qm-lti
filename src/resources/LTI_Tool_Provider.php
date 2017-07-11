@@ -1799,6 +1799,7 @@ EOF;
       curl_setopt($ch, CURLOPT_SSLVERSION, 3);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
       $ch_resp = curl_exec($ch);
+      error_log("Curl error: " . curl_error($ch));
       $ok = $ch_resp !== FALSE;
       error_log("CURL configs set.");
       error_log("curl data: " . print_r($ch, true));
