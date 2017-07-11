@@ -1328,7 +1328,6 @@ EOF;
               break;
           }
         }
-        error_log("Response is: " . print_r( $response, true));
       } else {
         $params = array();
         $params['sourcedid'] = $sourcedid;
@@ -1710,7 +1709,6 @@ EOF;
  * @return boolean True if the request successfully obtained a response
  */
   private function doLTI11Service($type, $url, $xml) {
-    error_log("1debug1");
     $ok = FALSE;
     $this->ext_response = NULL;
     if (!empty($url)) {
@@ -1787,10 +1785,6 @@ EOF;
         $headers = explode("\n", $header);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
       }
-      error_log("CURL setopt begin");
-      error_log("URL: " . $url);
-      error_log("headers: " . print_r($headers, true));
-      error_log("curl data init: " . print_r($ch, true));
       curl_setopt($ch, CURLOPT_POST, TRUE);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -1799,26 +1793,16 @@ EOF;
       curl_setopt($ch, CURLOPT_SSLVERSION, 4);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
       $ch_resp = curl_exec($ch);
-      error_log("Curl error: " . curl_error($ch));
       $ok = $ch_resp !== FALSE;
-      error_log("CURL configs set.");
-      error_log("curl data: " . print_r($ch, true));
-      error_log("Response: " . print_r($ch_resp, true));
-      error_log("OK parsed: " . print_r($ok, true));
       $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-      error_log("HTTP code: " . $http_code);
       if ($ok) {
         $ch_resp = str_replace("\r\n", "\n", $ch_resp);
         $ch_resp_split = explode("\n\n", $ch_resp, 2);
         $this->ext_response_headers = $ch_resp_split[0];
         $resp = $ch_resp_split[1];
         $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE) < 400;
-        error_log("curl resp: " . print_r($ch_resp_split, true));
-        error_log("This response headers: " . print_r($this, true));
-        error_log("OK parsed 2: " . print_r($ok, true));
       }
       $this->ext_request_headers = str_replace("\r\n", "\n", curl_getinfo($ch, CURLINFO_HEADER_OUT));
-      error_log("Final This: " . print_r($this, true));
       curl_close($ch);
       // End of Bart issue
     } else {
