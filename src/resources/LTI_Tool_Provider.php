@@ -1796,13 +1796,16 @@ EOF;
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
       curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
       curl_setopt($ch, CURLOPT_HEADER, TRUE);
-      curl_setopt($ch, CURLOPT_SSLVERSION,3);
+      curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
       $ch_resp = curl_exec($ch);
       $ok = $ch_resp !== FALSE;
       error_log("CURL configs set.");
       error_log("curl data: " . print_r($ch, true));
       error_log("Response: " . print_r($ch_resp, true));
       error_log("OK parsed: " . print_r($ok, true));
+      $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      error_log("HTTP code: " . $http_code);
       if ($ok) {
         $ch_resp = str_replace("\r\n", "\n", $ch_resp);
         $ch_resp_split = explode("\n\n", $ch_resp, 2);
