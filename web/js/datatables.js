@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     $('.DataTable-staff').DataTable({
     columnDefs: [
-      { "bSortable": true }
+      { orderable: false, targets: 1 }
     ]
     });
 
