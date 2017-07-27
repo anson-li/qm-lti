@@ -21,7 +21,9 @@ $(document).ready(function() {
     });
 
     $('.DataTable-staff').DataTable({
-    columnDefs: []
+    columnDefs: [
+      { "bSortable": true }
+    ]
     });
 
 } );
