@@ -17,12 +17,15 @@
 ?>
         <form action="staff.php" method="POST">
         <table class="DataTable-staff table table-sm" cellpadding="0" cellspacing="0">
+        <thead>
         <tr class="GridHeader">
           <td>&nbsp;</td>
           <td class="AssessmentName">Assessment Name</td>
           <td class="AssessmentAuthor">Assessment Author</td>
           <td class="LastModified">Last Modified</td>
         </tr>
+        </thead>
+        <tbody>
 <?php
     $i = 0;
     foreach ($assessments as $assessment) {
@@ -43,7 +46,8 @@
         </tr>
 <?php
     }
-?>
+?>      
+        </tbody>
         </table>
         <br><br>
         <p>
