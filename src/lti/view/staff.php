@@ -16,7 +16,7 @@
   if ((count($assessments) > 0) && !is_null($assessments[0])) {
 ?>
         <form action="staff.php" method="POST">
-        <table class="DataTable table table-sm" cellpadding="0" cellspacing="0">
+        <table class="DataTable-staff table table-sm" cellpadding="0" cellspacing="0">
         <tr class="GridHeader">
           <td>&nbsp;</td>
           <td class="AssessmentName">Assessment Name</td>

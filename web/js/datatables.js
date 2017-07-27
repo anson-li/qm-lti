@@ -16,7 +16,12 @@ $(document).ready(function() {
     $('.DataTable').DataTable({
     columnDefs: [
       { type: 'numeric-parse', targets: [1, 2] },
-      { orderable: true } //false, targets: -1
+      { orderable: false, targets: -1 }
     ]
     });
+
+    $('.DataTable-staff').DataTable({
+    columnDefs: []
+    });
+
 } );
