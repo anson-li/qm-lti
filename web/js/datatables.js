@@ -14,16 +14,17 @@ $(document).ready(function() {
     } );
 
     $('.DataTable').DataTable({
-    columnDefs: [
-      { type: 'numeric-parse', targets: [1, 2] },
-      { orderable: false, targets: -1 }
-    ]
+        columnDefs: [
+          { type: 'numeric-parse', targets: [1, 2] },
+          { orderable: false, targets: -1 }
+        ]
     });
 
     $('.DataTable-staff').DataTable({
-    columnDefs: [
-      { orderable: false, targets: 0 }
-    ]
+        order: [],
+        columnDefs: [
+          { orderable: false, targets: 0 }
+        ]
     });
 
 } );
