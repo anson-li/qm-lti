@@ -43,8 +43,9 @@ require_once('model/staff.php');
   }
 
   $script = <<< EOD
-<link rel="stylesheet" type="text/css" href="../../../web/css/jquery.dataTables.min.css"/>
-<script type="text/javascript" src="../../../web/js/jquery.dataTables.min.js"></script>
+<script src="../../../web/js/staff.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../../../web/datatables/css/dataTables.bootstrap.min.css"/>
+<script type="text/javascript" src="../../../web/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../web/js/datatables.js"></script>
 EOD;
 
