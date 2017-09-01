@@ -163,6 +163,8 @@ class Student {
     } else {
     	$this->participant_id = FALSE;
     }
+    error_log("Debugging session variables");
+    error_log(print_r($_SESSION));
   }
 
 /**
