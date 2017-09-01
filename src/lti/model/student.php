@@ -186,8 +186,8 @@ class Student {
           }
         }
       } else {
-        error_log(print_r($this->group_list, true));
-        error_log(print_r($this->group, true));
+        error_log(print_r($this->group_list->GroupList, true));
+        error_log(print_r($this->group->Group_ID, true));
         if ((!stdclass_empty($this->group_list)) && (!stdclass_empty($this->group_list->GroupList)) && (!stdclass_empty($this->group_list->GroupList->Group)) && (!stdclass_empty($this->group)) && ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID)) {
           $found = TRUE;
         }
