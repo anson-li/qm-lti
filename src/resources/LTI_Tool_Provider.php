@@ -187,7 +187,7 @@ class LTI_Tool_Provider {
 /**
  * Permitted LTI versions for messages.
  */
-  private $LTI_VERSIONS = array(self::LTI_VERSION); // 'LTI-2p0' is not a permitted LTI version
+  private $LTI_VERSIONS = array(self::LTI_VERSION, 'LTI-2p0');
 
 /**
  * Class constructor
