@@ -41,7 +41,7 @@ require_once('model/student.php');
   }
 
   $student->createParticipant();
-  error_log($student->participant_id);
+  error_log("participant_id: " . $student->participant_id);
   $url = $student->getAccessAssessmentNotify();
   if (isset($_SESSION['error'])) {
     $url = "error.php";
