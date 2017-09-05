@@ -32,13 +32,19 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   // initialise database
   $db = open_db();
 
-  $consumer_key = $_POST['lti_consumer_key'];
-  $resource_link_id = $_POST['lti_context_id'];
-  $result_id = $_POST['lti_result_id'];
-  $report_id = $_POST['Result_ID'];
-  $participant_id = $_POST['lti_participant_id'];
-  $score = $_POST['Percentage_Score'];
-  $participant = $_POST['Participant'];
+  try {
+    $consumer_key = $_POST['lti_consumer_key'];
+    $resource_link_id = $_POST['lti_context_id'];
+    $result_id = $_POST['lti_result_id'];
+    $report_id = $_POST['Result_ID'];
+    $participant_id = $_POST['lti_participant_id'];
+    $score = $_POST['Percentage_Score'];
+    $participant = $_POST['Participant'];
+  } catch (Exception $e) {
+    error_log("Invalid parameter configuration, did not save result.");
+    exit();
+  }
+
   $is_saved = FALSE;
   $score_decimal = $score / 100;
 
