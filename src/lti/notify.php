@@ -33,7 +33,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   $db = open_db();
 
   // Catch any issues with using an incompatible lti.pip
-  $post_required = array('lti_consumer_key', 'lti_context_id', 'lti_result_id', 'Result_ID', 'lti_participant_id', 'Percentage_Score', 'Participant');
+  $post_required = array('lti_participant_id');
   foreach ($post_required as $field) {
     if (empty($_POST[$field])) {
       error_log("Invalid parameter configuration, did not save result.");
