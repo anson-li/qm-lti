@@ -32,7 +32,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   // initialise database
   $db = open_db();
 
-  try {
+  if (isset($_POST['lti_participant_id'])) { // Catch any issues with using an older LTI.pip form.
     $consumer_key = $_POST['lti_consumer_key'];
     $resource_link_id = $_POST['lti_context_id'];
     $result_id = $_POST['lti_result_id'];
@@ -40,7 +40,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     $participant_id = $_POST['lti_participant_id'];
     $score = $_POST['Percentage_Score'];
     $participant = $_POST['Participant'];
-  } catch (Exception $e) {
+  } else {
     error_log("Invalid parameter configuration, did not save result.");
     exit();
   }
