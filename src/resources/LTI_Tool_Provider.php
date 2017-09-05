@@ -1743,6 +1743,7 @@ EOF;
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
       // Parse XML response
+      error_log($this->ext_response);
       if ($this->ext_response) {
         try {
           $this->ext_doc = new DOMDocument();
