@@ -1730,6 +1730,7 @@ EOF;
 </imsx_POXEnvelopeRequest>
 EOF;
       // Calculate body hash
+      error_log("XML Request: " . $this->ext_response);
       $hash = base64_encode(sha1($xmlRequest, TRUE));
       $params = array('oauth_body_hash' => $hash);
       // Add OAuth signature
