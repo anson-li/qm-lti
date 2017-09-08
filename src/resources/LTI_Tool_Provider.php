@@ -223,8 +223,6 @@ class LTI_Tool_Provider {
     # Set return URL if available
     if (isset($_POST['launch_presentation_return_url'])) {
       $this->return_url = $_POST['launch_presentation_return_url'];
-      $this->return_url = str_replace("&","%26", $this->return_url);
-      error_log($this->return_url);
     }
     # Perform action
     if ($this->authenticate()) {
