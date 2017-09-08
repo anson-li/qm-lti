@@ -1731,7 +1731,7 @@ EOF;
 EOF;
       // Calculate body hash
       error_log("URL: " . $url);
-      error_log("XML Request: " . $this->ext_response);
+      error_log("XML Request: " . $xmlRequest);
       $hash = base64_encode(sha1($xmlRequest, TRUE));
       $params = array('oauth_body_hash' => $hash);
       // Add OAuth signature
