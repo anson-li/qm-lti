@@ -111,6 +111,9 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
         $_SESSION['qmwise_checksum'] = $customer['qmwise_checksum'];
       }
 
+      $return_url = parse_url($_SESSION['lti_return_url']);
+      parse_str($return_url['query'], $_SESSION['additional_params']);
+      
       // set redirect URL
       if ($is_student) {
         $page = 'student_nav';
