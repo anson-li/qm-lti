@@ -1799,7 +1799,9 @@ EOF;
       curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_SSLVERSION, 4);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+      error_log("CH: {$ch}");
       $ch_resp = curl_exec($ch);
+      error_log("CH_RESP: {$ch_resp}");
       $ok = $ch_resp !== FALSE;
       $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
       if ($ok) {
