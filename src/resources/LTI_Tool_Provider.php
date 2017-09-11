@@ -1251,11 +1251,13 @@ class LTI_Resource_Link {
     # Lookup service details from the source resource link appropriate to the user (in case the destination is being shared)
     $source_resource_link = $this;
     $sourcedid = $lti_outcome->getSourcedid();
+    error_log("Sourcedid from the outcome: {$sourcedid}");
     $resultid = $lti_outcome->getResultID();
     if (!is_null($user)) {
       $source_resource_link = $user->getResourceLink();
       $sourcedid = $user->lti_result_sourcedid;
       $resultid = NULL;
+      error_log("Sourcedid from the user: {$sourcedid}");
     }
     # Use LTI 1.1 service in preference to extension service if it is available
     $urlLTI11 = $source_resource_link->getSetting('lis_outcome_service_url');
@@ -1314,6 +1316,7 @@ EOF;
         </sourcedGUID>{$xml}
       </resultRecord>
 EOF;
+        error_log("XML: {$xml}");
         if ($this->doLTI11Service($do, $urlLTI11, $xml)) {
           switch ($action) {
             case self::EXT_READ:
