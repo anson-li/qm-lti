@@ -1367,6 +1367,7 @@ EOF;
         $response = '';
       }
     }
+    error_log("Result response: {$response}");
     return $response;
   }
 
