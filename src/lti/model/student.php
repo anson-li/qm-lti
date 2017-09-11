@@ -85,6 +85,10 @@ class Student {
  *  Number of attempts previously taken.
  */
   protected $past_attempts = NULL;
+/** 
+ *  Additional parameters passed by the tool consumer.
+ */
+  protected $additional_params = NULL;
 
 /**
  * Class constructor
