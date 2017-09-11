@@ -1810,6 +1810,21 @@ EOF;
         $this->ext_response_headers = $ch_resp_split[0];
         $resp = $ch_resp_split[1];
         $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE) < 400;
+      } else {
+        $opts = array('method' => 'POST',
+                      'content' => $data);
+        if (!empty($header)) {
+          $opts['header'] = $header;
+        }
+        $ctx = stream_context_create(array('http' => $opts));
+        $fp = @fopen($url, 'rb', false, $ctx);
+        if ($fp) {
+          $resp = @stream_get_contents($fp);
+          error_log("Response #2: {$resp}");
+          $ok = $resp !== FALSE;
+        }
+        $this->ext_request_headers = '';
+        $this->ext_response_headers = '';
       }
       $this->ext_request_headers = str_replace("\r\n", "\n", curl_getinfo($ch, CURLINFO_HEADER_OUT));
       curl_close($ch);
