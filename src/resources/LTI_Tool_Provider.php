@@ -1811,6 +1811,7 @@ EOF;
         $resp = $ch_resp_split[1];
         $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE) < 400;
       } else {
+        error_log("CURL failed, trying FP");
         $opts = array('method' => 'POST',
                       'content' => $data);
         if (!empty($header)) {
