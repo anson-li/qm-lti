@@ -565,6 +565,7 @@ class LTI_Tool_Provider {
         if (isset($_POST['roles'])) {
           $this->user->roles = LTI_Tool_Provider::parseRoles($_POST['roles']);
         }
+        error_log("result_sourcedid: {$_POST['lis_result_sourcedid']}");
         # Save the user instance
         if (isset($_POST['lis_result_sourcedid'])) {
           if ($this->user->lti_result_sourcedid != $_POST['lis_result_sourcedid']) {
