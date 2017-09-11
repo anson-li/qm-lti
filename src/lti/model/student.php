@@ -116,7 +116,6 @@ class Student {
     $this->number_attempts = $session['number_attempts'];
     $this->parsed_attempts = $this->number_attempts;
     $this->past_attempts = 0;
-    $this->additional_params = $session['additional_params'];
   }
 
 /**
@@ -276,7 +275,7 @@ class Student {
   function getAccessAssessmentNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
-	    $url = get_access_assessment_notify($this->assessment_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
+	    $url = get_access_assessment_notify($this->assessment_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username);
 	  }
 	  return $url;
   }

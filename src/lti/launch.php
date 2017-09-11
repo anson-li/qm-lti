@@ -110,8 +110,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       }
 
       $return_url = parse_url($_SESSION['lti_return_url']);
-      parse_str($return_url['query'], $_SESSION['additional_params']);
-      
+      error_log("Session Return URL" . $return_url['query']);
+
       // set redirect URL
       if ($is_student) {
         $page = 'student_nav';
