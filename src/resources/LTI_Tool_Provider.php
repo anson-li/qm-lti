@@ -1257,7 +1257,6 @@ class LTI_Resource_Link {
       $source_resource_link = $user->getResourceLink();
       $sourcedid = $user->lti_result_sourcedid;
       $resultid = NULL;
-      error_log("Sourcedid from the user: {$sourcedid}");
     }
     # Use LTI 1.1 service in preference to extension service if it is available
     $urlLTI11 = $source_resource_link->getSetting('lis_outcome_service_url');
@@ -1331,6 +1330,7 @@ EOF;
               break;
           }
         }
+        error_log("LTI11 response: {$response}");
       } else {
         $params = array();
         $params['sourcedid'] = $sourcedid;
@@ -1748,10 +1748,10 @@ EOF;
       $header .= "\nContent-Type: application/xml";
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
+      error_log("XML Response: " . $this->ext_response);
       // Parse XML response
       if ($this->ext_response) {
         try {
-          error_log("XML Response: " . $this->ext_response);
           $this->ext_doc = new DOMDocument();
           $this->ext_doc->loadXML($this->ext_response);
           $this->ext_nodes = $this->domnode_to_array($this->ext_doc->documentElement);
