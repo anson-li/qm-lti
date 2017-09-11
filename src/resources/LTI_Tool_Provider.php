@@ -1799,9 +1799,7 @@ EOF;
       curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_SSLVERSION, 4);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-      error_log("CH: {$ch}");
       $ch_resp = curl_exec($ch);
-      error_log("CH_RESP: {$ch_resp}");
       $ok = $ch_resp !== FALSE;
       $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
       if ($ok) {
@@ -1811,17 +1809,16 @@ EOF;
         $resp = $ch_resp_split[1];
         $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE) < 400;
       } else {
-        error_log("CURL failed, trying FP");
         $opts = array('method' => 'POST',
                       'content' => $data);
         if (!empty($header)) {
           $opts['header'] = $header;
         }
         $ctx = stream_context_create(array('http' => $opts));
+        error_log("FOpen URL: {$url}");
         $fp = @fopen($url, 'rb', false, $ctx);
         if ($fp) {
           $resp = @stream_get_contents($fp);
-          error_log("Response #2: {$resp}");
           $ok = $resp !== FALSE;
         }
         $this->ext_request_headers = '';
