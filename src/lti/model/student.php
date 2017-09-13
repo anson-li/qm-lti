@@ -191,7 +191,7 @@ class Student {
           }
         }
       } else {
-        if ((!stdclass_empty($this->group_list)) && (!stdclass_empty($this->group_list->GroupList)) && (!stdclass_empty($this->group_list->GroupList->Group)) && ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID)) {
+        if (is_object($this->group_list) && (!stdclass_empty($this->group_list)) && (!stdclass_empty($this->group_list->GroupList)) && (!stdclass_empty($this->group_list->GroupList->Group)) && ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID)) {
           $found = TRUE;
         }
       }
