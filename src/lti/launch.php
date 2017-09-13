@@ -95,6 +95,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       $_SESSION['multiple_results'] = $multiple_results;
       $_SESSION['number_attempts'] = $number_attempts;
       $_SESSION['lti_return_url'] = $tool_provider->return_url;
+      $_SESSION['lti_return_url'] = str_replace("&","%26",$_SESSION['lti_return_url']);
 
       $_SESSION['result_id'] = $result_id;
       $_SESSION['allow_outcome'] = $supports_outcomes;
