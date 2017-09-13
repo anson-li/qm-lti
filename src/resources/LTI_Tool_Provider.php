@@ -1803,7 +1803,6 @@ EOF;
       curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
       curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_SSLVERSION, 4);
-      curl_setopt($ch, CURLOPT_VERBOSE, TRUE);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
       error_log("Capturing curl");
       error_log("Printing resp: " . print_r($ch, true));
