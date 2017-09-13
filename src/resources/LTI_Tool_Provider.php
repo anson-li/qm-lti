@@ -1715,7 +1715,9 @@ EOF;
  */
   private function doLTI11Service($type, $url, $xml) {
     $ok = FALSE;
-    $this->ext_response = NULL;
+    $this->ext_response = NULL;      
+    $xml = str_replace('&quot;','"', $xml);
+
     if (!empty($url)) {
       $id = uniqid();
       $xmlRequest = <<<EOF
