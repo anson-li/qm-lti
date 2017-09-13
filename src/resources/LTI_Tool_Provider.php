@@ -1804,7 +1804,9 @@ EOF;
       curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_SSLVERSION, 4);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+      error_log("Capturing curl")
       $ch_resp = curl_exec($ch);
+      error_log("Printing resp: " . print_r($ch_resp, true));
       $ok = $ch_resp !== FALSE;
       $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
       if ($ok) {
@@ -1825,7 +1827,6 @@ EOF;
       if (!empty($header)) {
         $opts['header'] = $header;
       }
-      error_log("Opts: " . print_r($opts, true));
       $ctx = stream_context_create(array('http' => $opts));
       $fp = @fopen($url, 'rb', false, $ctx);
       if ($fp) {
