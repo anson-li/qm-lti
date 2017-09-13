@@ -1817,8 +1817,8 @@ EOF;
         $resp = $ch_resp_split[1];
         $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE) < 400;
       } else {
-        printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
-           htmlspecialchars(curl_error($ch)))
+        error_log("cUrl error (#%d): %s<br>\n", curl_errno($ch),
+           htmlspecialchars(curl_error($ch)));
       }
       $this->ext_request_headers = str_replace("\r\n", "\n", curl_getinfo($ch, CURLINFO_HEADER_OUT));
       curl_close($ch);
