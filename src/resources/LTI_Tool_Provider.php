@@ -1749,7 +1749,7 @@ EOF;
       $params = $req->get_parameters();
       $header = $req->to_header();
       $header .= "\nContent-Type: application/xml";
-      $header .= "\nContent-Length:" . strlen($xmlRequest);
+      $header .= "\nContent-Length: " . strlen($xmlRequest);
       error_log("Header: {$header}");
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
