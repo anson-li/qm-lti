@@ -1748,8 +1748,8 @@ EOF;
       $req->sign_request($hmac_method, $consumer, NULL);
       $params = $req->get_parameters();
       $header = $req->to_header();
-      $header .= "\nContent-Type: application/xml";
-      $header .= "\nContent-Length: " . strlen($xmlRequest);
+      $header .= "\r\nContent-Type: application/xml";
+      $header .= "\r\nContent-Length: " . strlen($xmlRequest);
       error_log("Header: {$header}");
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
