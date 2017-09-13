@@ -95,6 +95,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       $_SESSION['multiple_results'] = $multiple_results;
       $_SESSION['number_attempts'] = $number_attempts;
       $_SESSION['lti_return_url'] = $tool_provider->return_url;
+      error_log("Return url 1: {$_SESSION['lti_return_url']}");
       $_SESSION['lti_return_url'] = str_replace("&","%26",$_SESSION['lti_return_url']);
 
       $_SESSION['result_id'] = $result_id;
@@ -111,8 +112,10 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
         $_SESSION['qmwise_checksum'] = $customer['qmwise_checksum'];
       }
 
+      error_log("Return url 2: {$_SESSION['lti_return_url']}");
       $return_url = parse_url($_SESSION['lti_return_url']);
       parse_str($return_url['query'], $_SESSION['additional_params']);
+      error_log("Additional params: " . print_r($_SESSION['additional_params'], true));
       
       // set redirect URL
       if ($is_student) {
