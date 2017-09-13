@@ -196,8 +196,12 @@ class Student {
             if (!stdclass_empty($this->group_list->GroupList)) {
               if (!stdclass_empty($this->group_list->GroupList->Group)) { 
                 if (!stdclass_empty($this->group)) {
-                  if ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID) {
-                    $found = TRUE;
+                  if (is_object($this->group_list->GroupList->Group)) {
+                    if (is_object($this->group)) {
+                      if ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID) {
+                        $found = TRUE;
+                      }
+                    }
                   }
                 }
               }
