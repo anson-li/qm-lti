@@ -1825,6 +1825,7 @@ EOF;
       if (!empty($header)) {
         $opts['header'] = $header;
       }
+      error_log("Opts: " . print_r($opts, true));
       $ctx = stream_context_create(array('http' => $opts));
       $fp = @fopen($url, 'rb', false, $ctx);
       if ($fp) {
