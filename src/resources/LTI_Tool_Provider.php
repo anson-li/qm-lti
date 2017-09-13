@@ -1842,7 +1842,6 @@ EOF;
  * @return array Array of XML document elements
  */
   private function domnode_to_array($node) {
-    error_log("Node: {$node}");
     $output = array();
     switch ($node->nodeType) {
       case XML_CDATA_SECTION_NODE:
