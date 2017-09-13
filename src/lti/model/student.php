@@ -191,8 +191,16 @@ class Student {
           }
         }
       } else {
-        if (is_object($this->group_list) && (!stdclass_empty($this->group_list)) && (!stdclass_empty($this->group_list->GroupList)) && (!stdclass_empty($this->group_list->GroupList->Group)) && ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID)) {
-          $found = TRUE;
+        if (is_object($this->group_list)) {
+          if (!stdclass_empty($this->group_list)) {
+            if (!stdclass_empty($this->group_list->GroupList)) {
+              if (!stdclass_empty($this->group_list->GroupList->Group)) { 
+                if ($this->group_list->GroupList->Group->Group_ID == $this->group->Group_ID) {
+                  $found = TRUE;
+                }
+              }
+            }
+          }
         }
       }
       if (!$found) {
