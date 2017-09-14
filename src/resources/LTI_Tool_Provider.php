@@ -1756,6 +1756,7 @@ EOF;
       // Parse XML response
       if ($this->ext_response) {
         try {
+          $this->ext_response = html_entity_decode($this->ext_response);
           $this->ext_doc = new DOMDocument();
           $this->ext_doc->loadXML($this->ext_response);
           $this->ext_nodes = $this->domnode_to_array($this->ext_doc->documentElement);
