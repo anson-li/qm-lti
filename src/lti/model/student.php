@@ -127,7 +127,7 @@ class Student {
  * Checks if user is a student.
  */
   function checkValid() {
-    error_log(print_r($this));
+    print_r($this);
     if (!$this->is_student) {
       $_SESSION['error'] = 'Not a student';
     } else if (!$this->assessment_id) {
