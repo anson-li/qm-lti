@@ -35,7 +35,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
 
   $student = new Student($_SESSION);
   error_log(print_r($student));
-  error_log($student->checkValid);
+  error_log($student->checkValid());
   error_log("===");
   $student->checkValid();
 
