@@ -69,8 +69,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     $lastname = substr($tool_provider->user->lastname, 0, MAX_NAME_LENGTH);
     $email = substr($tool_provider->user->email, 0, MAX_EMAIL_LENGTH);
     $is_student = $tool_provider->user->isLearner();
-    error_log("!!!!");
-    error_log($is_student);
     $result_id = $tool_provider->user->lti_result_sourcedid;
 
     $assessment_id = $tool_provider->resource_link->getSetting(ASSESSMENT_SETTING);
