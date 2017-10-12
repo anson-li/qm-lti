@@ -25,6 +25,9 @@ launch_container=launch_container
 instanceid=instanceid
 sesskey=sesskey
 
+[Security]
+Hosts = qm-lti.azurewebsites.net
+
 [Settings]
 HEADER=Content-Type: application/x-www-form-urlencoded
 USEHOME=yes
