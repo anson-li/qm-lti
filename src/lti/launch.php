@@ -10,7 +10,7 @@
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License along
@@ -69,6 +69,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     $lastname = substr($tool_provider->user->lastname, 0, MAX_NAME_LENGTH);
     $email = substr($tool_provider->user->email, 0, MAX_EMAIL_LENGTH);
     $is_student = $tool_provider->user->isLearner();
+    error_log("!!!!");
+    error_log($is_student);
     $result_id = $tool_provider->user->lti_result_sourcedid;
 
     $assessment_id = $tool_provider->resource_link->getSetting(ASSESSMENT_SETTING);
@@ -115,7 +117,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       $return_url = parse_url($_SESSION['lti_return_url']);
       parse_str($return_url['query'], $_SESSION['additional_params']);
       error_log("Additional params: " . print_r($_SESSION['additional_params'], true));
-      
+
       // set redirect URL
       if ($is_student) {
         $page = 'student_nav';
