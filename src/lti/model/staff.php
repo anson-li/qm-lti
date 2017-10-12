@@ -378,11 +378,28 @@ class Staff {
       $assessments = array();
     } else {
       error_log(print_r($assessments, 1));
+      // grab latest version first
+      $assessments = findLatestRevision($assessments);
       $assessments = array_filter($assessments, array($this, 'filterDisabledForExternal'));
     }
     error_log(print_r($assessments, 1));
     return $assessments;
   }
+
+/**
+ * Removes any duplicates from an array that contains multiple revisions
+ *
+ */
+function findLatestRevision($array) {
+  foreach ($array as $key => $value) {
+    foreach ($array as $comparator) {
+      if (isset($value->Revision) && isset($comparator->Revision) && ($value->Revision < $comparator->Revision)) {
+        unset($array[$key]);
+      }
+    }
+  }
+  return $array;
+}
 
 /**
  * Removes any assessments that are not enabled for external calls
