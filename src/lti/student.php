@@ -31,8 +31,8 @@ require_once('model/student.php');
 
   session_name(SESSION_NAME);
   session_start();
-  error_log(print_r($student));
   $student = new Student($_SESSION);
+  error_log(print_r($student));
   $student->checkValid();
 
   // Activate SOAP Connection.
