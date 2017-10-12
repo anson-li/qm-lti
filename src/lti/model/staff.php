@@ -379,7 +379,7 @@ class Staff {
     } else {
       error_log(print_r($assessments, 1));
       // grab latest version first
-      $assessments = findLatestRevision($assessments);
+      $assessments = $this->findLatestRevision($assessments);
       $assessments = array_filter($assessments, array($this, 'filterDisabledForExternal'));
     }
     error_log(print_r($assessments, 1));
