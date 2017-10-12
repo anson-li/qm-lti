@@ -410,7 +410,7 @@ function findLatestRevision($array) {
  */
 function filterDisabledForExternal($obj) {
   if (isset($obj->Permit_External_Call)) {
-    if ($obj->Permit_External_Call === 1) {
+    if ($obj->Permit_External_Call == 1) {
       return true;
     }
   }
