@@ -376,10 +376,26 @@ class Staff {
     $assessments = array();
     if ($this->ok && (($assessments = get_assessment_list()) === FALSE)) {
       $assessments = array();
+    } else {
+      $assessments = array_filter($assessments, "filterDisabledForExternal");
     }
     error_log(print_r($assessments, 1));
     return $assessments;
   }
+
+/**
+ * Removes any assessments that are not enabled for external calls
+ *
+ * @return Boolean determines if array value should be removed
+ */
+function filterDisabledForExternal($obj) {
+  if (isset($obj->Permit_External_Call)) {
+    if ($obj->Permit_External_Call == 0) {
+      return false;
+    }
+  }
+  return true;
+}
 
 /**
  * Gets result list for participants of group.
