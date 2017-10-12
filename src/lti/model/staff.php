@@ -393,8 +393,10 @@ class Staff {
 function findLatestRevision($array) {
   foreach ($array as $key => $value) {
     foreach ($array as $comparator) {
-      if (isset($value->Revision) && isset($comparator->Revision) && ($value->Revision < $comparator->Revision)) {
-        unset($array[$key]);
+      if (isset($value->Revision) && isset($comparator->Revision) {
+        if (($value->Assessment_ID === $comparator->Assessment_ID) && ($value->Revision < $comparator->Revision)) {
+          unset($array[$key]);
+        }
       }
     }
   }
