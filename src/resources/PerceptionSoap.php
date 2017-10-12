@@ -187,10 +187,11 @@ class PerceptionSoap {
     return $response->Assessment;
   }
 
-  public function get_assessment_list($parent_id) {
+  public function get_assessment_list($parent_id, $only_run_from_integration) {
     try {
       $list = $this->soap->GetAssessmentList(array(
-        "Parent_ID" => $parent_id
+        "Parent_ID" => $parent_id,
+        "OnlyRunFromIntegration" => $only_run_from_integration
       ));
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
@@ -231,7 +232,7 @@ class PerceptionSoap {
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
     }
-    return $response->AssessmentResultList;
+    return $response->AssessmentResultList; 
   }
 
 
@@ -243,7 +244,7 @@ class PerceptionSoap {
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
     }
-    return $response;
+    return $response; 
   }
 
   public function get_assessment_result_list_by_participant($participant_name) {
