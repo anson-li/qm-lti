@@ -58,8 +58,8 @@ class PerceptionSoap {
       $context = stream_context_create([
         'ssl' => [
           // set some SSL/TLS specific options
-          'verify_peer' => false,
-          'verify_peer_name' => false,
+          'verify_peer' => true,
+          'verify_peer_name' => true,
           'allow_self_signed' => true
         ]
       ]);
