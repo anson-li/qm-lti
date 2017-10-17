@@ -40,8 +40,8 @@ require_once('../resources/lib.php');
     header('Location: error.php');
     exit;
   }
-
-  $launch_url =  substr( get_root_url(), 0, -14 );
+  
+  $url =  substr( get_root_url(), 0, -10 );
   if (isset($_GET['consumer_key'])) {
     $_SESSION['consumer_key'] = $_GET['consumer_key'];
   }
@@ -227,7 +227,7 @@ EOD;
             <br>
             <div class="row">
               <p class="col-sm-8 alert alert-info">
-              <b>The LTI App's launch URL is:</b><br><?php echo $launch_url . 'lti/launch.php'; ?>
+              <b>The LTI App's launch URL is:</b><br><?php echo $url . 'lti/launch.php'; ?>
               </p>
               <p class="col-sm-8 alert alert-info">
               <b>The LTI consumer key for this LMS is:</b><br><?php echo $_SESSION['consumer_key']; ?>
