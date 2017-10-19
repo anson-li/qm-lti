@@ -3,6 +3,7 @@
 require_once('../config/config.php');
 require_once('../resources/LTI_Tool_Provider.php');
 require_once('../resources/lib.php');
+require_once('../resources/DeliveryOdataService.php');
 
 class Student {
 
@@ -121,6 +122,7 @@ class Student {
     $this->parsed_attempts = $this->number_attempts;
     $this->past_attempts = 0;
     $this->additional_params = $session['additional_params'];
+    $this->delivery_odata_service = new DeliveryOdataService();
   }
 
 /**
@@ -225,8 +227,14 @@ class Student {
  */
   function getAssessment() {
     $assessment = '';
-    if (!isset($_SESSION['error'])) {
-      $assessment = get_assessment($this->assessment_id);
+    if ($this->delivery_odata_service) {
+      $assessment = $this->delivery_odata_service->GetAssessment($this->assessment_id);
+      error_log("Assessment grabbed through getAssessment");
+      error_log(print_r($assessment));
+    } else {
+      if (!isset($_SESSION['error'])) {
+        $assessment = get_assessment($this->assessment_id);
+      }
     }
     return $assessment;
   }
