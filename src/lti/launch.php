@@ -122,7 +122,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       } else {
         $page = 'staff';
       }
-      error_log(get_root_url());
       $ok = get_root_url() . "../lti/{$page}.php";
     } else {
       $tool_provider->reason = 'Missing data';
