@@ -1,9 +1,11 @@
-<?PHP
+<?php
 /**
  * Copyright (C) 2016 Questionmark Computing Limited.
  * License GNU GPL version 2 or later (see LICENSE.TXT file)
  * There is NO WARRANTY, to the extent permitted by law.
  */
+
+require_once('BaseService.php');
 
 /**
  * Class DeliveryOdataService
