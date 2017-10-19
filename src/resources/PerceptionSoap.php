@@ -54,7 +54,9 @@ class PerceptionSoap {
     $security_client_id = isset($options["security_client_id"]) ? $options["security_client_id"] : null;
     $security_checksum = isset($options["security_checksum"]) ? $options["security_checksum"] : null;
     $this->debug = isset($options["debug"]) ? $options["debug"] : false;
+    error_log("-----");
     error_log('QMWISe url: ' . $perception_qmwise);
+    error_log("=====");
     try {
       $context = stream_context_create([
         'ssl' => [
