@@ -38,7 +38,7 @@ require_once('LTI_Tool_Provider.php');
   if (SECURE_COOKIE_ONLY) {
     $secure = TRUE;
   }
-  session_set_cookie_params(0, NULL, NULL, $secure, TRUE);
+  session_set_cookie_params(0, NULL, '/', $secure, TRUE);
 
   define('SESSION_NAME', 'QMP-LTI');  // name of session cookie
   define('INVALID_USERNAME_CHARS', '\'"&\\/£,:><');  // characters not allowed in QM usernames
