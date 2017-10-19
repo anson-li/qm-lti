@@ -1,7 +1,5 @@
 <?php
 
-namespace Questionmark\qm_services\Api;
-
 /**
  * @file
  * Copyright (C) 2016 Questionmark Computing Limited.

@@ -7,7 +7,6 @@
 
 require_once "BaseService.php";
 
-
 /**
  * Class DeliveryOdataService
  *
