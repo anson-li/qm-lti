@@ -1216,6 +1216,31 @@ EOD;
   }
 
 /*
+ * Gets the DeliveryOData URL for a customer ID
+ *
+ *   returns the URL
+ */
+  function getDeliveryODataUrl($customer_id) {
+    // identifies if the input value is a valid URL
+    if (filter_var($customer_id, FILTER_VALIDATE_URL)) {
+      return $customer_id;
+    }
+    $url = "https://ondemand.questionmark.com/deliveryodata/{$customer_id}/";
+    // Check for EU customer IDs
+    $id_string = $customer_id;
+    while ((strlen($id_string) > 0) && (substr($id_string, 0, 1) == '0')) {  // remove any leading zeroes
+      $id_string = substr($id_string, 1);
+    }
+    $id = intval($id_string);
+    if ($id != 0) {
+      if ($id >= MIN_EU_CUSTOMER_ID) {
+        $url = "https://ondemand.questionmark.eu/deliveryodata/{$customer_id}/";
+      }
+    }
+    return $url;
+  }
+
+/*
  * Check that the details for a customer are valid
  *
  *   returns TRUE if the details are valid, otherwise FALSE

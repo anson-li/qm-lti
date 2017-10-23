@@ -34,18 +34,11 @@ class BaseService {
   /**
    * BaseService constructor.
    */
-  public function __construct() {
-    $this->ServiceBaseUrl = variable_get('qm_services_base_url');
-    if (!isset($this->ServiceBaseUrl) || filter_var($this->ServiceBaseUrl, FILTER_VALIDATE_URL) === FALSE) {
-      $parsedUrl = parse_url($GLOBALS['base_url']);
-      $this->ServiceBaseUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
-    }
-
-    $this->AreaName = variable_get('qm_tenant_id');
-    $this->ServiceUsername = variable_get('qm_qmwise_username');
-    $this->ServicePassword = variable_get('qm_qmwise_password');
-    $this->ServiceBasicAuthString = variable_get('qm_qmwise_basicauth');
-    $this->LogTransactions = variable_get('qm_services_log_transactions', TRUE);
+  public function __construct($customer_id, $url, $qmwise_username, $qmwise_password) {
+    $this->ServiceBaseUrl = $url;
+    $this->AreaName = $customer_id;
+    $this->ServiceUsername = $qmwise_username;
+    $this->ServicePassword = $qmwise_password;
   }
 
   /**

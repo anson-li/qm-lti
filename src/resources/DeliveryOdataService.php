@@ -17,9 +17,9 @@ class DeliveryOdataService extends BaseService {
   private $ServiceEndpoint = '';
   private $ServiceName = 'Delivery Odata Service';
 
-  public function __construct() {
-    parent::__construct();
-    $this->ServiceEndpoint = $this->ServiceBaseUrl . '/deliveryodata/' . $this->AreaName;
+  public function __construct($customer_id, $url, $qmwise_username, $qmwise_password) {
+    parent::__construct($customer_id, $url, $qmwise_username, $qmwise_password);
+    $this->ServiceEndpoint = $this->ServiceBaseUrl;
   }
 
   // RESULTS FEED

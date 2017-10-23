@@ -122,7 +122,7 @@ class Student {
     $this->parsed_attempts = $this->number_attempts;
     $this->past_attempts = 0;
     $this->additional_params = $session['additional_params'];
-    $this->delivery_odata_service = new DeliveryOdataService();
+    $this->delivery_odata_service = new DeliveryOdataService($session['customer_id'], $session['deliveryodata_url'], $session['qmwise_client_id'], $session['qmwise_checksum']);
   }
 
 /**
