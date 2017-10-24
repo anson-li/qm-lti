@@ -58,7 +58,7 @@ class BaseService {
     if (isset($params)) {
       // Create and add signature.
       $parameters = array(
-        'timestamp' => date_create_from_format()('Y-m-d H:i:sO'),
+        'timestamp' => date_create_from_format('Y-m-d H:i:sO'),
         'requesturl' => $requestUrl,
         'requestbody' => $params,
       );
@@ -66,7 +66,7 @@ class BaseService {
     else {
       // Create and add signature.
       $parameters = array(
-        'timestamp' => date_create_from_format()('Y-m-d H:i:sO'),
+        'timestamp' => date_create_from_format('Y-m-d H:i:sO'),
         'requesturl' => $requestUrl,
         'requestbody' => '',
       );
