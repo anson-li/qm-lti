@@ -52,10 +52,28 @@ class BaseService {
    */
   private function signParams($targetUrl, $params) {
     $signedRequestDataGenerator = CoreFactory::getSignedRequestDataGenerator();
+    $requestUrl = str_replace('%27', '\'', $targetUrl);
+    if (isset($params)) {
+      // Create and add signature.
+      $parameters = array(
+        'timestamp' => $this->phpWrapper->date('Y-m-d H:i:sO'),
+        'requesturl' => $requestUrl,
+        'requestbody' => $params,
+      );
+    }
+    else {
+      // Create and add signature.
+      $parameters = array(
+        'timestamp' => $this->phpWrapper->date('Y-m-d H:i:sO'),
+        'requesturl' => $requestUrl,
+        'requestbody' => '',
+      );
+    }
 
-    $params = $signedRequestDataGenerator->generateDeliveryoDataServiceParameters($targetUrl, $params);
-
-    return $params;
+    $rsaKeyContainerName = $this->siteSettings->getDeliveryKeyContainerName();
+    $signature = $this->signingTask->computeDeliveryoDataSignature($parameters, $rsaKeyContainerName);
+    $parameters['signature'] = $signature;
+    return $parameters;
   }
 
   /**
