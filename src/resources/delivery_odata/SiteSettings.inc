@@ -12,7 +12,7 @@
  * @author Questionmark
  */
 
-class SiteSettings implements SiteSettingsInterface {
+class SiteSettings {
   /**
    * @return string Site name
    */

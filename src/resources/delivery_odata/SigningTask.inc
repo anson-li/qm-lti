@@ -12,7 +12,7 @@
  * @author Questionmark
  */
 
-class SigningTask implements SigningTaskInterface {
+class SigningTask {
   private $drupalWrapper;
 
   /**

@@ -12,12 +12,10 @@
  * @author Questionmark
  */
 
-namespace Questionmark\qm_core\Wrappers;
-
 /**
  * @codeCoverageIgnore
  */
-class PHPCoreWrapper implements PHPCoreWrapperInterface {
+class PHPCoreWrapper {
   /**
    * http://php.net/curl_init
    */

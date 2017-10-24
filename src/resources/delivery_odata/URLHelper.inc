@@ -11,7 +11,7 @@
  * @author Questionmark
  */
 
-class UrlHelper implements UrlHelperInterface {
+class UrlHelper {
   private $drupalWrapper;
 
   /**
