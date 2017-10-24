@@ -10,7 +10,7 @@ require_once('SigningTask.inc');
 require_once('SiteSettings.inc');
 require_once('URLHelper.inc');
 
-class Factory {
+class CoreFactory {
 
   /**
    * Get a Signed Request Data Generator object
