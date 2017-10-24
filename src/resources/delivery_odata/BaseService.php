@@ -8,6 +8,8 @@
  * There is NO WARRANTY, to the extent permitted by law.
  */
 
+require_once('CoreFactory.inc');
+
 /**
  * Class BaseService for making generic service calls.
  */
