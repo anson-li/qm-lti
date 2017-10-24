@@ -11,10 +11,6 @@
  * @author Questionmark
  */
 
-namespace Questionmark\qm_core\Web;
-
-use Questionmark\qm_core\Wrappers;
-
 class UrlHelper implements UrlHelperInterface {
   private $drupalWrapper;
 

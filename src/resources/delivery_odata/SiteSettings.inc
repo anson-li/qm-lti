@@ -12,8 +12,6 @@
  * @author Questionmark
  */
 
-namespace Questionmark\qm_core;
-
 class SiteSettings implements SiteSettingsInterface {
   /**
    * @return string Site name

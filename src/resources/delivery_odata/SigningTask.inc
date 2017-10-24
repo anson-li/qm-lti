@@ -12,10 +12,6 @@
  * @author Questionmark
  */
 
-namespace Questionmark\qm_core\Cryptography;
-
-use Questionmark\qm_core\Wrappers;
-
 class SigningTask implements SigningTaskInterface {
   private $drupalWrapper;
 
