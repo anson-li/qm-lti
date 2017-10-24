@@ -13,15 +13,13 @@
  */
 
 class SigningTask {
-  private $drupalWrapper;
 
   /**
    * Constructs a Signing Task object
    *
    * @param \Questionmark\qm_core\Wrappers\DrupalWrapperInterface $drupalWrapper
    */
-  public function __construct(Wrappers\DrupalWrapperInterface $drupalWrapper) {
-    $this->drupalWrapper = $drupalWrapper;
+  public function __construct() {
   }
 
   /**
@@ -44,8 +42,6 @@ class SigningTask {
     foreach ($parameters as $name => $parameter) {
       $dataToSign .= urlencode($name) . '=' . urlencode($parameter) . '&';
     }
-
-    $dataToSign = $this->drupalWrapper->drupal_strtolower(rtrim($dataToSign, '&'));
 
     return $this->sign($rsaKeyContainerName, $dataToSign);
   }
