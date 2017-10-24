@@ -25,31 +25,6 @@ class CoreFactory {
       self::getSiteSettings());
   }
 
-}
-
-class SignedRequestDataGenerator {
-  private $phpWrapper;
-  private $signingTask;
-  private $urlHelper;
-  private $siteSettings;
-
-  /**
-   * @param Wrappers\PHPCoreWrapperInterface $phpWrapper
-   * @param Cryptography\SigningTaskInterface $signingTask
-   * @param Web\UrlHelperInterface $urlHelper
-   * @param SiteSettingsInterface $siteSettings
-   */
-  public function __construct(
-      PHPCoreWrapper $phpWrapper,
-      SigningTask $signingTask,
-      UrlHelper $urlHelper,
-      SiteSettings $siteSettings) {
-    $this->phpWrapper = $phpWrapper;
-    $this->signingTask = $signingTask;
-    $this->urlHelper = $urlHelper;
-    $this->siteSettings = $siteSettings;
-  }
-
   /**
    * Get a PHP Core Wrapper object
    *
@@ -87,4 +62,29 @@ class SignedRequestDataGenerator {
     return new SiteSettings();
   }
 
+
+}
+
+class SignedRequestDataGenerator {
+  private $phpWrapper;
+  private $signingTask;
+  private $urlHelper;
+  private $siteSettings;
+
+  /**
+   * @param Wrappers\PHPCoreWrapperInterface $phpWrapper
+   * @param Cryptography\SigningTaskInterface $signingTask
+   * @param Web\UrlHelperInterface $urlHelper
+   * @param SiteSettingsInterface $siteSettings
+   */
+  public function __construct(
+      PHPCoreWrapper $phpWrapper,
+      SigningTask $signingTask,
+      UrlHelper $urlHelper,
+      SiteSettings $siteSettings) {
+    $this->phpWrapper = $phpWrapper;
+    $this->signingTask = $signingTask;
+    $this->urlHelper = $urlHelper;
+    $this->siteSettings = $siteSettings;
+  }
 }
