@@ -14,34 +14,13 @@ class CoreFactory {
   /**
    * Get a Signed Request Data Generator object
    *
-   * @return \Questionmark\qm_core\SignedRequestDataGenerator
+   * @return SignedRequestDataGenerator
    */
   public static function getSignedRequestDataGenerator() {
     return new SignedRequestDataGenerator(
       self::getPHPCoreWrapper(),
       self::getSigningTask(),
       self::getSiteSettings());
-  }
-
-}
-
-class SignedRequestDataGenerator {
-  private $phpWrapper;
-  private $signingTask;
-  private $siteSettings;
-
-  /**
-   * @param Wrappers\PHPCoreWrapperInterface $phpWrapper
-   * @param Cryptography\SigningTaskInterface $signingTask
-   * @param SiteSettingsInterface $siteSettings
-   */
-  public function __construct(
-      PHPCoreWrapper $phpWrapper,
-      SigningTask $signingTask,
-      SiteSettings $siteSettings) {
-    $this->phpWrapper = $phpWrapper;
-    $this->signingTask = $signingTask;
-    $this->siteSettings = $siteSettings;
   }
 
   /**
@@ -71,4 +50,25 @@ class SignedRequestDataGenerator {
     return new SiteSettings();
   }
 
+
+}
+
+class SignedRequestDataGenerator {
+  private $phpWrapper;
+  private $signingTask;
+  private $siteSettings;
+
+  /**
+   * @param PHPCoreWrapperInterface $phpWrapper
+   * @param SigningTaskInterface $signingTask
+   * @param SiteSettingsInterface $siteSettings
+   */
+  public function __construct(
+      PHPCoreWrapper $phpWrapper,
+      SigningTask $signingTask,
+      SiteSettings $siteSettings) {
+    $this->phpWrapper = $phpWrapper;
+    $this->signingTask = $signingTask;
+    $this->siteSettings = $siteSettings;
+  }
 }
