@@ -55,10 +55,11 @@ class BaseService {
   private function signParams($targetUrl, $params) {
     $signedRequestDataGenerator = CoreFactory::getSignedRequestDataGenerator();
     $requestUrl = str_replace('%27', '\'', $targetUrl);
+    $date = date_create_from_format('Y-m-d H:i:sO', NULL);
     if (isset($params)) {
       // Create and add signature.
       $parameters = array(
-        'timestamp' => date_create_from_format('Y-m-d H:i:sO', NULL),
+        'timestamp' => $date,
         'requesturl' => $requestUrl,
         'requestbody' => $params,
       );
@@ -66,7 +67,7 @@ class BaseService {
     else {
       // Create and add signature.
       $parameters = array(
-        'timestamp' => date_create_from_format('Y-m-d H:i:sO', NULL),
+        'timestamp' => $date,
         'requesturl' => $requestUrl,
         'requestbody' => '',
       );
