@@ -3,7 +3,7 @@
 require_once('../config/config.php');
 require_once('../resources/LTI_Tool_Provider.php');
 require_once('../resources/lib.php');
-require_once('../resources/DeliveryOdataService.php');
+require_once('../resources/delivery_odata/DeliveryOdataService.php');
 
 class Student {
 
