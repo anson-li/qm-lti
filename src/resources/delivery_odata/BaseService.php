@@ -171,7 +171,6 @@ class BaseService {
 
       if (isset($params)) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
-        $requestParams = $this->getWatchdogString($httpHeaderObj->paramString);
       }
       else {
         $requestParams = "";
@@ -193,28 +192,6 @@ class BaseService {
       if (!curl_errno($ch)) {
         if ($this->LogTransactions) {
           $info = curl_getinfo($ch);
-          if ($this->isJson($result)) {
-            $responseParams = $this->getWatchdogString(json_decode($result));
-          }
-          else {
-            $responseParams = $this->getWatchdogString($result);
-          }
-
-          watchdog(
-            'QM Services',
-            '@apiMethodName (@scriptTime seconds)<br/>Endpoint: @endpoint</br>HTTP Status: @httpStatus<br/>REQUEST:<pre>@request</pre><br/>RESPONSE:<pre>@responseParams</pre><br/>Curl Info:<pre>@curl_info</pre>',
-            array(
-              '@serviceName' => $serviceName,
-              '@responseParams' => $responseParams,
-              '@requestParams' => $requestParams,
-              '@apiMethodName' => $apiMethodName,
-              '@scriptTime' => $scriptTime,
-              '@endpoint' => $endpoint,
-              '@httpStatus' => $this->LastHttpStatus,
-              '@curl_info' => print_r($info, TRUE),
-            )
-          );
-        }
 
         if ($this->isJson($result)) {
           $resultIsJSON = TRUE;
@@ -245,79 +222,12 @@ class BaseService {
       else {
         $this->LastErrorCode = curl_errno($ch);
         $this->LastErrorMessage = curl_error($ch);
-
-        $resultString = $this->getWatchdogString($result);
-
-        if (isset($result)) {
-          $status = $this->getWatchdogString($result);
-        }
-        else {
-          if (isset($result->code)) {
-            $status = $result->code . ': ' . $result->error;
-          }
-          else {
-            $status = 'Unknown error';
-          }
-        }
-
-        watchdog(
-          'QM Services',
-          '@apiMethodName (@scriptTime seconds)<br/>Endpoint: @endpoint</br>@status<br/>Curl Error: @curl_errorno - @curl_error<br/>Request Params:<pre>@request</pre>Status: <pre>@status</pre>Response:<pre>@result</pre>',
-          array(
-            '@serviceName' => $serviceName,
-            '@apiMethodName' => $apiMethodName,
-            '@scriptTime' => $scriptTime,
-            '@endpoint' => $endpoint,
-            '@status' => $status,
-            '@curl_errorno' => curl_errno($ch),
-            '@curl_error' => curl_error($ch),
-            '@request' => $requestParams,
-            '@result' => $resultString,
-          ),
-          WATCHDOG_ERROR);
         return FALSE;
       }
-    }
-    else {
-      // Curl init failed.
-      watchdog('QM Services',
-        '@apiMethodName<br/>Endpoint: @endpoint</br>API call initialization failed.<br/>Request Params<pre>@request</pre>',
-        array(
-          '@serviceName' => $serviceName,
-          '@endpoint' => $endpoint,
-          '@apiMethodName' => $apiMethodName,
-          '@request' => $this->getWatchdogString($params),
-        ),
-        WATCHDOG_ERROR);
     }
     curl_close($ch);
 
     return FALSE;
-  }
-
-  /**
-   * Turns objects and arrays into a string ready for use in a watchdog call.
-   *
-   * @param array|object $obj
-   *   A stdClass that will be made ready for being logged in watchdog.
-   *
-   * @return string
-   *   String ready to be used in a call for Watchdog.
-   */
-  protected function getWatchdogString($obj) {
-    if (is_object($obj) || is_array($obj)) {
-      $messageObj = print_r($obj, TRUE);
-    }
-    else {
-      if (!is_null($obj)) {
-        $messageObj = $obj;
-      }
-      else {
-        $messageObj = 'NULL';
-      }
-    }
-
-    return $messageObj;
   }
 
   /**
