@@ -22,7 +22,14 @@ class LTIRestClient {
       'base_url' => $url,
       'format' => 'json',
       'username' => $qmwise_username,
-      'password' => $qmwise_password
+      'password' => $qmwise_password,
+      'curl_options' => [
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLINFO_HEADER_OUT => TRUE,
+        CURLOPT_HEADER => TRUE,
+        CURLOPT_SSLVERSION => 'CURL_SSLVERSION_SSLv4',
+        CURLOPT_FOLLOWLOCATION => TRUE
+      ]
     ]);
   }
 

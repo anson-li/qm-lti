@@ -137,9 +137,9 @@ class DeliveryOdataService  {
 
   // Assessments FEED
   function GetAssessment($id = null) {
-    $endpoint = $this->ServiceEndpoint . '/Assessments';
+    $endpoint = $this->ServiceEndpoint . 'Assessments';
     if (isset($id)) {
-      $endpoint .= '?\$filter=ID eq ' . $id . 'L';
+      $endpoint .= '?$filter=ID eq ' . $id . 'L';
     }
     $method = "GET";
     return $this->RestClient->callApi($this->ServiceName, $endpoint, $method);
