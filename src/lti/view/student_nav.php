@@ -12,7 +12,7 @@
     <?php } ?>
     </tr>
     <tr class="GridRow">
-      <td><?php echo $assessment->Session_Name; ?></td>
+      <td><?php echo $assessment->Name; ?></td>
       <td><?php echo $launch; ?></td>
       <td><?php echo $parsed_attempts; ?></td>
       <td><?php echo $past_attempts; ?></td>
