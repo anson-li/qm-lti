@@ -33,7 +33,14 @@ class LTIRestClient {
   }
 
   public function callApi($serviceName, $endpoint, $method) {
-    return $this->api->get($endpoint);
+    $result = $this->api->get($endpoint)
+    if ($result->info->http_code == 200) {
+      return $result->decode_response();
+    } else {
+      error_log($result);
+      return $result;
+    }
+
   }
 
 }
