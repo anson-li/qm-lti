@@ -230,6 +230,7 @@ class Student {
     if ($this->delivery_odata_service) {
       $result = $this->delivery_odata_service->GetAssessment($this->assessment_id);
       $assessment = $result->value[0];
+      error_log($assessment);
     } else {
       if (!isset($_SESSION['error'])) {
         $assessment = get_assessment($this->assessment_id);
