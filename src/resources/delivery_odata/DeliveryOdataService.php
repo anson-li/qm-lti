@@ -139,20 +139,20 @@ class DeliveryOdataService  {
   function GetAssessment($id = null) {
     $endpoint = 'Assessments';
     if (isset($id)) {
-      $endpoint .= "?\$filter=ID eq " . $id . "L";
+      $endpoint .= "?\$filter=" . urlencode("ID eq " . $id . "L");
     }
     $method = "GET";
     return $this->RestClient->callApi($this->ServiceName, $endpoint, $method);
   }
 
   function GetAssessments($filter) {
-    $endpoint = $this->ServiceEndpoint . "/Assessments?\$filter=".urlencode($filter);
+    $endpoint = "Assessments".urlencode($filter);
     $method = "GET";
     return $this->callApi($this->ServiceName, __FUNCTION__, $endpoint, $method);
   }
 
   function GetAllAssessments() {
-    $endpoint = $this->ServiceEndpoint . "/Assessments";
+    $endpoint = $endpoint = 'Assessments';;
     $method = "GET";
     return $this->callApi($this->ServiceName, __FUNCTION__, $endpoint, $method);
   }
