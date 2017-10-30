@@ -5,7 +5,7 @@
  * There is NO WARRANTY, to the extent permitted by law.
  */
 
-require_once "LTIRestClient.php"
+require_once "LTIRestClient.php";
 
 /**
  * Class DeliveryOdataService
