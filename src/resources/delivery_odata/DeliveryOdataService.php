@@ -137,12 +137,12 @@ class DeliveryOdataService  {
 
   // Assessments FEED
   function GetAssessment($id = null) {
-    $endpoint = $this->ServiceEndpoint . "/Assessments";
+    $endpoint = "Assessments";
     if (isset($id)) {
-      $endpoint .= "('" . $id . "')";
+      $endpoint .= "/" . $id . "";
     }
     $method = "GET";
-    return $this->callApi($this->ServiceName, __FUNCTION__, $endpoint, $method);
+    return $this->RestClient->callApi($this->ServiceName, $endpoint, $method);
   }
 
   function GetAssessments($filter) {

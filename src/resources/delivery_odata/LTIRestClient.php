@@ -19,11 +19,15 @@ class LTIRestClient {
    */
   public function __construct($customer_id, $url, $qmwise_username, $qmwise_password) {
     $this->api = new RestClient([
-    'base_url' => 'url',
-    'format' => 'json',
-    'username' => $qmwise_username,
-    'password' => $qmwise_password
-]);
+      'base_url' => $url,
+      'format' => 'json',
+      'username' => $qmwise_username,
+      'password' => $qmwise_password
+    ]);
+  }
+
+  public function callApi($serviceName, $endpoint, $method) {
+    $result = $api->get('Assessments');
   }
 
 }
