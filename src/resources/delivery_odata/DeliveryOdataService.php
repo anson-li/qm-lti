@@ -5,20 +5,21 @@
  * There is NO WARRANTY, to the extent permitted by law.
  */
 
-require_once "BaseService.php";
+require_once "LTIRestClient.php"
 
 /**
  * Class DeliveryOdataService
  *
  * @package Questionmark\qm_services\Api
  */
-class DeliveryOdataService extends BaseService {
+class DeliveryOdataService  {
 
   private $ServiceEndpoint = '';
   private $ServiceName = 'Delivery Odata Service';
+  private $RestClient = NULL;
 
   public function __construct($customer_id, $url, $qmwise_username, $qmwise_password) {
-    parent::__construct($customer_id, $url, $qmwise_username, $qmwise_password);
+    $this->RestClient = new LTIRestClient($customer_id, $url, $qmwise_username, $qmwise_password);
     $this->ServiceEndpoint = $this->ServiceBaseUrl;
   }
 
