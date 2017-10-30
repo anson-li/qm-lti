@@ -228,9 +228,8 @@ class Student {
   function getAssessment() {
     $assessment = '';
     if ($this->delivery_odata_service) {
-      $assessment = $this->delivery_odata_service->GetAssessment($this->assessment_id);
-      error_log("Assessment grabbed through getAssessment");
-      error_log(print_r($assessment));
+      $result = $this->delivery_odata_service->GetAssessment($this->assessment_id);
+      $assessment = $result->value[0]->Name;
     } else {
       if (!isset($_SESSION['error'])) {
         $assessment = get_assessment($this->assessment_id);
