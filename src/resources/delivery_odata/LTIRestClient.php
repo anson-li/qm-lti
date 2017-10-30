@@ -27,7 +27,7 @@ class LTIRestClient {
   }
 
   public function callApi($serviceName, $endpoint, $method) {
-    $result = $this->api->get($endpoint);
+    return $this->api->get($endpoint);
   }
 
 }

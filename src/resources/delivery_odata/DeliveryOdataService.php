@@ -20,7 +20,7 @@ class DeliveryOdataService  {
 
   public function __construct($customer_id, $url, $qmwise_username, $qmwise_password) {
     $this->RestClient = new LTIRestClient($customer_id, $url, $qmwise_username, $qmwise_password);
-    $this->ServiceEndpoint = $this->ServiceBaseUrl;
+    $this->ServiceEndpoint = $url;
   }
 
   // RESULTS FEED
