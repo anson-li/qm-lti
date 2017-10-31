@@ -13,7 +13,6 @@
 ?>
         <h1>Assessments</h1>
 <?php
-  error_log(print_r($assessments));
   if ((count($assessments) !== 0) && !is_null($assessments[0])) {
 ?>
         <form action="staff.php" method="POST">
