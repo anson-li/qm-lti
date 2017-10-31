@@ -247,7 +247,7 @@ class Student {
     $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
     error_log("external attempt");
     error_log($this->external_attempt_id);
-    $response = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id)
+    $response = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     return $this->external_attempt_id;
   }
 
