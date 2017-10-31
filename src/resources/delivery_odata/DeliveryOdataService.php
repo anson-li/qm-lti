@@ -44,7 +44,10 @@ class DeliveryOdataService  {
       "LockRequired" => false
     );
     $method = "POST";
-    return $this->RestClient->callApi($endpoint, $method, $params);
+    $headers = array(
+      "Content-Type" => "application/json"
+    );
+    return $this->RestClient->callApi($endpoint, $method, $params, $headers);
   }
 
 }

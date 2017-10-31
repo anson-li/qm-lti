@@ -32,11 +32,11 @@ class LTIRestClient {
     ]);
   }
 
-  public function callApi($endpoint, $method, $params = null) {
+  public function callApi($endpoint, $method, $params = null, $headers = null) {
     if ($method == 'GET') {
-      $result = $this->api->get($endpoint, $params);
+      $result = $this->api->get($endpoint, $params, $headers);
     } else if ($method == 'POST') {
-      $result = $this->api->post($endpoint, $params);
+      $result = $this->api->post($endpoint, $params, $headers);
     } else {
       return false;
     }
