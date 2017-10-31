@@ -34,11 +34,15 @@ class DeliveryOdataService  {
   }
 
   // Attempts FEED
-  function GetAttempt($externalAttemptID, $assessmentID, $participantID) {
-    $endpoint = 'Attempts';
-    if (isset($id)) {
-      $endpoint .= "?\$filter=" . urlencode("ExternalAttemptID eq " . $externalAttemptID . "L&AssessmentID eq " . $assessmentID . "L&ParticipantID eq " . $participantID . "L");
-    }
+  function GetAttemptID($externalAttemptID, $assessmentID, $participantID) {
+    $endpoint = 'Attempts?\$filter=' . urlencode("ExternalAttemptID eq " . $externalAttemptID . "L&AssessmentID eq " . $assessmentID . "L&ParticipantID eq " . $participantID . "L");
+    $method = "GET";
+    return $this->RestClient->callApi($endpoint, $method);
+  }
+
+  // Attempts FEED
+  function GetAttempt($attemptID) {
+    $endpoint = 'Attempts(' . $attemptID . ')';
     $method = "GET";
     return $this->RestClient->callApi($endpoint, $method);
   }
