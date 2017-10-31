@@ -250,7 +250,7 @@ class Student {
     if ($result->info->http_code != 200) {
       $result = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     }
-    return $result;
+    error_log(print_r($result));
     return $this->external_attempt_id;
   }
 

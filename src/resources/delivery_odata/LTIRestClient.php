@@ -44,7 +44,7 @@ class LTIRestClient {
     if ($result->info->http_code == 200) {
       return $result->decode_response();
     } else {
-      error_log(print_r($result));
+      error_log(print_r($result, 1));
       return $result;
     }
 
