@@ -43,6 +43,7 @@ class DeliveryOdataService  {
       "LockStatus" => false,
       "LockRequired" => false
     );
+    error_log(print_r($params, 1));
     $method = "POST";
     $headers = array(
       "Content-Type" => "application/json"
