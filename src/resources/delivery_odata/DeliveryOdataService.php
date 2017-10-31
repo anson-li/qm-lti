@@ -271,7 +271,7 @@ class DeliveryOdataService  {
 
   // Attempts FEED
   function GetAttempt($externalAttemptID, $assessmentID, $participantID) {
-    $endpoint = $this->ServiceEndpoint . "/Attempts";
+    $endpoint = "Attempts";
     $params = array(
       "ExternalAttemptID" => $externalAttemptID,
       "AssessmentID" => $assessmentID,
@@ -280,7 +280,7 @@ class DeliveryOdataService  {
       "LockRequired" => false
     );
     $method = "POST";
-    return $this->callApi($endpoint, $method, $params);
+    return $this->RestClient->callApi($endpoint, $method, $params);
   }
 
   function GetAttempts($filter) {
