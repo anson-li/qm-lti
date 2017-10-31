@@ -378,9 +378,10 @@ class Staff {
       $assessments = array();
     } else {
       error_log(print_r($assessments, 1));
-      $assessments = array_filter($assessments, array($this, 'filterDisabledForExternal'));
+      $filtered_assessments = array_filter($assessments, array($this, 'filterDisabledForExternal'));
+      error_log(print_r($filtered_assessments));
     }
-    return $assessments;
+    return $filtered_assessments;
   }
 
 /**
