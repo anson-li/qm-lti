@@ -36,13 +36,14 @@ class DeliveryOdataService  {
   // Attempts FEED
   function GetAttempt($externalAttemptID, $assessmentID, $participantID) {
     $endpoint = "Attempts";
-    $params = array(
+    $params = (object) array(
       "ExternalAttemptID" => $externalAttemptID,
       "AssessmentID" => $assessmentID,
       "ParticipantID" => $participantID,
       "LockStatus" => false,
       "LockRequired" => false
     );
+    $params = json_encode($params);
     $method = "POST";
     $headers = array(
       "Content-Type" => "application/json"
