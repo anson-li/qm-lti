@@ -247,15 +247,46 @@ class Student {
     $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
     // Already have an attempt in progress, grab attempt already there
     $result = $this->delivery_odata_service->GetAttemptID($this->external_attempt_id, $this->assessment_id, $this->participant_id);
-    error_log("Testing result");
-    error_log(print_r($result, 1));
+
     if (count($result->value) == 0) {
       $result = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     }
     $attempt_id = $result->value[0]->ID;
     $result = $this->delivery_odata_service->GetAttempt($attempt_id);
-    error_log(print_r($result, 1));
-    return $attempt_id;
+    $url = $result->value[0]->ParticipantFacingQMLobbyURL;
+    $url = $this->appendParametersToArray($url, $this->notify_url, $this->return_url, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->participant_id, $this->additional_params);
+    return $url;
+  }
+
+/**
+ * Appends parameters to url
+ *
+ * @return String Complete URL
+ */
+  function appendParametersToArray($url, $notify_url, $home_url, $consumer_key, $resource_link_id, $result_id, $participant_id, $additional_params = array()) {
+      $access_parameters = array(
+        "PIP" => PIP_FILE,
+        "Assessment_ID" => $assessment_id,
+        "Participant_Name" => $participant_name,
+        "Notify" => $notify_url,
+        "ParameterList" => array(
+          "Parameter" => array(
+            array("Name" => "HOME", "Value" => $home_url),
+            array("Name" => "lti_consumer_key", "Value" => $consumer_key),
+            array("Name" => "lti_context_id", "Value" => $resource_link_id),
+            array("Name" => "lti_result_id", "Value" => $result_id),
+            array("Name" => "lti_participant_id", "Value" => $participant_id),
+            array("Name" => "CALLBACK", "Value" => 1)
+          )
+        )
+      );
+
+      foreach ($additional_params as $key => $value) {
+        $access_parameters['ParameterList']['Parameter'][] = array(
+          "Name" => $key,
+          "Value" => $value
+        );
+      }
   }
 
 /**
