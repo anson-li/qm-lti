@@ -244,10 +244,9 @@ class Student {
  * @return String Attempt URL
  */
   function setupAssessmentAttempt() {
-    // $this->assessment_id
-    // $this->participant_id
-    // setup random attempt id
-    $response = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id)
+    $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
+    error_log($this->external_attempt_id);
+    // $response = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id)
   }
 
 /**

@@ -1715,7 +1715,7 @@ EOF;
  */
   private function doLTI11Service($type, $url, $xml) {
     $ok = FALSE;
-    $this->ext_response = NULL;      
+    $this->ext_response = NULL;
 
     if (!empty($url)) {
       $id = uniqid();
@@ -2005,7 +2005,7 @@ class LTI_Outcome {
  * @param consumer_tool Consumer tool used to connect to database
  * @param resoure_link
  * @param participant
- * 
+ *
  * @return boolean True if saved
  */
   public function saveToResult($consumer, $resource_link, $user_id, $is_accessed, $result_sourcedid) {
@@ -2045,7 +2045,7 @@ class LTI_Outcome {
 
 /**
  * Get the result ID for coaching report URL.
- * 
+ *
  * @return string Coaching report url
  */
   public function getResultID() {
@@ -2063,7 +2063,7 @@ class LTI_Outcome {
 
   /**
  * Set the result ID.
- * 
+ *
  * @param string result ID
  */
   public function setResultID($resultid) {
@@ -2839,6 +2839,10 @@ abstract class LTI_Data_Connector {
  * Default name for database table used to store student result values
  */
   const RESULTS_TABLE_NAME = 'lti_results';
+/**
+ * Default name for database table used to store student attempts
+ */
+  const ATTEMPTS_TABLE_NAME = 'lti_attempts';
 
 /**
  * SQL date format (default = 'Y-m-d')
@@ -2980,19 +2984,19 @@ abstract class LTI_Data_Connector {
  * @param String consumer_key
  * @param String context
  * @param String assessment_id
- * @param Boolean is_accessible 
+ * @param Boolean is_accessible
  *
  * @return boolean True if the configuration was successfully inserted
  */
   abstract public function ReportConfig_insert($consumer_key, $resource_link_id, $assessment_id, $is_accessible);
 /**
  * Updates existing report configuration entry with new accessible boolean.
- * 
+ *
  * @param String consumer_key
  * @param String context
  * @param String assessment_id
  * @param Boolean is_accessible
- * 
+ *
  * @return boolean True if the configuration was successfully updated
  */
   abstract public function ReportConfig_update($consumer_key, $resource_link_id, $assessment_id, $is_accessible);
@@ -3010,7 +3014,7 @@ abstract class LTI_Data_Connector {
  *
  * @param String consumer_key
  * @param String context
- * 
+ *
  * @return mixed Array of users or false
  */
   abstract public function TCUser_loadUsersbyContext($consumer_key, $context_id);
@@ -3018,7 +3022,7 @@ abstract class LTI_Data_Connector {
  * Loads list of users available
  *
  * @param String consumer_key
- * 
+ *
  * @return mixed Array of users or false
  */
   abstract public function User_loadUsers($consumer_key);
@@ -3026,7 +3030,7 @@ abstract class LTI_Data_Connector {
  * Loads list of users available on tool consumer
  *
  * @param String consumer_key
- * 
+ *
  * @return mixed Array of users or false
  */
   abstract public function TCUser_loadUsers($consumer_key);
