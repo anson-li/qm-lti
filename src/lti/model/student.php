@@ -245,10 +245,10 @@ class Student {
  */
   function setupAssessmentAttempt() {
     $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
-    $result = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     // Already have an attempt in progress, grab attempt already there
+    $result = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     if ($result->info->http_code != 200) {
-      $result = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
+      $result = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     }
     error_log("Debug statement");
     error_log(print_r($result));
