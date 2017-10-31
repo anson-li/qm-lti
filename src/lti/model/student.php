@@ -245,7 +245,8 @@ class Student {
  */
   function setupAssessmentAttempt() {
     $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
-    $response = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
+    $response = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
+    return $response->ID;
     return $this->external_attempt_id;
   }
 
