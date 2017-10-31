@@ -13,8 +13,7 @@
 ?>
         <h1>Assessments</h1>
 <?php
-  if (count($assessments) > 0) {
-    if (!is_null($assessments[0])) {
+  if ((count($assessments) !== 0) && !is_null($assessments[0])) {
 ?>
         <form action="staff.php" method="POST">
         <table class="DataTable-staff table table-sm" cellpadding="0" cellspacing="0">
@@ -28,14 +27,14 @@
           </thead>
           <tbody>
 <?php
-      $i = 0;
-      foreach ($assessments as $assessment) {
-        $i++;
-        if ($assessment->Assessment_ID == $assessment_id) {
-          $selected = ' checked="checked" onclick="doReset();"';
-        } else {
-          $selected = ' onclick="doChange(\'\');"';
-        }
+    $i = 0;
+    foreach ($assessments as $assessment) {
+      $i++;
+      if ($assessment->Assessment_ID == $assessment_id) {
+        $selected = ' checked="checked" onclick="doReset();"';
+      } else {
+        $selected = ' onclick="doChange(\'\');"';
+      }
 ?>
             <tr class="GridRow">
               <td>
@@ -46,7 +45,7 @@
               <td><?php echo $assessment->Modified_Date; ?></td>
             </tr>
 <?php
-      }
+    }
 ?>
           </tbody>
         </table>
@@ -116,7 +115,6 @@
         </form>
         </div>
 <?php
-    }
   } else {
 ?>
         <p>No assessments available.</p>
