@@ -116,11 +116,11 @@
         </form>
         </div>
 <?php
-    } else {
+    }
+  } else {
 ?>
         <p>No assessments available.</p>
         </div>
 <?php
-    }
   }
 ?>

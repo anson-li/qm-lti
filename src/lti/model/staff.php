@@ -379,7 +379,6 @@ class Staff {
     } else {
       error_log(print_r($assessments, 1));
       $assessments = array_filter($assessments, array($this, 'filterDisabledForExternal'));
-      error_log(print_r($assessments, 1));
     }
     return $assessments;
   }
@@ -390,6 +389,7 @@ class Staff {
  * @return Boolean determines if array value should be removed
  */
 function filterDisabledForExternal($obj) {
+  error_log(print_r($obj));
   if (isset($obj->Permit_External_Call)) {
     if ($obj->Permit_External_Call === 1) {
       return true;
