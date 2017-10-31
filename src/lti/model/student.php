@@ -269,7 +269,6 @@ class Student {
       $access_parameters = array(
         "PIP" => PIP_FILE,
         "Assessment_ID" => $assessment_id,
-        "Participant_Name" => $participant_name,
         "Notify" => $notify_url,
         "HOME" => $home_url,
         "lti_consumer_key" => $consumer_key,
