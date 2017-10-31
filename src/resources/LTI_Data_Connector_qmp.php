@@ -549,7 +549,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 /*
  *  Gets the latest external attempt ID for an assessment
  */
-  public function Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
+  public function Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
     $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME .
             ' (consumer_key, context_id, assessment_id, participant_id) ' .
             'OUTPUT INSERTED.external_attempt_id ' .
