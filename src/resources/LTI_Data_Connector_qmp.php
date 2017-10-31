@@ -530,12 +530,12 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
   public function Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
     $sql = 'SELECT external_attempt_id ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
-           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (customer_id = :customer)';
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (participant_id = :participant)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
     $query->bindValue('assessment', $assessment_id, PDO::PARAM_STR);
-    $query->bindValue('participant_id', $participant_id, PDO::PARAM_STR);
+    $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
     $ok = $query->execute();
     if ($ok) {
       $row = $query->fetch();
