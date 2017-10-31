@@ -284,7 +284,7 @@ class Student {
       }
 
       foreach ($access_parameters as $key => $value) {
-        $url .= urlencode('&' . $key . '=' . $value);
+        $url .= '&' . urlencode($key) . '=' . urlencode($value);
       }
 
       return $url;
