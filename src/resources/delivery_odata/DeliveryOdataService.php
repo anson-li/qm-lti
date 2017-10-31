@@ -35,7 +35,7 @@ class DeliveryOdataService  {
 
   // Attempts FEED
   function GetAttempt($externalAttemptID, $assessmentID, $participantID) {
-    $endpoint = "Attempt";
+    $endpoint = "Attempts";
     $params = array(
       "ExternalAttemptID" => $externalAttemptID,
       "AssessmentID" => $assessmentID,
