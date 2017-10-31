@@ -247,7 +247,8 @@ class Student {
     $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
     // Already have an attempt in progress, grab attempt already there
     $result = $this->delivery_odata_service->GetAttemptID($this->external_attempt_id, $this->assessment_id, $this->participant_id);
-    if ($count($result->value) == 0) {
+    error_log(print_r($result, 1));
+    if (count($result->value) == 0) {
       $result = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     }
     $attempt_id = $result->value[0]->ID;
