@@ -142,13 +142,13 @@ class DeliveryOdataService  {
       $endpoint .= "?\$filter=" . urlencode("ID eq " . $id . "L");
     }
     $method = "GET";
-    return $this->RestClient->callApi($this->ServiceName, $endpoint, $method);
+    return $this->RestClient->callApi($endpoint, $method);
   }
 
   function GetAssessments($filter) {
     $endpoint = "Assessments".urlencode($filter);
     $method = "GET";
-    return $this->callApi($this->ServiceName, __FUNCTION__, $endpoint, $method);
+    return $this->RestClient->callApi($this->ServiceName, $endpoint, $method);
   }
 
   function GetAllAssessments() {
@@ -270,13 +270,17 @@ class DeliveryOdataService  {
   }
 
   // Attempts FEED
-  function GetAttempt($id = null) {
+  function GetAttempt($externalAttemptID, $assessmentID, $participantID) {
     $endpoint = $this->ServiceEndpoint . "/Attempts";
-    if (isset($id)) {
-      $endpoint .= "(" . $id . ")";
-    }
-    $method = "GET";
-    return $this->callApi($this->ServiceName, __FUNCTION__, $endpoint, $method);
+    $params = array(
+      "ExternalAttemptID" => $externalAttemptID,
+      "AssessmentID" => $assessmentID,
+      "ParticipantID" => $participantID,
+      "LockStatus" => false,
+      "LockRequired" => false
+    );
+    $method = "POST";
+    return $this->callApi($endpoint, $method, $params);
   }
 
   function GetAttempts($filter) {

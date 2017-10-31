@@ -32,8 +32,15 @@ class LTIRestClient {
     ]);
   }
 
-  public function callApi($serviceName, $endpoint, $method) {
-    $result = $this->api->get($endpoint);
+  public function callApi($endpoint, $method, $params = null) {
+    if ($method == 'GET') {
+      $result = $this->api->get($endpoint, $params);
+    } else if ($method == 'POST') {
+      $result = $this->api->post($endpoint, $params);
+    } else {
+      return false;
+    }
+
     if ($result->info->http_code == 200) {
       return $result->decode_response();
     } else {

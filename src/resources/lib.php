@@ -843,13 +843,10 @@ function is_best_result($db, $consumer, $resource_link, $user_id, $score) {
  */
 function get_latest_attempt($db, $consumer_key, $resource_link_id, $assessment_id, $user_id) {
   $data_connector = LTI_Data_Connector::getDataConnector(TABLE_PREFIX, $db, DATA_CONNECTOR);
-  error_log("getitng latest attempt");
   $latest_attempt = $data_connector->Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $user_id);
   if (!$latest_attempt) {
-    error_log("Making latest attempt");
     $latest_attempt = $data_connector->Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $user_id);
   }
-  error_log("submitting");
   return $latest_attempt;
 }
 

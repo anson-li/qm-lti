@@ -777,7 +777,6 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $query->bindValue('consumer', $consumer->getKey(), PDO::PARAM_STR);
     $query->bindValue('context', $id, PDO::PARAM_STR);
     $ok = $query->execute();
-    error_log(print_r($query->errorInfo(), true));
     if ($ok) {
       $row = $query->fetch();
       $result_id = $row['result_id'];
