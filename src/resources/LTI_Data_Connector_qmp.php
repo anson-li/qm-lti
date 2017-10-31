@@ -628,6 +628,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $row = $query->fetch();
       $result_id = $row['result_id'];
     } else {
+      error_log(print_r($query->errorInfo(), 1));
       return FALSE;
     }
     return $result_id;
