@@ -228,14 +228,26 @@ class Student {
   function getAssessment() {
     $assessment = '';
     if ($this->delivery_odata_service) {
-      $result = $this->delivery_odata_service->GetAssessment($this->assessment_id);
-      $assessment = $result->value[0];
+      $response = $this->delivery_odata_service->GetAssessment($this->assessment_id);
+      $assessment = $response->value[0];
     } else {
       if (!isset($_SESSION['error'])) {
         $assessment = get_assessment($this->assessment_id);
       }
     }
     return $assessment;
+  }
+
+/**
+ * Setup attempt list
+ *
+ * @return String Attempt URL
+ */
+  function setupAssessmentAttempt() {
+    // $this->assessment_id
+    // $this->participant_id
+    // setup random attempt id
+    $response = $this->delivery_odata_service->GetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id)
   }
 
 /**
