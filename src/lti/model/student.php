@@ -250,6 +250,8 @@ class Student {
     if ($result->info->http_code != 200) {
       $result = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
     }
+    error_log(print_r($result));
+    error_log(print_r($result->value[0]));
     $attempt_id = $result->value[0]->ID;
     // error_log("Debug statement");
     // error_log(print_r($result));
