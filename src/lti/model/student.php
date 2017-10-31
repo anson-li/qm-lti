@@ -271,24 +271,23 @@ class Student {
         "Assessment_ID" => $assessment_id,
         "Participant_Name" => $participant_name,
         "Notify" => $notify_url,
-        "ParameterList" => array(
-          "Parameter" => array(
-            array("Name" => "HOME", "Value" => $home_url),
-            array("Name" => "lti_consumer_key", "Value" => $consumer_key),
-            array("Name" => "lti_context_id", "Value" => $resource_link_id),
-            array("Name" => "lti_result_id", "Value" => $result_id),
-            array("Name" => "lti_participant_id", "Value" => $participant_id),
-            array("Name" => "CALLBACK", "Value" => 1)
-          )
-        )
+        "HOME" => $home_url,
+        "lti_consumer_key" => $consumer_key,
+        "lti_context_id" => $resource_link_id,
+        "lti_result_id" => $result_id,
+        "lti_participant_id" => $participant_id,
+        "CALLBACK" => 1
       );
 
       foreach ($additional_params as $key => $value) {
-        $access_parameters['ParameterList']['Parameter'][] = array(
-          "Name" => $key,
-          "Value" => $value
-        );
+        $access_parameters[$key] = $value;
       }
+
+      foreach ($access_parameters as $key => $value) {
+        $url .= urlencode('&' . $key . '=' . $value);
+      }
+
+      return $url;
   }
 
 /**
