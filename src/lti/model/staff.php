@@ -390,8 +390,9 @@ class Staff {
  */
 function filterDisabledForExternal($obj) {
   error_log(print_r($obj, 1));
+  error_log($obj->Permit_External_Call);
   if (isset($obj->Permit_External_Call)) {
-    if ($obj->Permit_External_Call === 1) {
+    if ($obj->Permit_External_Call == 1) {
       return true;
     }
   }
