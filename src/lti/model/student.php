@@ -255,6 +255,7 @@ class Student {
     $result = $this->delivery_odata_service->GetAttempt($attempt_id);
     $url = $result->value[0]->ParticipantFacingQMLobbyURL;
     $url = $this->appendParametersToArray($url, $this->notify_url, $this->return_url, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->participant_id, $this->additional_params);
+    error_log($url);
     return $url;
   }
 
