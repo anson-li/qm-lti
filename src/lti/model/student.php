@@ -289,7 +289,7 @@ class Student {
       $schedule_name = $this->assessment_id . $this->participant_id . $this->past_attempts;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
-      $schedule_stops = $schedule_starts->modify('+1 day');
+      $schedule_stops = new DateTime('NOW')->modify('+1 day');
       $this->schedule_id = create_schedule_participant($schedule_name, $this->assessment_id, $this->participant_id, TRUE, $schedule_starts, $schedule_stops);
 	    $url = get_access_schedule_notify($this->schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
