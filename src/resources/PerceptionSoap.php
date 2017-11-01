@@ -326,6 +326,7 @@ class PerceptionSoap {
         "Schedule_Starts" => $schedule_starts,
         "Schedule_Stops" => $schedule_stops
       );
+      error_log(print_r($access_parameters, 1));
       $schedule_id = $this->soap->CreateScheduleParticipant($access_parameters);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
@@ -359,7 +360,7 @@ class PerceptionSoap {
           "Value" => $value
         );
       }
-
+      error_log(print_r($access_parameters, 1));
       $access_assessment = $this->soap->GetAccessAssessmentNotify($access_parameters);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
