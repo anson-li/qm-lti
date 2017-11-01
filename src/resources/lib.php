@@ -621,6 +621,41 @@ EOD;
   }
 
 /*
+ * SOAP call to create a schedule for a user given an assessment id and preferable times
+ *
+ *   returns the Schedule ID or FALSE
+ */
+  function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops) {
+    try {
+      $soap_connection_id = perception_soapconnect_id();
+      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_schedule_notify($schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops);
+      $schedule_id = $access->Schedule_ID;
+    } catch (Exception $e) {
+      log_error($e);
+      return FALSE;
+    }
+    return $schedule_id;
+  }
+
+
+/*
+ * SOAP call to get a direct URL to an assessment for a participant which includes the notify option
+ *
+ *   returns the URL or FALSE
+ */
+  function get_access_schedule_notify($schedule_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params) {
+    try {
+      $soap_connection_id = perception_soapconnect_id();
+      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_schedule_notify($schedule_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params);
+      $url = $access->URL;
+    } catch (Exception $e) {
+      log_error($e);
+      $url = FALSE;
+    }
+    return $url;
+  }
+
+/*
  * SOAP call to get a direct URL to an assessment for a participant which includes the notify option
  *
  *   returns the URL or FALSE

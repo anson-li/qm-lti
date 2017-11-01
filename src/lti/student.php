@@ -40,7 +40,7 @@ require_once('model/student.php');
   }
 
   $student->createParticipant();
-  $url = $student->getAccessAssessmentNotify();
+  $url = $student->getAccessScheduleNotify();
   if (isset($_SESSION['error'])) {
     $url = "error.php";
   }

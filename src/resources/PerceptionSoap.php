@@ -316,6 +316,58 @@ class PerceptionSoap {
     return $access_assessment;
   }
 
+  public function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops) {
+    try {
+      $access_parameters = array(
+        "Schedule_Name" => $schedule_name,
+        "Assessment_ID" => $assessment_id,
+        "Participant_ID" => $participant_id,
+        "Restrict_Times" => $restrict_times,
+        "Schedule_Starts" => $schedule_starts,
+        "Schedule_Stops" => $schedule_stops
+      );
+      $schedule_id = $this->soap->CreateScheduleParticipant($access_parameters);
+    } catch(SoapFault $e) {
+      throw new QMWiseException($e);
+    }
+    return $schedule_id;
+  }
+
+
+  public function get_access_schedule_notify($schedule_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params = array()) {
+    try {
+      $access_parameters = array(
+        "PIP" => PIP_FILE,
+        "Schedule_ID" => $schedule_id,
+        "Participant_Name" => $participant_name,
+        "Notify" => $notify_url,
+        "ParameterList" => array(
+          "Parameter" => array(
+            array("Name" => "HOME", "Value" => $home_url),
+            array("Name" => "lti_consumer_key", "Value" => $consumer_key),
+            array("Name" => "lti_context_id", "Value" => $resource_link_id),
+            array("Name" => "lti_result_id", "Value" => $result_id),
+            array("Name" => "lti_participant_id", "Value" => $participant_id),
+            array("Name" => "CALLBACK", "Value" => 1)
+          )
+        )
+      );
+
+      foreach ($additional_params as $key => $value) {
+        $access_parameters['ParameterList']['Parameter'][] = array(
+          "Name" => $key,
+          "Value" => $value
+        );
+      }
+
+      $access_assessment = $this->soap->GetAccessAssessmentNotify($access_parameters);
+    } catch(SoapFault $e) {
+      throw new QMWiseException($e);
+    }
+    return $access_assessment;
+  }
+
+
   /**
    * get_report_url
    * Return the URL of a report for a given result ID
