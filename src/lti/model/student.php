@@ -289,7 +289,7 @@ class Student {
       $schedule_name = $this->assessment_id . $this->participant_id . $this->past_attempts;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
-      $schedule_stops = clone $schedule_starts;
+      $schedule_stops = new DateTime('NOW');
       $schedule_stops->modify('+1 day');
       $schedule_starts = $schedule_starts->format('Y-m-d H:i:s');
       $schedule_stops = $schedule_stops->format('Y-m-d H:i:s');
