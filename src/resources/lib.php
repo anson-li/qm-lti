@@ -628,7 +628,7 @@ EOD;
   function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops) {
     try {
       $soap_connection_id = perception_soapconnect_id();
-      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_schedule_notify($schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops);
+      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops);
       $schedule_id = $access->Schedule_ID;
     } catch (Exception $e) {
       log_error($e);
