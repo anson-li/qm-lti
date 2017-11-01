@@ -295,6 +295,7 @@ class Student {
       $schedule_stops = $schedule_stops->format('Y-m-d H:i:s');
 
       $this->schedule_id = create_schedule_participant($schedule_name, $this->assessment_id, $this->participant_id, TRUE, $schedule_starts, $schedule_stops);
+      error_log("Schedule_id " . $this->schedule_id);
 	    $url = get_access_schedule_notify($this->schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
 	  return $url;
