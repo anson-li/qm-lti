@@ -95,6 +95,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       $_SESSION['multiple_results'] = $multiple_results;
       $_SESSION['number_attempts'] = $number_attempts;
       $_SESSION['lti_return_url'] = $tool_provider->return_url;
+
       $_SESSION['result_id'] = $result_id;
       $_SESSION['allow_outcome'] = $supports_outcomes;
       $_SESSION['coaching_report'] = $coaching_report;
@@ -108,8 +109,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
         $_SESSION['qmwise_client_id'] = $customer['qmwise_client_id'];
         $_SESSION['qmwise_checksum'] = $customer['qmwise_checksum'];
       }
-      $_SESSION['deliveryodata_url'] = getDeliveryODataUrl($tool_provider->consumer->custom['customer_id']);
-      $_SESSION['customer_id'] = $tool_provider->consumer->custom['customer_id'];
+
       $return_url = parse_url($_SESSION['lti_return_url']);
       parse_str($return_url['query'], $_SESSION['additional_params']);
 
@@ -119,7 +119,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       } else {
         $page = 'staff';
       }
-      error_log(get_root_url());
       $ok = get_root_url() . "../lti/{$page}.php";
     } else {
       $tool_provider->reason = 'Missing data';

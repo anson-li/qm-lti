@@ -837,20 +837,6 @@ function is_best_result($db, $consumer, $resource_link, $user_id, $score) {
 }
 
 /*
- * Either retrieves an existing attempt or creates a new attempt in the database
- *
- * returns attempt ID
- */
-function get_latest_attempt($db, $consumer_key, $resource_link_id, $assessment_id, $user_id) {
-  $data_connector = LTI_Data_Connector::getDataConnector(TABLE_PREFIX, $db, DATA_CONNECTOR);
-  $latest_attempt = $data_connector->Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $user_id);
-  if (!$latest_attempt) {
-    $latest_attempt = $data_connector->Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $user_id);
-  }
-  return $latest_attempt;
-}
-
-/*
  * Returns the number of assessments previously logged for the user
  *
  * returns the numeral value
@@ -1224,31 +1210,6 @@ EOD;
     if ($id != 0) {
       if ($id >= MIN_EU_CUSTOMER_ID) {
         $url = "https://ondemand.questionmark.eu/qmwise/{$customer_id}/qmwise.asmx";
-      }
-    }
-    return $url;
-  }
-
-/*
- * Gets the DeliveryOData URL for a customer ID
- *
- *   returns the URL
- */
-  function getDeliveryODataUrl($customer_id) {
-    // identifies if the input value is a valid URL
-    if (filter_var($customer_id, FILTER_VALIDATE_URL)) {
-      return $customer_id;
-    }
-    $url = "https://ondemand.questionmark.com/deliveryodata/{$customer_id}/";
-    // Check for EU customer IDs
-    $id_string = $customer_id;
-    while ((strlen($id_string) > 0) && (substr($id_string, 0, 1) == '0')) {  // remove any leading zeroes
-      $id_string = substr($id_string, 1);
-    }
-    $id = intval($id_string);
-    if ($id != 0) {
-      if ($id >= MIN_EU_CUSTOMER_ID) {
-        $url = "https://ondemand.questionmark.eu/deliveryodata/{$customer_id}/";
       }
     }
     return $url;

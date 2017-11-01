@@ -565,7 +565,6 @@ class LTI_Tool_Provider {
         if (isset($_POST['roles'])) {
           $this->user->roles = LTI_Tool_Provider::parseRoles($_POST['roles']);
         }
-        error_log("result_sourcedid: {$_POST['lis_result_sourcedid']}");
         # Save the user instance
         if (isset($_POST['lis_result_sourcedid'])) {
           if ($this->user->lti_result_sourcedid != $_POST['lis_result_sourcedid']) {
@@ -1252,7 +1251,6 @@ class LTI_Resource_Link {
     # Lookup service details from the source resource link appropriate to the user (in case the destination is being shared)
     $source_resource_link = $this;
     $sourcedid = $lti_outcome->getSourcedid();
-    error_log("Sourcedid from the outcome: {$sourcedid}");
     $resultid = $lti_outcome->getResultID();
     if (!is_null($user)) {
       $source_resource_link = $user->getResourceLink();
@@ -1316,7 +1314,6 @@ EOF;
         </sourcedGUID>{$xml}
       </resultRecord>
 EOF;
-        error_log("XML: {$xml}");
         if ($this->doLTI11Service($do, $urlLTI11, $xml)) {
           switch ($action) {
             case self::EXT_READ:
@@ -1331,7 +1328,6 @@ EOF;
               break;
           }
         }
-        error_log("LTI11 response: {$response}");
       } else {
         $params = array();
         $params['sourcedid'] = $sourcedid;
@@ -1371,7 +1367,6 @@ EOF;
         $response = '';
       }
     }
-    error_log("Result response: {$response}");
     return $response;
   }
 
@@ -1736,8 +1731,6 @@ EOF;
 </imsx_POXEnvelopeRequest>
 EOF;
       // Calculate body hash
-      error_log("URL: " . $url);
-      error_log("XML Request: " . $xmlRequest);
       $hash = base64_encode(sha1($xmlRequest, TRUE));
       $params = array('oauth_body_hash' => $hash);
       // Add OAuth signature
@@ -1749,10 +1742,8 @@ EOF;
       $header = $req->to_header();
       $header .= "\nContent-Type: application/xml";
       $header .= "\nContent-Length: " . strlen($xmlRequest);
-      error_log("Header: {$header}");
       // Connect to tool consumer
       $this->ext_response = $this->do_post_request($url, $xmlRequest, $header);
-      error_log("XML Response: " . $this->ext_response);
       // Parse XML response
       if ($this->ext_response) {
         try {
@@ -2839,10 +2830,6 @@ abstract class LTI_Data_Connector {
  * Default name for database table used to store student result values
  */
   const RESULTS_TABLE_NAME = 'lti_results';
-/**
- * Default name for database table used to store student attempts
- */
-  const ATTEMPTS_TABLE_NAME = 'lti_attempts';
 
 /**
  * SQL date format (default = 'Y-m-d')

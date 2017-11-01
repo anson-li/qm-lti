@@ -3,7 +3,6 @@
 require_once('../config/config.php');
 require_once('../resources/LTI_Tool_Provider.php');
 require_once('../resources/lib.php');
-require_once('../resources/delivery_odata/DeliveryOdataService.php');
 
 class Student {
 
@@ -122,14 +121,12 @@ class Student {
     $this->parsed_attempts = $this->number_attempts;
     $this->past_attempts = 0;
     $this->additional_params = $session['additional_params'];
-    $this->delivery_odata_service = new DeliveryOdataService($session['customer_id'], $session['deliveryodata_url'], $session['qmwise_client_id'], $session['qmwise_checksum']);
   }
 
 /**
  * Checks if user is a student.
  */
   function checkValid() {
-    error_log($this->is_student);
     if (!$this->is_student) {
       $_SESSION['error'] = 'Not a student';
     } else if (!$this->assessment_id) {
@@ -227,66 +224,10 @@ class Student {
  */
   function getAssessment() {
     $assessment = '';
-    if ($this->delivery_odata_service) {
-      $response = $this->delivery_odata_service->GetAssessment($this->assessment_id);
-      $assessment = $response->value[0];
-    } else {
-      if (!isset($_SESSION['error'])) {
-        $assessment = get_assessment($this->assessment_id);
-      }
+    if (!isset($_SESSION['error'])) {
+      $assessment = get_assessment($this->assessment_id);
     }
     return $assessment;
-  }
-
-/**
- * Setup attempt list
- *
- * @return String Attempt URL
- */
-  function setupAssessmentAttempt() {
-    $this->external_attempt_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_id);
-    // Already have an attempt in progress, grab attempt already there
-    $result = $this->delivery_odata_service->GetAttemptID($this->external_attempt_id, $this->assessment_id, $this->participant_id);
-
-    if (count($result->value) == 0) {
-      $result = $this->delivery_odata_service->SetAttempt($this->external_attempt_id, $this->assessment_id, $this->participant_id);
-    }
-    $attempt_id = $result->value[0]->ID;
-    $result = $this->delivery_odata_service->GetAttempt($attempt_id);
-    error_log(print_r($result, 1));
-    $url = $result->ParticipantFacingQMLobbyUrl;
-    $url = $this->appendParametersToArray($url, $this->assessment_id, $this->notify_url, $this->return_url, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->participant_id, $this->additional_params);
-    error_log($url);
-    return $url;
-  }
-
-/**
- * Appends parameters to url
- *
- * @return String Complete URL
- */
-  function appendParametersToArray($url, $assessment_id, $notify_url, $home_url, $consumer_key, $resource_link_id, $result_id, $participant_id, $additional_params = array()) {
-      $access_parameters = array(
-        "PIP" => PIP_FILE,
-        "Assessment_ID" => $assessment_id,
-        "Notify" => $notify_url,
-        "HOME" => $home_url,
-        "lti_consumer_key" => $consumer_key,
-        "lti_context_id" => $resource_link_id,
-        "lti_result_id" => $result_id,
-        "lti_participant_id" => $participant_id,
-        "CALLBACK" => 1
-      );
-
-      foreach ($additional_params as $key => $value) {
-        $access_parameters[$key] = $value;
-      }
-
-      foreach ($access_parameters as $key => $value) {
-        $url .= '&' . $key . '=' . $value;
-      }
-
-      return $url;
   }
 
 /**

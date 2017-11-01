@@ -13,7 +13,7 @@
 ?>
         <h1>Assessments</h1>
 <?php
-  if (!empty($assessments) && (count($assessments) > 0) && !is_null($assessments[0])) {
+  if ((count($assessments) !== 0) && !is_null($assessments[0])) {
 ?>
         <form action="staff.php" method="POST">
         <table class="DataTable-staff table table-sm" cellpadding="0" cellspacing="0">

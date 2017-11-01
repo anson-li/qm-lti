@@ -1,7 +1,6 @@
 <div id="body" class="container-fluid col-md-6">
 <h1>Student Portal</h1>
 <form action="student_nav.php" method="POST">
-  <?php echo $assessment_attempt; ?>
   <table class="DataTable table table-sm" cellpadding="0" cellspacing="0">
     <tr class="GridHeader">
       <th>Assessment Name</th>
@@ -13,7 +12,7 @@
     <?php } ?>
     </tr>
     <tr class="GridRow">
-      <td><?php echo $assessment->Name; ?></td>
+      <td><?php echo $assessment->Session_Name; ?></td>
       <td><?php echo $launch; ?></td>
       <td><?php echo $parsed_attempts; ?></td>
       <td><?php echo $past_attempts; ?></td>
