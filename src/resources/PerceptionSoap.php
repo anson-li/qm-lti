@@ -316,7 +316,7 @@ class PerceptionSoap {
     return $access_assessment;
   }
 
-  public function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery) {
+  public function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $web_delivery) {
     try {
       $access_parameters = array(
         "Schedule_Name" => $schedule_name,
@@ -325,8 +325,6 @@ class PerceptionSoap {
         "Restrict_Times" => $restrict_times,
         "Schedule_Starts" => $schedule_starts,
         "Schedule_Stops" => $schedule_stops,
-        "Group_ID" => $group_id,
-        "Group_Tree_ID" => $group_tree_id,
         "Web_Delivery" => $web_delivery
       );
       error_log(print_r($access_parameters, 1));
