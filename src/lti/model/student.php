@@ -213,8 +213,8 @@ class Student {
         add_group_participant_list($this->group->Group_ID, $this->participant_id);
       }
     }
-    error_log(print_r($this->group));
-    $this->group_ID = $this->group->Group_ID;
+    error_log(print_r($this->group_id));
+    $this->group_id = $this->group->Group_ID;
   }
 
 /**
@@ -304,7 +304,7 @@ class Student {
       $schedule_starts = $schedule_starts->format('Y-m-d H:i:s');
       $schedule_stops = $schedule_stops->format('Y-m-d H:i:s');
       error_log(print_r($this->Group, 1));
-      $schedule_id = create_schedule_participant($schedule_name, $this->assessment_id, $this->participant_id, TRUE, $schedule_starts, $schedule_stops, $this->Group_ID, $this->Group_ID, TRUE);
+      $schedule_id = create_schedule_participant($schedule_name, $this->assessment_id, $this->participant_id, TRUE, $schedule_starts, $schedule_stops, $this->Group_ID, $this->group_id, TRUE);
 	    $url = get_access_schedule_notify($schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
 	  return $url;
