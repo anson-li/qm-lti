@@ -209,6 +209,8 @@ class Student {
         add_group_participant_list($this->group->Group_ID, $this->participant_id);
       }
     }
+    error_log("Group added");
+    error_log(print_r($this->group));
   }
 
 /**
