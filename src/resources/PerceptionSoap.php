@@ -316,7 +316,7 @@ class PerceptionSoap {
     return $access_assessment;
   }
 
-  public function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops) {
+  public function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery) {
     try {
       $access_parameters = array(
         "Schedule_Name" => $schedule_name,
@@ -324,10 +324,13 @@ class PerceptionSoap {
         "Participant_ID" => $participant_id,
         "Restrict_Times" => $restrict_times,
         "Schedule_Starts" => $schedule_starts,
-        "Schedule_Stops" => $schedule_stops
+        "Schedule_Stops" => $schedule_stops,
+        "Group_ID" => $group_id,
+        "Group_Tree_ID" => $group_tree_id,
+        "Web_Delivery" => $web_delivery
       );
       error_log(print_r($access_parameters, 1));
-      $schedule_id = $this->soap->CreateScheduleParticipant($access_parameters);
+      $schedule_id = $this->soap->CreateScheduleParticipantV42($access_parameters);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
     }
