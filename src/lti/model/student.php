@@ -89,6 +89,10 @@ class Student {
  *  Additional parameters passed by the tool consumer.
  */
   protected $additional_params = NULL;
+/**
+ *  Group that participant belongs to.
+ */
+  protected $group = NULL;
 
 /**
  * Class constructor
