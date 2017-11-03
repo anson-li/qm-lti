@@ -213,8 +213,9 @@ class Student {
         add_group_participant_list($this->group->Group_ID, $this->participant_id);
       }
     }
-    error_log(print_r($this->group_id));
+    error_log(print_r($this->group, 1));
     $this->group_id = $this->group->Group_ID;
+    error_log(print_r($this->group_id, 1));
   }
 
 /**
