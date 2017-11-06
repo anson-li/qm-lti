@@ -331,6 +331,7 @@ class PerceptionSoap {
       );
       error_log(print_r($access_parameters, 1));
       $schedule_id = $this->soap->CreateScheduleParticipantV42($access_parameters);
+      error_reporting(print_r($schedule_id, 1));
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
     }
