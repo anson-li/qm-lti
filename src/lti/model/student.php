@@ -96,7 +96,7 @@ class Student {
 /**
  *  Group ID for the participant.
  */
-  protected $group_id = NULL;
+  protected $group_id = 0;
 
 /**
  * Class constructor
