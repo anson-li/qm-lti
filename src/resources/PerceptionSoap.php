@@ -319,13 +319,15 @@ class PerceptionSoap {
   public function create_schedule_participant($schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $web_delivery) {
     try {
       $access_parameters = array(
-        "Schedule_Name" => $schedule_name,
-        "Assessment_ID" => $assessment_id,
-        "Participant_ID" => $participant_id,
-        "Restrict_Times" => $restrict_times,
-        "Schedule_Starts" => $schedule_starts,
-        "Schedule_Stops" => $schedule_stops,
-        "Web_Delivery" => $web_delivery
+        "schedule" => array(
+          "Schedule_Name" => $schedule_name,
+          "Assessment_ID" => $assessment_id,
+          "Participant_ID" => $participant_id,
+          "Restrict_Times" => $restrict_times,
+          "Schedule_Starts" => $schedule_starts,
+          "Schedule_Stops" => $schedule_stops,
+          "Web_Delivery" => $web_delivery
+        )
       );
       error_log(print_r($access_parameters, 1));
       $schedule_id = $this->soap->CreateScheduleParticipantV42($access_parameters);
