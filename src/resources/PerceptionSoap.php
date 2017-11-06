@@ -320,6 +320,7 @@ class PerceptionSoap {
     try {
       $access_parameters = array(
         "schedule" => array(
+          "Schedule_ID" => 0,
           "Schedule_Name" => $schedule_name,
           "Assessment_ID" => $assessment_id,
           "Participant_ID" => $participant_id,
