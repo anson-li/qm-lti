@@ -316,7 +316,7 @@ class PerceptionSoap {
     return $access_assessment;
   }
 
-  public function create_schedule_participant($schedule_id, $schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $restrict_attempts, $max_attempts, $monitored, $min_days_between_attempts, $time_limit_override, $time_limit) {
+  public function create_schedule_participant($schedule_id, $schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $restrict_attempts, $max_attempts, $monitored, $min_days_between_attempts, $time_limit_override, $time_limit, $offline_delivery) {
     try {
       $access_parameters = array(
         "schedule" => array(
@@ -336,7 +336,8 @@ class PerceptionSoap {
           "Test_Center_ID" => $test_center_id,
           "Min_Days_Between_Attempts" => $min_days_between_attempts,
           "Time_Limit_Override" => $time_limit_override,
-          "Time_Limit" => $time_limit
+          "Time_Limit" => $time_limit,
+          "Offline_Delivery" => $offline_delivery
         )
       );
       error_log(print_r($access_parameters, 1));
