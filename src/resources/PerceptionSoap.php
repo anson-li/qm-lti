@@ -332,7 +332,8 @@ class PerceptionSoap {
           "Web_Delivery" => $web_delivery,
           "Restrict_Attempts" => $restrict_attempts,
           "Max_Attempts" => $max_attempts,
-          "Monitored" => $monitored
+          "Monitored" => $monitored,
+          "Test_Center_ID" => $test_center_id
         )
       );
       error_log(print_r($access_parameters, 1));
