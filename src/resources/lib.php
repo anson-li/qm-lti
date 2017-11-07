@@ -647,6 +647,7 @@ EOD;
     try {
       $soap_connection_id = perception_soapconnect_id();
       $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_schedule_notify($schedule_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params);
+      error_log(print_r($access, 1));
       $url = $access->URL;
     } catch (Exception $e) {
       log_error($e);
