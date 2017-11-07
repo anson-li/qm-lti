@@ -44,6 +44,8 @@ require_once('model/student.php');
   if (!$student->hasScheduleID()) {
     error_log("getting new schedule id");
     $student = $student->createScheduleParticipant();
+    error_log("interim test");
+    error_log($student->getScheduleID());
     $student->setLatestAttempt();
   }
   error_log("Getting schedule id");
