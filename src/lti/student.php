@@ -40,6 +40,7 @@ require_once('model/student.php');
   }
 
   $student->createParticipant();
+  $student = $student->createScheduleParticipant();
   $url = $student->getAccessScheduleNotify();
   if ($url !== false) {
     $student->saveAttempt();

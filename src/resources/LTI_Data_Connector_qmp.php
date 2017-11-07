@@ -754,14 +754,15 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 /*
  *  Gets the latest external attempt ID for an assessment
  */
-  public function Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
+  public function Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $schedule_id, $participant_id) {
     $sql = 'SELECT external_attempt_id ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
-           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (participant_id = :participant)';
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (schedule_id = :schedule) AND (participant_id = :participant)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
     $query->bindValue('assessment', $assessment_id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
     $ok = $query->execute();
     if ($ok) {
@@ -777,15 +778,16 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 /*
  *  Gets the latest external attempt ID for an assessment
  */
-  public function Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
+  public function Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $schedule_id, $participant_id) {
     $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME .
-            ' (consumer_key, context_id, assessment_id, participant_id) ' .
+            ' (consumer_key, context_id, assessment_id, schedule_id, participant_id) ' .
             'OUTPUT INSERTED.external_attempt_id ' .
-            'VALUES (:consumer, :context, :assessment, :participant)';
+            'VALUES (:consumer, :context, :assessment, :schedule_id, :participant)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
     $query->bindValue('assessment', $assessment_id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
         $ok = $query->execute();
     if ($ok) {
@@ -801,13 +803,14 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 /*
  *  Gets the latest external attempt ID for an assessment
  */
-  public function Attempts_deleteLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
+  public function Attempts_deleteLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $schedule_id, $participant_id) {
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (customer_id = :customer)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
     $query->bindValue('assessment', $assessment_id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant_id', $participant_id, PDO::PARAM_STR);
     $ok = $query->execute();
     return $ok;
