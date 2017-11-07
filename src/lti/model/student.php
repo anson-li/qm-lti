@@ -241,9 +241,9 @@ class Student {
  */
   function setLatestAttempt() {
     if (!isset($_SESSION['error'])) {
-      $this->schedule_id = set_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username, $this->schedule_id);
+      return set_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username, $this->schedule_id);
     }
-    return $this;
+    return false;
   }
 
 /**
