@@ -340,7 +340,7 @@ class PerceptionSoap {
           "Offline_Delivery" => $offline_delivery
         )
       );
-      error_log(print_r($access_parameters));
+      error_log(print_r($access_parameters, 1));
       $schedule_id = $this->soap->CreateScheduleParticipantV42($access_parameters);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
@@ -375,7 +375,7 @@ class PerceptionSoap {
           "Value" => $value
         );
       }
-      error_log(print_r($access_parameters));
+      error_log(print_r($access_parameters, 1));
       $access_assessment = $this->soap->GetAccessScheduleNotify($access_parameters);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
