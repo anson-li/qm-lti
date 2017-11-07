@@ -770,6 +770,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $external_attempt_id = $row['external_attempt_id'];
     } else {
       error_log(print_r($query->errorInfo(), 1));
+      error_log($query->queryString);
       return FALSE;
     }
     return $external_attempt_id;
@@ -795,6 +796,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $external_attempt_id = $row['external_attempt_id'];
     } else {
       error_log(print_r($query->errorInfo(), 1));
+      error_log($query->queryString);
       return FALSE;
     }
     return $external_attempt_id;
