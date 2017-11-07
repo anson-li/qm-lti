@@ -298,7 +298,7 @@ class Student {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
       error_log("Group");
-      error_log(print_r($this->group));
+      error_log(print_r($this->group, 1));
       error_log($this->group->Group_ID);
       error_log("Testing");
       $schedule_name = $this->assessment_id . $this->participant_id . $this->past_attempts;
