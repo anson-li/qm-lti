@@ -362,6 +362,7 @@ class PerceptionSoap {
             array("Name" => "lti_context_id", "Value" => $resource_link_id),
             array("Name" => "lti_result_id", "Value" => $result_id),
             array("Name" => "lti_participant_id", "Value" => $participant_id),
+            array("Name" => "schedule_id", "Value" => $schedule_id),
             array("Name" => "CALLBACK", "Value" => 1)
           )
         )

@@ -40,11 +40,12 @@ require_once('model/student.php');
   }
 
   $student->createParticipant();
-  $student = $student->createScheduleParticipant();
-  $url = $student->getAccessScheduleNotify();
-  if ($url !== false) {
-    $student->saveAttempt();
+  $student = $student->getLatestAttempt();
+  if ($student->schedule_id === false) {
+    $student = $student->createScheduleParticipant();
+    $student->setLatestAttempt();
   }
+  $url = $student->getAccessScheduleNotify();
 
   if (isset($_SESSION['error'])) {
     $url = "error.php";

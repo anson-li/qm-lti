@@ -223,15 +223,27 @@ class Student {
   }
 
 /**
+ * Gets the assessment attempt.
+ *
+ * @return NULL
+ */
+  function getLatestAttempt() {
+    if (!isset($_SESSION['error'])) {
+      $this->schedule_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username);
+    }
+    return $this;
+  }
+
+/**
  * Saves the assessment attempt until deleted later.
  *
  * @return NULL
  */
-  function saveAttempt() {
+  function setLatestAttempt() {
     if (!isset($_SESSION['error'])) {
-      $this->attempt_record = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->schedule_id, $this->username);
+      $this->schedule_id = set_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username, $this->schedule_id);
     }
-    return $this->attempt_record;
+    return $this;
   }
 
 /**

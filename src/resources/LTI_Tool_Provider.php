@@ -2005,6 +2005,19 @@ class LTI_Outcome {
 
 
 /**
+ * Saves the results in outcome to Results database
+ *
+ * @param consumer_tool Consumer tool used to connect to database
+ * @param resoure_link
+ * @param participant
+ *
+ * @return boolean True if saved
+ */
+  public function deleteAttempt($consumer, $resource_link, $user_id, $schedule_id) {
+    return $consumer->getDataConnector()->Attempts_deleteLatestAttempt($this, $consumer, $resource_link->getId(), $user_id, $schedule_id);
+  }
+
+/**
  * Get the result sourcedid value.
  *
  * @deprecated Use User object instead
