@@ -62,6 +62,10 @@ class Student {
  */
   protected $assessment_id = NULL;
 /**
+ *  ID of schedule currently selected by resource link.
+ */
+  protected $schedule_id = NULL;
+/**
  *  URL of LTI page to complete return process.
  */
   protected $return_url = NULL;
