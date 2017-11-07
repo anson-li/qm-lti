@@ -374,6 +374,7 @@ class PerceptionSoap {
           "Value" => $value
         );
       }
+      error_log(print_r($access_parameters));
       $access_assessment = $this->soap->GetAccessScheduleNotify($access_parameters);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
