@@ -252,7 +252,7 @@ class Student {
  * @return Boolean TRUE if schedule ID is not false
  */
   function hasScheduleID() {
-    return ($this->schedule_id != false);
+    return (($this->schedule_id != null) && ($this->schedule_id != false));
   }
 
 /**
@@ -295,6 +295,9 @@ class Student {
   function getAttemptDetails() {
     if (!isset($_SESSION['error'])) {
       $this->past_attempts = get_past_attempts($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->schedule_id, $this->username);
+      if ($this->hasScheduleID) { # Already has an attempt setup
+        $this->past_attempts++;
+      }
     }
     return $this->past_attempts;
   }
@@ -345,8 +348,6 @@ class Student {
       $schedule_starts = $schedule_starts->format('Y-m-d\TH:i:s');
       $schedule_stops = $schedule_stops->format('Y-m-d\TH:i:s');
       $this->schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 0, $schedule_starts, $schedule_stops, $this->group_id, $this->group_id, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0);
-      error_log("model debug");
-      error_log($this->schedule_id);
     }
     return $this;
   }
