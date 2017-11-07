@@ -305,7 +305,7 @@ class Student {
       $schedule_stops->modify('+1 day');
       $schedule_starts = date('c', strtotime($schedule_starts));
       $schedule_stops = date('c', strtotime($schedule_stops));
-      $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, $this->group_id, $this->group_id, 1, 0, 0, 0, 0, 0, 0, 0, 0);
+      $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, $this->group->Group_ID, $this->group->Group_ID, 1, 0, 0, 0, 0, 0, 0, 0, 0);
       error_log("Schedule ID: " . $schedule_id);
 	    $url = get_access_schedule_notify($schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
