@@ -41,7 +41,7 @@ require_once('model/student.php');
 
   $student->createParticipant();
   $student = $student->getLatestAttempt();
-  if ($student->schedule_id === false) {
+  if ($student->hasScheduleID) {
     $student = $student->createScheduleParticipant();
     $student->setLatestAttempt();
   }

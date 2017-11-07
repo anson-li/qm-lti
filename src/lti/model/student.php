@@ -247,6 +247,15 @@ class Student {
   }
 
 /**
+ * Checks if student has schedule id
+ *
+ * @return Boolean TRUE if schedule ID is not false
+ */
+  function hasScheduleID() {
+    return ($this->schedule_id !== false);
+  }
+
+/**
  * Checks database to identify if coaching report is available for participant and assessment.
  * Includes a sanitary check to identify if a previous assessment was taken.
  *
