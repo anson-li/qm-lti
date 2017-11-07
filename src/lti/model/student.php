@@ -229,7 +229,7 @@ class Student {
  */
   function saveAttempt() {
     if (!isset($_SESSION['error'])) {
-      $this->attempt_record = get_latest_attempt($this->db, $this->resource_link_id, $this->assessment_id, $this->schedule_id, $this->username);
+      $this->attempt_record = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->schedule_id, $this->username);
     }
     return $this->attempt_record;
   }
