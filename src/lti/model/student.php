@@ -252,13 +252,16 @@ class Student {
  * @return Boolean TRUE if schedule ID is not false
  */
   function hasScheduleID() {
-    error_log("Testing");
-    if ($this->schedule_id != false) {
-      error_log("Looks not false");
-    } else {
-      error_log("Looks false");
-    }
     return ($this->schedule_id != false);
+  }
+
+/**
+ * Checks if student has schedule id
+ *
+ * @return Boolean TRUE if schedule ID is not false
+ */
+  function getScheduleID() {
+    return $this->schedule_id;
   }
 
 /**
