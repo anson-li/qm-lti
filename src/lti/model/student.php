@@ -176,6 +176,7 @@ class Student {
     } else {
     	$this->participant_id = FALSE;
     }
+    return $this;
   }
 
 /**
@@ -214,6 +215,7 @@ class Student {
       }
     }
     $this->group_id = $this->group->Group_ID;
+    return $this;
   }
 
 /**
@@ -295,16 +297,15 @@ class Student {
   function getAccessScheduleNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
-      $schedule_name = $this->assessment_id . $this->participant_id . $this->past_attempts;
+      $schedule_name = 'Assessment ' . $this->assessment_id . ' for ' $this->username . ', attempt ' $this->past_attempts;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
       $schedule_stops = new DateTime('NOW');
       $schedule_stops->modify('+1 day');
       $schedule_starts = $schedule_starts->format('Y-m-d\TH:i:s');
       $schedule_stops = $schedule_stops->format('Y-m-d\TH:i:s');
-      $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+      $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, $this->group_id, $this->group_id, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	    $url = get_access_schedule_notify($schedule_id, $this->username, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
-      error_log('URL: ' . $url);
 	  }
 	  return $url;
   }

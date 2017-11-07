@@ -44,8 +44,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   if (isset($_POST['action'])) {
     $student->identifyAction($_POST['action']);
   }
-  $student->createParticipant();
-  $student->joinGroup();
+  $student = $student->createParticipant();
+  $student = $student->joinGroup();
 
   $assessment = $student->getAssessment();
   $past_attempts = $student->getAttemptDetails();
