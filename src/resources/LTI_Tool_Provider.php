@@ -2830,7 +2830,10 @@ abstract class LTI_Data_Connector {
  * Default name for database table used to store student result values
  */
   const RESULTS_TABLE_NAME = 'lti_results';
-
+/**
+ * Default name for database table used to store student attempts
+ */
+  const ATTEMPTS_TABLE_NAME = 'lti_attempts';
 /**
  * SQL date format (default = 'Y-m-d')
  */
