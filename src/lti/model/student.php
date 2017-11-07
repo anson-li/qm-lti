@@ -297,6 +297,7 @@ class Student {
   function getAccessScheduleNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
+      error_log(print_r($this->group));
       $schedule_name = $this->assessment_id . $this->participant_id . $this->past_attempts;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
