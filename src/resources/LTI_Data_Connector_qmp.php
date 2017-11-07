@@ -780,7 +780,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
   public function Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $schedule_id, $participant_id) {
     $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME .
             ' (consumer_key, context_id, assessment_id, schedule_id, participant_id) ' .
-            'VALUES (:consumer, :context, :assessment, :schedule_id, :participant)';
+            'VALUES (:consumer, :context, :assessment, :schedule, :participant)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
