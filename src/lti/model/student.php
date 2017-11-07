@@ -314,7 +314,7 @@ class Student {
       $schedule_stops->modify('+1 day');
       $schedule_starts = $schedule_starts->format('Y-m-d\TH:i:s');
       $schedule_stops = $schedule_stops->format('Y-m-d\TH:i:s');
-      $this->schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 0, $schedule_starts, $schedule_stops, $this->group_id, $this->group_id, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+      $this->schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 0, $schedule_starts, $schedule_stops, $this->group_id, $this->group_id, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0);
     }
     return $this;
   }
