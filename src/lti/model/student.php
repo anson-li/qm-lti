@@ -187,7 +187,7 @@ class Student {
     } else if (!isset($_SESSION['error'])) {
       $this->group = create_group($this->context_label, $this->context_title, 0);
     } else {
-      $this->group = FALSE;
+      error_log("Group not instantiated for participant " . $this->participant_id);
     }
     if ($this->group != FALSE) {
       $this->group_list = get_participant_group_list($this->participant_id);
@@ -213,9 +213,7 @@ class Student {
         add_group_participant_list($this->group->Group_ID, $this->participant_id);
       }
     }
-    error_log(print_r($this->group, 1));
     $this->group_id = $this->group->Group_ID;
-    error_log(print_r($this->group_id, 1));
   }
 
 /**
@@ -308,7 +306,7 @@ class Student {
       $schedule_stops->modify('+1 day');
       $schedule_starts = date('c', strtotime($schedule_starts));
       $schedule_stops = date('c', strtotime($schedule_stops));
-      $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, $this->group->Group_ID, $this->group->Group_ID, 1, 0, 0, 0, 0, 0, 0, 0, 0);
+      $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0);
       error_log("Schedule ID: " . $schedule_id);
 	    $url = get_access_schedule_notify($schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
