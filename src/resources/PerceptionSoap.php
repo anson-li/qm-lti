@@ -373,7 +373,7 @@ class PerceptionSoap {
           "Value" => $value
         );
       }
-      $access_assessment = $this->soap->GetAccessAssessmentNotify($access_parameters);
+      $access_assessment = $this->soap->GetAccessScheduleNotify($access_parameters);
     } catch(SoapFault $e) {
       error_log("Soap last request");
       error_log($this->soap->__getLastRequest());
