@@ -295,10 +295,6 @@ class Student {
   function getAccessScheduleNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
-      error_log("Group");
-      error_log(print_r($this->group, 1));
-      error_log($this->group->Group_ID);
-      error_log("Testing");
       $schedule_name = $this->assessment_id . $this->participant_id . $this->past_attempts;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
@@ -307,8 +303,9 @@ class Student {
       $schedule_starts = date('c', strtotime($schedule_starts));
       $schedule_stops = date('c', strtotime($schedule_stops));
       $schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 1, $schedule_starts, $schedule_stops, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-      error_log("Schedule ID: " . $schedule_id);
 	    $url = get_access_schedule_notify($schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
+      error_log("URL");
+      error_log($url);
 	  }
 	  return $url;
   }
