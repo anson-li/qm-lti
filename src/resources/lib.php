@@ -628,7 +628,7 @@ EOD;
   function create_schedule_participant($schedule_id, $schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $test_center_id, $restrict_attempts, $max_attempts, $monitored, $test_center_id, $min_days_between_attempts, $time_limit_override, $time_limit, $offline_delivery) {
     try {
       $soap_connection_id = perception_soapconnect_id();
-      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->create_schedule_participant(9999999, $schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $restrict_attempts, $max_attempts, $monitored, $test_center_id, $min_days_between_attempts, $time_limit_override, $time_limit, $offline_delivery);
+      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->create_schedule_participant($schedule_id, $schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $restrict_attempts, $max_attempts, $monitored, $test_center_id, $min_days_between_attempts, $time_limit_override, $time_limit, $offline_delivery);
       $schedule_id = $access->Schedule_ID;
     } catch (Exception $e) {
       log_error($e);
@@ -646,7 +646,7 @@ EOD;
   function get_access_schedule_notify($schedule_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params) {
     try {
       $soap_connection_id = perception_soapconnect_id();
-      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_schedule_notify(9999999, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params);
+      $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_schedule_notify($schedule_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params);
       $url = $access->URL;
     } catch (Exception $e) {
       log_error($e);
