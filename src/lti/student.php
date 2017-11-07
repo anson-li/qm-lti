@@ -41,6 +41,10 @@ require_once('model/student.php');
 
   $student->createParticipant();
   $url = $student->getAccessScheduleNotify();
+  if ($url !== false) {
+    $student->saveAttempt();
+  }
+
   if (isset($_SESSION['error'])) {
     $url = "error.php";
   }
