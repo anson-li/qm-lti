@@ -41,10 +41,12 @@ require_once('model/student.php');
 
   $student->createParticipant();
   $student = $student->getLatestAttempt();
-  if ($student->hasScheduleID) {
+  error_log("getting schedule id");
+  if (!$student->hasScheduleID()) {
     $student = $student->createScheduleParticipant();
     $student->setLatestAttempt();
   }
+  error_log("passed");
   $url = $student->getAccessScheduleNotify();
 
   if (isset($_SESSION['error'])) {
