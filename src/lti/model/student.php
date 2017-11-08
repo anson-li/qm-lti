@@ -295,8 +295,7 @@ class Student {
   function getAttemptDetails() {
     if (!isset($_SESSION['error'])) {
       $this->past_attempts = get_past_attempts($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->schedule_id, $this->username);
-      $attemptInProgress = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username);
-      if ($attemptInProgress != false) { # Already has an attempt setup
+      if ($this->hasAttemptInProgress) { # Already has an attempt setup
         $this->past_attempts++;
       }
     }
@@ -313,13 +312,22 @@ class Student {
   }
 
 /**
+ * Checks if user has attempt in progress.
+ *
+ * @return Boolean
+ */
+  function hasAttemptInProgress() {
+    return (get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username) != false);
+  }
+
+/**
  * Checks whether or not launch is disabled due to maximum attempts taken.
  *
  * @return String UI disable string.
  */
   function checkLaunchDisabled() {
     if ($this->number_attempts != 'none') {
-      if ($this->past_attempts >= $this->number_attempts) {
+      if (($this->past_attempts >= $this->number_attempts) && (!$this->hasAttemptInProgress)) {
         return '';
       } else {
         return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
@@ -327,6 +335,19 @@ class Student {
     } else {
       $this->parsed_attempts = 'No limit';
       return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
+    }
+  }
+
+/**
+ * Provides a user-readable format for getting attempts in progress
+ *
+ * @return String text for attempt in progress details
+ */
+  function getAttemptProgress() {
+    if ($this->hasAttemptInProgress()) {
+      return 'Yes';
+    } else {
+      return 'No';
     }
   }
 
