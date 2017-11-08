@@ -546,6 +546,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $query->bindValue('accessed', $is_accessed, PDO::PARAM_INT);
     $query->bindValue('sourcedid', $result_sourcedid, PDO::PARAM_STR);
     $ok = $query->execute();
+    error_log("Testing results save");
     error_log(print_r($query, 1));
     error_log(print_r($query->errorInfo(), 1));
     return $ok;
