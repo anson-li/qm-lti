@@ -87,15 +87,33 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       // Save result
       if ($resource_link->doOutcomesService(LTI_Resource_Link::EXT_WRITE, $outcome)) {
         $outcome->clearAccessedResult($consumer, $resource_link, $participant_id);
-        $outcome->saveToResult($consumer, $resource_link, $participant_id, 1, $result_id);
-        $outcome->deleteAttempt($consumer, $resource_link, $schedule_id, $participant_id);
+        error_log("Saving via outcomes service");
+        if ($outcome->saveToResult($consumer, $resource_link, $participant_id, 1, $result_id)) {
+          error_log("Working 1");
+        } else {
+          error_log("Not working 1");
+        }
+        if ($outcome->deleteAttempt($consumer, $resource_link, $schedule_id, $participant_id)) {
+          error_log("Working 2");
+        } else {
+          error_log("Not working 2");
+        }
       } else {
         error_log("Failed to pass outcome of {$score} for {$result_id}.");
       }
     }
   } else {
+    error_log("Saving alternate");
     $resource_link->checkValueType($outcome);
-    $outcome->saveToResult($consumer, $resource_link, $participant_id, 0, $result_id);
-    $outcome->deleteAttempt($consumer, $resource_link, $participant_id, $schedule_id, $participant_id);
+    if ($outcome->saveToResult($consumer, $resource_link, $participant_id, 0, $result_id)) {
+      error_log("Working 1");
+    } else {
+          error_log("Not working 1");
+        }
+    if ($outcome->deleteAttempt($consumer, $resource_link, $participant_id, $schedule_id, $participant_id)) {
+      error_log("Working 2");
+    } else {
+          error_log("Not working 2");
+        }
   }
 ?>
