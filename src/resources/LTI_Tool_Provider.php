@@ -2000,6 +2000,7 @@ class LTI_Outcome {
  * @return boolean True if saved
  */
   public function saveToResult($consumer, $resource_link, $user_id, $is_accessed, $result_sourcedid) {
+    error_log("Saving to result...");
     return $consumer->getDataConnector()->Results_save($this, $consumer, $resource_link, $user_id, $is_accessed, $result_sourcedid);
   }
 
@@ -2014,6 +2015,7 @@ class LTI_Outcome {
  * @return boolean True if saved
  */
   public function deleteAttempt($consumer, $resource_link, $user_id, $schedule_id) {
+    error_log("Deleting attempt...");
     return $consumer->getDataConnector()->Attempts_deleteLatestAttempt($this, $consumer, $resource_link->getId(), $user_id, $schedule_id);
   }
 
