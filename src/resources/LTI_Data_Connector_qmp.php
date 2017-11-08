@@ -800,11 +800,11 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
   public function Attempts_deleteLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $schedule_id, $participant_id) {
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (schedule_id = :schedule) AND (participant_id = :participant)';
-    error_log($consumer_key);
-    error_log($resource_link_id);
-    error_log($assessment_id);
-    error_log($schedule_id);
-    error_log($participant_id);
+    error_log('Consumer key: ' . $consumer_key);
+    error_log('Resource link id: ' . $resource_link_id);
+    error_log('Assessment ID: ' . $assessment_id);
+    error_log('schedule id: ' . $schedule_id);
+    error_log('participant_id: ' . $participant_id);
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
