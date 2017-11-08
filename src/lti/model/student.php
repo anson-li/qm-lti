@@ -295,7 +295,7 @@ class Student {
   function getAttemptDetails() {
     if (!isset($_SESSION['error'])) {
       $this->past_attempts = get_past_attempts($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->schedule_id, $this->username);
-      if ($this->hasAttemptInProgress) { # Already has an attempt setup
+      if ($this->hasAttemptInProgress()) { # Already has an attempt setup
         $this->past_attempts++;
       }
     }
