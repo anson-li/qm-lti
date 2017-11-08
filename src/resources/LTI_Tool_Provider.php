@@ -2013,7 +2013,7 @@ class LTI_Outcome {
  *
  * @return boolean True if saved
  */
-  public function deleteAttempt($consumer, $resource_link, $user_id, $schedule_id) {
+  public function deleteAttempt($consumer, $resource_link, $schedule_id, $user_id) {
     error_log("Deleting attempt...");
     $result = $consumer->getDataConnector()->Attempts_deleteLatestAttempt($this, $consumer, $resource_link, $user_id, $schedule_id);
     error_log("Done transaction");
