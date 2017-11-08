@@ -82,6 +82,9 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   $outcome->setResultID($report_id);
   $outcome->type = 'percentage';
 
+  error_log("Schedule id is: " . $schedule_id);
+  error_log(print_r($_POST, 1));
+
   if ($is_saved) {
     if ($resource_link->hasOutcomesService()) {
       // Save result
