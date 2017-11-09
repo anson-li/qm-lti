@@ -94,7 +94,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       }
     }
   } else {
-    error_log("Saving alternate");
     $resource_link->checkValueType($outcome);
     $outcome->saveToResult($consumer, $resource_link, $participant_id, 0, $result_id);
     $outcome->deleteAttempt($consumer, $resource_link, $participant_id, $schedule_id, $participant_id);

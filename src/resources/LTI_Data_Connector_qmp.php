@@ -546,9 +546,6 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $query->bindValue('accessed', $is_accessed, PDO::PARAM_INT);
     $query->bindValue('sourcedid', $result_sourcedid, PDO::PARAM_STR);
     $ok = $query->execute();
-    error_log("Testing results save");
-    error_log(print_r($query, 1));
-    error_log(print_r($query->errorInfo(), 1));
     return $ok;
   }
 
@@ -801,20 +798,12 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $id = $resource_link->getId();
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule_id = :schedule) AND (participant_id = :participant)';
-    error_log('starting to debug');
-    error_log('Consumer key: ' . $consumer_key->getKey());
-    error_log('starting to debug');
-    error_log('Resource link id: ' . $id);
-    error_log('starting to debug');
-    error_log('schedule id: ' . $schedule_id);
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
     $query->bindValue('context', $id, PDO::PARAM_STR);
     $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
     $ok = $query->execute();
-    error_log(print_r($query, 1));
-    error_log(print_r($query->errorInfo(), 1));
     return $ok;
   }
 

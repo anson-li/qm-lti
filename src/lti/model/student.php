@@ -294,12 +294,23 @@ class Student {
  */
   function getAttemptDetails() {
     if (!isset($_SESSION['error'])) {
-      $this->past_attempts = get_past_attempts($this->db, $this->resource_link_id, $this->assessment_id, $this->username);
       if ($this->hasAttemptInProgress()) { # Already has an attempt setup
         $this->past_attempts++;
       }
     }
     return $this->past_attempts;
+  }
+
+/**
+ * Gets past attempts list
+ *
+ * @return Student
+ */
+  function getPastAttempts() {
+    if (!isset($_SESSION['error'])) {
+      $this->past_attempts = get_past_attempts($this->db, $this->resource_link_id, $this->assessment_id, $this->username);
+    }
+    return $this;
   }
 
 /**
@@ -362,7 +373,7 @@ class Student {
 
   function createScheduleParticipant() {
     if (!isset($_SESSION['error'])) {
-      $schedule_name = 'Assessment ' . $this->assessment_id . ' for user ' . $this->username . ' attempt ' . $this->past_attempts;
+      $schedule_name = 'Assessment ' . $this->assessment_id . ' for user ' . $this->username . ' attempt ' . $this->past_attempts++;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
       $schedule_stops = new DateTime('NOW');
