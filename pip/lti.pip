@@ -26,9 +26,6 @@ launch_container=launch_container
 instanceid=instanceid
 sesskey=sesskey
 
-[Security]
-; HOSTS=qm-lti.azurewebsites.net lti.tools *.questionmark.com
-
 [Settings]
 HEADER=Content-Type: application/x-www-form-urlencoded
 USEHOME=yes
