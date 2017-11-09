@@ -798,12 +798,6 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $id = $resource_link->getId();
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule_id = :schedule) AND (participant_id = :participant)';
-    error_log('starting to debug');
-    error_log('Consumer key: ' . $consumer_key->getKey());
-    error_log('starting to debug');
-    error_log('Resource link id: ' . $id);
-    error_log('starting to debug');
-    error_log('schedule id: ' . $schedule_id);
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
     $query->bindValue('context', $id, PDO::PARAM_STR);
