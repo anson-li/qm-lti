@@ -37,9 +37,6 @@ require_once('model/staff.php');
   $em_url = $staff->getLoginURL();
   $results = $staff->getResults();
 
-  error_log(print_r($results, 1));
-  error_log("results");
-
   if (!$staff->isOk()) {
     header('Location: error.php');
     exit;
