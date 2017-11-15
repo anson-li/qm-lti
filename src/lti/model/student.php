@@ -348,7 +348,7 @@ class Student {
  */
   function checkLaunchDisabled() {
     if ($this->number_attempts != 'none') {
-      if (($this->past_attempts >= $this->number_attempts) && (!$this->hasAttemptInProgress)) {
+      if (($this->past_attempts >= $this->number_attempts) && (!$this->hasAttemptInProgress())) {
         return '';
       } else {
         return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment"/>';
