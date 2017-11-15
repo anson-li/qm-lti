@@ -106,8 +106,8 @@ function open_db() {
 /**
  * Check if a named tables exists in the database
  *
- * @param database
- * @param table name
+ * @param $db Database
+ * @param $name table name
  *
  * @return TRUE if the table exists, FALSE otherwise
  */
@@ -125,6 +125,7 @@ EOD;
 /**
  * Create each of the required database tables if they do not already exist
  *
+ * @param $db Database
  */
 function init_db($db) {
   $ok = TRUE;
@@ -453,7 +454,7 @@ function perception_soapconnect() {
 /**
  * SOAP call to get details for an administrator account
  *
- * @param String username
+ * @param String $username
  *
  * @return Details object or FALSE
  */
@@ -470,13 +471,13 @@ function get_administrator_by_name($username) {
 /**
  * SOAP call to get details for an administrator account
  *
- * @param String username
- * @param String firstname
- * @param String lastname
- * @param String email
- * @param String profile
+ * @param String $username
+ * @param String $firstname
+ * @param String $lastname
+ * @param String $email
+ * @param String $profile
  *
- * @return user ID or FALSE
+ * @return Integer user ID or FALSE
  */
 function create_administrator_with_password($username, $firstname, $lastname, $email, $profile) {
   $admin_id = FALSE;
@@ -493,7 +494,7 @@ function create_administrator_with_password($username, $firstname, $lastname, $e
 /**
  * SOAP call to get a direct login URL for an administrator account
  *
- * @param String username
+ * @param String $username
  *
  * @return String URL or FALSE
  */
@@ -512,7 +513,7 @@ function get_access_administrator($username) {
 /**
  * SOAP call to get an assessment's details
  *
- * @param Integer assessment id
+ * @param Integer $assessment_id
  *
  * @return Assessment object or FALSE
  */
@@ -546,7 +547,7 @@ function get_assessment_list() {
 /**
  * SOAP call to get a list of assessments availalble to an administrator account
  *
- * @param Integer administrator id
+ * @param Integer $id
  *
  * @return Array of assessment objects or FALSE
  */
@@ -564,7 +565,7 @@ function get_assessment_list_by_administrator($id) {
 /**
  * SOAP call to grab most recent result ID
  *
- * @param String participant name
+ * @param String $participant_name
  *
  * @return Integer the result id or FALSE
  */
@@ -591,7 +592,7 @@ function get_result_id($participant_name) {
 /**
  * SOAP call to get coaching report URL given a result ID
  *
- * @param Integer report id
+ * @param Integer $report_id
  *
  * @return String coaching report URL or FALSE
  */
@@ -625,7 +626,7 @@ function get_assessment_result_list_by_assessment($assessment_id) {
 /**
 * SOAP call to grab participant list when provided group id
 *
-* @param Integer group id
+* @param Integer $group_id
 *
 * @return Array of participants
 */
@@ -648,26 +649,26 @@ function get_participant_list_by_group($group_id) {
 /**
  * SOAP call to create a schedule for a user given an assessment id and preferable times
  *
- * @param Integer old schedule id, will be overwritten after but is required for call
- * @param String schedule name
- * @param Integer assessment id
- * @param Integer participant id
- * @param Boolean set whether or nnot the schedule is time restricted.
- * @param String ISO 8601 standard for starting schedule time
- * @param String ISO 8601 standard for ending schedule time
- * @param Integer group id
- * @param Integer group tree id, often defaulted to the group id
- * @param Boolean identify whether or not this schedule is to be used for web delievery
- * @param Boolean identify if the attempts are limited
- * @param Integer max attempt count
- * @param Boolean identify if system is monitored
- * @param Integer test center id
- * @param Integer minimum days between attempts taken
- * @param Boolean identify if there is a time limit to be attached to the attempt
- * @param Integer time limit
- * @param Boolean identify if assessment should be used for offline delivery.
+ * @param Integer $schedule_id Will be overwritten after but is required for call
+ * @param String $schedule_name
+ * @param Integer $assessment_id
+ * @param Integer $participant_id
+ * @param Boolean $restrict_times
+ * @param String $schedule_starts ISO 8601 standard for starting schedule time
+ * @param String $schedule_stops ISO 8601 standard for ending schedule time
+ * @param Integer $group_id
+ * @param Integer $group_tree_id, same as group id for LTI use
+ * @param Boolean $web_delivery
+ * @param Boolean $restrict_attempts
+ * @param Integer $max_attempts
+ * @param Boolean $monitored
+ * @param Integer $test_center_id
+ * @param Integer $min_days_between_attempts
+ * @param Boolean $time_limit_override
+ * @param Integer $time_limit
+ * @param Boolean $offline_delivery
  *
- * @return the Schedule ID or FALSE
+ * @return Integer Schedule ID or FALSE
  */
 function create_schedule_participant($schedule_id, $schedule_name, $assessment_id, $participant_id, $restrict_times, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $test_center_id, $restrict_attempts, $max_attempts, $monitored, $test_center_id, $min_days_between_attempts, $time_limit_override, $time_limit, $offline_delivery) {
   try {
@@ -685,15 +686,15 @@ function create_schedule_participant($schedule_id, $schedule_name, $assessment_i
 /**
  * SOAP call to get a direct URL to an assessment for a participant which includes the notify option
  *
- * @param Integer schedule id
- * @param String participant name
- * @param String consumer key
- * @param String The ID of the resource link
- * @param Integer result id
- * @param String the URL to allow the LTI to begin adjusting grades
- * @param String the URL to return to after the assessment is completed
- * @param String the participant ID
- * @param Array optional parameters passed from the LMS
+ * @param Integer $schedule_id
+ * @param String $participant_name
+ * @param String $consumer_key
+ * @param String $resource_link_id
+ * @param Integer $result_id
+ * @param String $notify_url the URL to allow the LTI to begin adjusting grades
+ * @param String $home_url the URL to return to after the assessment is completed
+ * @param String $participant_id
+ * @param Array $additional_params optional parameters passed from the LMS
  *
  * @return String URL or FALSE
  */
@@ -712,15 +713,15 @@ function get_access_schedule_notify($schedule_id, $participant_name, $consumer_k
 /**
  * SOAP call to get a direct URL to an assessment for a participant which includes the notify option
  *
- * @param Integer assessment id
- * @param String participant name
- * @param String consumer key
- * @param String The ID of the resource link
- * @param Integer result id
- * @param String the URL to allow the LTI to begin adjusting grades
- * @param String the URL to return to after the assessment is completed
- * @param String the participant ID
- * @param Array optional parameters passed from the LMS
+ * @param Integer $assessment_id
+ * @param String $participant_name
+ * @param String $consumer_key
+ * @param String $resource_link_id
+ * @param Integer $result_id
+ * @param String $notify_url the URL to allow the LTI to begin adjusting grades
+ * @param String $home_url the URL to return to after the assessment is completed
+ * @param String $participant_id
+ * @param Array $additional_params optional parameters passed from the LMS
  *
  * @return String URL or FALSE
  */
@@ -739,7 +740,7 @@ function get_access_assessment_notify($assessment_id, $participant_name, $consum
 /**
  * SOAP call to get details for a group
  *
- * @param String group name
+ * @param String $groupname
  *
  * @return Groups object or FALSE
  */
@@ -756,8 +757,8 @@ function get_group_by_name($groupname) {
 /**
  * SOAP call to add participant to group
  *
- * @param Integer group id
- * @param Integer participant id
+ * @param Integer $group_id
+ * @param Integer $participant_id
  *
  * @return Boolean depending on success
  */
@@ -774,8 +775,8 @@ function add_group_participant_list($group_id, $participant_id) {
 /**
 * SOAP call to add administrator to group
 *
-* @param Integer group id
-* @param Integer administrator id
+* @param Integer $group_id
+* @param Integer $administrator_id
 *
 * @return Boolean depending on success
 */
@@ -792,7 +793,7 @@ function add_group_administrator_list($group_id, $administrator_id) {
 /**
 * SOAP call to add administrator to group
 *
-* @param Integer participant id
+* @param Integer $participant_id
 *
 * @return Boolean depending on success
 */
@@ -809,7 +810,7 @@ function get_participant_group_list($participant_id) {
 /**
 * SOAP call to add administrator to group
 *
-* @param Integer administrator id
+* @param Integer $administrator_id
 *
 * @return Array Group list or FALSE
 */
@@ -826,11 +827,11 @@ function get_administrator_group_list($administrator_id) {
 /**
  * SOAP call to create a group
  *
- * @param String group name
- * @param String description
- * @param Integer group's parent id
+ * @param String $group_name
+ * @param String $description
+ * @param Integer $parentid Group's parent id
  *
- * @return Group ID or FALSE
+ * @return Integer Group ID or FALSE
  */
 function create_group($groupname, $description, $parentid) {
   try {
@@ -845,7 +846,7 @@ function create_group($groupname, $description, $parentid) {
 /**
  * SOAP call to get details for a participant account
  *
- * @param String username
+ * @param String $username
  *
  * @return Details object or FALSE
  */
@@ -862,10 +863,10 @@ function get_participant_by_name($username) {
 /**
  * SOAP call to create a participant account
  *
- * @param String username
- * @param String first name
- * @param String last name
- * @param String email
+ * @param String $username
+ * @param String $firstname
+ * @param String $lastname
+ * @param String $email
  *
  * @return Integer Participant id or FALSE
  */
@@ -888,11 +889,11 @@ function create_participant($username, $firstname, $lastname, $email) {
   /**
    * Boolean check for coaching report availability
    *
-   * @param Database
-   * @param String consumer key
-   * @param Integer resource link id
-   * @param Integer assessment id
-   * @param Integer user id
+   * @param $db Database
+   * @param Consumer Key $consumer_key
+   * @param Integer $resource_link_id
+   * @param Integer $assessment_id
+   * @param Integer $user_id
    *
    * @return TRUE if coaching report is valid
    */
@@ -914,10 +915,10 @@ function create_participant($username, $firstname, $lastname, $email) {
  *
  * i.e. if a result is already in the database, return FALSE
  *
- * @param Database
- * @param Consumer key object
- * @param Resource Link object
- * @param Integer user id
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $user_id
  *
  * @return TRUE if result is oldest
  */
@@ -933,11 +934,11 @@ function is_oldest_result($db, $consumer, $resource_link, $user_id) {
 /**
  * Boolean check to identify if result is worst
  *
- * @param Database
- * @param Consumer key object
- * @param Resource link object
- * @param Integer user id
- * @param Float score
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $user_id
+ * @param Float $score
  *
  * @return TRUE if result is worst
  */
@@ -958,11 +959,11 @@ function is_worst_result($db, $consumer, $resource_link, $user_id, $score) {
 /**
  * Boolean check to identify if result is best
  *
- * @param Database
- * @param Consumer key object
- * @param Resource link object
- * @param Integer user id
- * @param Float score
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $user_id
+ * @param Float $score
  *
  * @return TRUE if result is best
  */
@@ -983,11 +984,11 @@ function is_best_result($db, $consumer, $resource_link, $user_id, $score) {
 /**
  * Either retrieves an existing attempt or creates a new attempt in the database
  *
- * @param Database
- * @param Consumer key object
- * @param Resource link object
- * @param Integer assessment id
- * @param Integer user id
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $assessment_id
+ * @param Integer $user_id
  *
  * @return TRUE if result is oldest
  */
@@ -1000,11 +1001,12 @@ function get_latest_attempt($db, $consumer_key, $resource_link_id, $assessment_i
 /**
  * Creates a new attempt in the database
  *
- * @param Database
- * @param Consumer key object
- * @param Resource link object
- * @param Integer assessment id
- * @param Integer user id
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $assessment_id
+ * @param Integer $user_id
+ * @param Integer $schedule_id
  *
  * @return Boolean depending on success
  */
@@ -1017,10 +1019,10 @@ function set_latest_attempt($db, $consumer_key, $resource_link_id, $assessment_i
 /**
  * Returns the number of assessments previously logged for the user
  *
- * @param Database
- * @param Resource link object
- * @param Integer assessment id
- * @param Integer user id
+ * @param Database $db
+ * @param Resource Link $resource_link
+ * @param Integer $assessment_id
+ * @param Integer $user_id
  *
  * @return Integer number of past attempts
  */
@@ -1034,10 +1036,10 @@ function get_past_attempts($db, $resource_link_id, $assessment_id, $user_id) {
 /**
  * Returns the result currently accessed by the LMS
  *
- * @param Database
- * @param Consumer key object
- * @param Resource link object
- * @param Integer user id
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $user_id
  *
  * returns Integer ID of accessed result
  */
@@ -1050,11 +1052,11 @@ function get_accessed_result($db, $consumer, $resource_link, $user_id) {
 /**
  * Gets the correct result given result parameter
  *
- * @param Data connector object
- * @param Consumer key object
- * @param Resource link object
- * @param Integer user id
- * @param String sort option
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $user_id
+ * @param String $multiple_result Sort option
  *
  * @return Integer result id
  */
@@ -1082,11 +1084,11 @@ function get_new_result($data_connector, $consumer, $resource_link, $user_id, $m
  * Retroactively updates all results accessed via is_accessed tag,
  * Updates LMS with correct grade
  *
- * @param Database
- * @param Consumer key object
- * @param Resource link object
- * @param Integer assessment id
- * @param String sort option
+ * @param Database $db
+ * @param Consumer Key $consumer
+ * @param Resource Link $resource_link
+ * @param Integer $assessment_id
+ * @param String $multiple_result Sort option
  *
  * @return NULL
  */
@@ -1116,8 +1118,8 @@ function update_result_accessed($db, $consumer, $resource_link, $assessment_id, 
 /**
  * DB call to get all available participants specific to a context
  *
- * @param Database
- * @param Consumer key object
+ * @param Database $db
+ * @param Consumer Key $consumer_key
  *
  * @return Array of participants
  */
@@ -1129,9 +1131,9 @@ function get_participants($db, $consumer_key) {
 /**
  * DB call to get all available participants specific to a context
  *
- * @param Database
- * @param Consumer key object
- * @param String context id
+ * @param Database $db
+ * @param Consumer Key $consumer_key
+ * @param String $context_id
  *
  * @return Array of participants
  */
@@ -1143,8 +1145,8 @@ function get_participants_by_context_id($db, $consumer_key, $context_id) {
 /**
  * DB call to save user generated by manual sync process
  *
- * @param Database
- * @param User object
+ * @param Database $db
+ * @param User $user
  *
  * @return Boolean depending on success
  */
@@ -1156,9 +1158,9 @@ function save_user($db, $user) {
 /**
  * DB call for Tool Consumer to grab all available participants specific to a context
  *
- * @param Database
- * @param Consumer key object
- * @param String context id
+ * @param Database $db
+ * @param Consumer Key $consumer_key
+ * @param String $context_id
  *
  * @return Array of participants
  */
@@ -1170,8 +1172,8 @@ function get_tc_participants_by_context_id($db, $consumer_key, $context_id) {
 /**
  * DB call for Tool Consumer to grab all available participants
  *
- * @param Database
- * @param Consumer key object
+ * @param Database $db
+ * @param Consumer Key $consumer_key
  *
  * @return Array of participants
  */
@@ -1183,11 +1185,11 @@ function get_tc_participants($db, $consumer_key) {
 /**
  * External call to grab coaching report url if allowed
  *
- * @param Database
- * @param Consumer key object
- * @param Outcome object
- * @param String resource link id
- * @param Integer assessment id
+ * @param Database $db
+ * @param Consumer Key $consumer_key
+ * @param Outcomes $lti_outcome
+ * @param Integer $resource_link_id
+ * @param Integer $assessment_id
  *
  * @return String the coaching report url
  */
@@ -1208,8 +1210,8 @@ function get_coaching_report($db, $consumer_key, $lti_outcome, $resource_link_id
  * Ouput the page header with an optional Javascript section; the logo is omitted if the output is to a frame and a link
  * to return to the LMS is included if a return URL is available and the output is not to a frame
  *
- * @param String optional scripts to be added
- * @param Boolean check if the page is in an iframe
+ * @param String $script Optional scripts to be added
+ * @param Boolean $isFrame Check if the page is in an iframe
  *
  * @return String HTML output for page header
  */
@@ -1259,7 +1261,7 @@ EOD;
 /**
  * Ouput the page footer
  *
- * @param Boolean check if the page is in an iframe
+ * @param Boolean $isFrame Check if the page is in an iframe
  *
  * @return String HTML output for page footer
  */
@@ -1311,8 +1313,8 @@ function get_root_url() {
 /**
  * Set a named value from post data in the user session; using a default value if the parameter does not exist
  *
- * @param String name
- * @param Mixed value
+ * @param String $name
+ * @param Mixed $value
  *
  * @return Session parameter to hold value
  */
@@ -1326,8 +1328,8 @@ function set_session($name, $value = '') {
 /**
  * Initialise a named value in the user session if it does not already exist
  *
- * @param String name
- * @param Mixed value
+ * @param String $name
+ * @param Mixed $value
  *
  * @return Session parameter
  */
@@ -1376,8 +1378,8 @@ function init_data() {
 /**
  * Add an OAuth signature to the parameters being passed
  *
- * @param String URL
- * @param Array of parameters to be passed
+ * @param String $url
+ * @param Array $params
  *
  * @return Array of updated parameters
  */
@@ -1419,7 +1421,7 @@ function signRequest($url, $params) {
 /**
  * Extract the customer ID from a QMWISe URL or return the value unchanged if it is not a URL
  *
- * @param String QMWISe URL
+ * @param String $value QMWISe URL
  *
  * @return String customer ID or an empty string
  */
@@ -1439,7 +1441,7 @@ function getCustomerId($value) {
 /**
  * Get the QMWISe URL for a customer ID
  *
- * @param Integer customer id
+ * @param Integer $customer_id
  *
  * @return String QMWISe URL
  */
@@ -1466,7 +1468,7 @@ function getQMWISeUrl($customer_id) {
 /**
  * Check that the details for a customer are valid
  *
- * @param Array of customer parameters
+ * @param Array $customer
  *
  * @return Boolean TRUE if the details are valid, otherwise FALSE
  */
@@ -1486,8 +1488,8 @@ function checkCustomer($customer) {
 /**
  * Connects to Perception given a QMWise URL and valid customer data
  *
- * @param String URL
- * @param Array of customer parameters
+ * @param String $url
+ * @param Array $customer
  *
  * @return Boolean TRUE if Perception is connected, otherwise FALSE
  */
@@ -1508,8 +1510,8 @@ function connectPerception($url, $customer) {
 /**
  * Load a customer record from the database
  *
- * @param Database
- * @param Integer customer id
+ * @param Database $db
+ * @param Integer $customer_id
  *
  * @return Array the customer record or an empty array if the record does not exist
  */
@@ -1536,8 +1538,8 @@ EOD;
 /**
  * Save a customer record to the database (updating any existing record)
  *
- * @param Database
- * @param Array of customer parameters
+ * @param Database $db
+ * @param Array $customer
  *
  * @return Boolean TRUE if the record is saved, otherwise FALSE
  */
@@ -1571,8 +1573,8 @@ EOD;
 /**
  * Delete a customer record from the database
  *
- * @param Database
- * @param Array of customer parameters
+ * @param Database $db
+ * @param Array $customer
  *
  * @return Boolean TRUE if the record is deleted, otherwise FALSE
  */
@@ -1602,8 +1604,8 @@ EOD;
 /**
  * Saves a user into the tool consumer using session values
  *
- * @param Database
- * @param Array of session parameters
+ * @param Database $db
+ * @param Array $session
  *
  * @return Boolean TRUE if the user is saved, otherwise FALSE
  */
@@ -1641,8 +1643,8 @@ function tc_save_user($db, $session) {
 /**
  * Get an array of tool consumer records indexed by the consumer key
  *
- * @param Database
- * @param Integer customer id
+ * @param Database $db
+ * @param Integer $customer_id
  *
  * @return Array of consumers
  */
@@ -1662,9 +1664,9 @@ function loadConsumers($db, $customer_id) {
 /**
  * Get a tool consumer record, set custom fields for the customer ID and username prefix settings
  *
- * @param Database
- * @param Integer customer id
- * @param String consumer key
+ * @param Database $db
+ * @param Integer $customer_id
+ * @param String $consumer_key
  *
  * @return Consumer object
  */
@@ -1687,7 +1689,7 @@ function loadConsumer($db, $customer_id, $consumer_key) {
 /**
  * Record details of an error to the default log file with a copy added to the user session
  *
- * @param Error
+ * @param Error $e
  *
  * @return Session parameter for error
  */
@@ -1700,7 +1702,7 @@ function log_error($e) {
 /**
  * Helper function to determine if an StdClass object is empty.
  *
- * @param StdClass object
+ * @param StdClass $obj
  *
  * @return Boolean TRUE if empty or FALSE
  */
@@ -1715,7 +1717,7 @@ function stdclass_empty($obj) {
 /**
  * Helper function to determine if a POST variable is available. Prevents the call from raising an error.
  *
- * @param String POST variable
+ * @param String $post_var POST variable
  *
  * @return the variable value or NULL
  */
@@ -1730,7 +1732,7 @@ function post_data($post_var) {
 /**
  * Generate a random string; the generated string will only comprise letters (upper- and lower-case) and digits
  *
- * @param Integer length of string to be randomized
+ * @param Integer $length
  *
  * @return String the generated string
  */
