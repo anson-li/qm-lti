@@ -29,18 +29,8 @@
 require_once('../resources/lib.php');
 require_once('../resources/LTI_Data_Connector_qmp.php');
 
-  session_name(SESSION_NAME);
-  session_start();
-
   // initialise database
   $db = open_db();
-
-  error_log(print_r($_SESSION, 1));
-
-  // Activate SOAP Connection.
-  if (!isset($_SESSION['error'])) {
-    perception_soapconnect();
-  }
 
   // Catch any issues with using an incompatible lti.pip
   $post_required = array('lti_participant_id');
@@ -100,9 +90,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
           $outcome->clearAccessedResult($consumer, $resource_link, $participant_id);
           $outcome->saveToResult($consumer, $resource_link, $participant_id, 1, $result_id);
           $outcome->deleteAttempt($consumer, $resource_link, $schedule_id, $participant_id);
-          error_log("Start dele 1");
-          delete_schedule($schedule_id);
-          error_log("Start dele 2");
         } else {
           error_log("Failed to retrieve attempt for {$result_id}.");
         }
@@ -115,7 +102,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     if ($outcome->getAttempt($consumer, $resource_link, $schedule_id, $participant_id) !== FALSE) {
       $outcome->saveToResult($consumer, $resource_link, $participant_id, 0, $result_id);
       $outcome->deleteAttempt($consumer, $resource_link, $participant_id, $schedule_id, $participant_id);
-      delete_schedule($schedule_id);
     } else {
       error_log("Failed to retrieve attempt for {$result_id}.");
     }
