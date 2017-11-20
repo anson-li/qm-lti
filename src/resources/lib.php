@@ -656,12 +656,16 @@ function get_participant_list_by_group($group_id) {
 function delete_schedule($schedule_id) {
   error_log("Testing deleting schedule");
   try {
+    error_log("Setting up");
     $soap_connection_id = perception_soapconnect_id();
+    error_log("tmp1");
     $response = $GLOBALS['perceptionsoap'][$soap_connection_id]->delete_schedule($schedule_id);
+    error_log("tmp2");
   } catch (Exception $e) {
     log_error($e);
     return FALSE;
   }
+  error_log(print_r($response,1));
   return $response;
 }
 

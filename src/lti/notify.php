@@ -90,7 +90,9 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
           $outcome->clearAccessedResult($consumer, $resource_link, $participant_id);
           $outcome->saveToResult($consumer, $resource_link, $participant_id, 1, $result_id);
           $outcome->deleteAttempt($consumer, $resource_link, $schedule_id, $participant_id);
+          error_log("Start dele 1");
           delete_schedule($schedule_id);
+          error_log("Start dele 2");
         } else {
           error_log("Failed to retrieve attempt for {$result_id}.");
         }
