@@ -820,10 +820,12 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
     $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
+    error_log("Check 6");
     $ok = $query->execute();
+    error_log("Check 5");
+    error_log($query->rowCount());
     if ($ok) {
       $row = $query->fetch();
-      error_log($query->rowCount());
       if (!$row) {
         return FALSE;
       } else {
