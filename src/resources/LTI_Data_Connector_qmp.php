@@ -810,14 +810,15 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  *
  * @return Integer schedule_id
  */
-  public function Attempts_getAttemptIfExists($consumer_key, $resource_link_id, $schedule_id, $participant_id) {
+  public function Attempts_getAttemptIfExists($consumer_key, $resource_link, $schedule_id, $participant_id) {
     error_log("Begin Query");
+    $id = $resource_link->getId();
     $sql = 'SELECT COUNT(*) ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule = :schedule_id) AND (participant_id = :participant)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
-    $query->bindValue('context', $resource_link_id->getId(), PDO::PARAM_STR);
+    $query->bindValue('context', $id, PDO::PARAM_STR);
     $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
     $ok = $query->execute();
