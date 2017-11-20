@@ -450,6 +450,7 @@ class PerceptionSoap {
   * @return Integer schedule id
   */
 public function delete_schedule($schedule_id) {
+  error_log("Deleting schedule");
   try {
     $access_parameters = array(
       "Schedule_ID" => $schedule_id
@@ -458,6 +459,7 @@ public function delete_schedule($schedule_id) {
   } catch(SoapFault $e) {
     throw new QMWiseException($e);
   }
+  error_log("Done deleting");
   return $response;
 }
 
