@@ -29,6 +29,9 @@
 require_once('../resources/lib.php');
 require_once('../resources/LTI_Data_Connector_qmp.php');
 
+  session_name(SESSION_NAME);
+  session_start();
+
   // initialise database
   $db = open_db();
 
