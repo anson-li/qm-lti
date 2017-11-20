@@ -815,7 +815,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $id = $resource_link->getId();
     $sql = 'SELECT COUNT(*) ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
-           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule = :schedule_id) AND (participant_id = :participant)';
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule_id = :schedule) AND (participant_id = :participant)';
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
     $query->bindValue('context', $id, PDO::PARAM_STR);
