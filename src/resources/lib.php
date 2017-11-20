@@ -658,7 +658,7 @@ function delete_schedule($schedule_id) {
   try {
     error_log("Setting up");
     $soap_connection_id = perception_soapconnect_id();
-    error_log("tmp1");
+    error_log($soap_connection_id);
     $response = $GLOBALS['perceptionsoap'][$soap_connection_id]->delete_schedule($schedule_id);
     error_log("tmp2");
   } catch (Exception $e) {
