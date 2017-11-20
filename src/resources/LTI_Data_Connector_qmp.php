@@ -814,19 +814,15 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $sql = 'SELECT assessment_id ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule = :schedule_id) AND (participant_id = :participant)';
-    error_log($sql);
     $query = $this->db->prepare($sql);
     $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
     $query->bindValue('context', $resource_link_id->getId(), PDO::PARAM_STR);
     $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
     $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
-    error_log("Check 6");
     $ok = $query->execute();
-    error_log("Check 5");
-    error_log($query->rowCount());
     if ($ok) {
       $row = $query->fetch();
-      if (!$row) {
+      if (!$query->rowCount() == 0) {
         return FALSE;
       } else {
         $assessment_id = $row['assessment_id'];

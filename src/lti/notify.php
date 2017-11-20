@@ -86,11 +86,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     if ($resource_link->hasOutcomesService()) {
       // Save result
       if ($resource_link->doOutcomesService(LTI_Resource_Link::EXT_WRITE, $outcome)) {
-        error_log("Testing outcomes checking");
-        error_log(print_r($outcome->getAttempt($consumer, $resource_link, $schedule_id, $participant_id), 1));
-        error_log("Done outcomes checking");
         if ($attempt = $outcome->getAttempt($consumer, $resource_link, $schedule_id, $participant_id) !== FALSE) {
-          error_log("Outcome gotten: " . $attempt);
           $outcome->clearAccessedResult($consumer, $resource_link, $participant_id);
           $outcome->saveToResult($consumer, $resource_link, $participant_id, 1, $result_id);
           $outcome->deleteAttempt($consumer, $resource_link, $schedule_id, $participant_id);
