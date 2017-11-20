@@ -2007,6 +2007,20 @@ class LTI_Outcome {
  *
  * @return boolean True if saved
  */
+  public function getAttempt($consumer, $resource_link, $schedule_id, $user_id) {
+    $result = $consumer->getDataConnector()->Attempts_getLatestAttempt($consumer, $resource_link, $schedule_id, $user_id);
+    return $result;
+  }
+
+/**
+ * Saves the results in outcome to Results database
+ *
+ * @param consumer_tool Consumer tool used to connect to database
+ * @param resoure_link
+ * @param participant
+ *
+ * @return boolean True if saved
+ */
   public function deleteAttempt($consumer, $resource_link, $schedule_id, $user_id) {
     $result = $consumer->getDataConnector()->Attempts_deleteLatestAttempt($consumer, $resource_link, $schedule_id, $user_id);
     return $result;

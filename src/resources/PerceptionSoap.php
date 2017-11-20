@@ -449,6 +449,44 @@ class PerceptionSoap {
   *
   * @return Integer schedule id
   */
+public function delete_schedule($schedule_id) {
+  try {
+    $access_parameters = array(
+      "Schedule_ID" => $schedule_id
+    );
+    $response = $this->soap->DeleteSchedule($access_parameters);
+  } catch(SoapFault $e) {
+    throw new QMWiseException($e);
+  }
+  return $response;
+}
+
+/**
+ * Maps the variables to SOAP call createScheduleParticipantv42, gets back schedule_id with parameters set.
+ *
+ * All parameters are required to be passed to the function.
+ *
+ * @param Integer $schedule_id Will be overwritten after but is required for call
+ * @param String $schedule_name
+ * @param Integer $assessment_id
+ * @param Integer $participant_id
+ * @param Boolean $restrict_times
+ * @param String $schedule_starts ISO 8601 standard for starting schedule time
+ * @param String $schedule_stops ISO 8601 standard for ending schedule time
+ * @param Integer $group_id
+ * @param Integer $group_tree_id, same as group id for LTI use
+ * @param Boolean $web_delivery
+ * @param Boolean $restrict_attempts
+ * @param Integer $max_attempts
+ * @param Boolean $monitored
+ * @param Integer $test_center_id
+ * @param Integer $min_days_between_attempts
+ * @param Boolean $time_limit_override
+ * @param Integer $time_limit
+ * @param Boolean $offline_delivery
+  *
+  * @return Integer schedule id
+  */
   public function create_schedule_participant($schedule_id, $schedule_name, $assessment_id, $participant_id, $restrict_times = TRUE, $schedule_starts, $schedule_stops, $group_id, $group_tree_id, $web_delivery, $restrict_attempts, $max_attempts, $monitored, $test_center_id, $min_days_between_attempts, $time_limit_override, $time_limit, $offline_delivery) {
     try {
       $access_parameters = array(

@@ -647,6 +647,25 @@ function get_participant_list_by_group($group_id) {
 }
 
 /**
+ * SOAP call to delete a schedule
+ *
+ * @param Integer $schedule_id
+ *
+ * @return Integer Schedule ID or FALSE
+ */
+function delete_schedule($schedule_id) {
+  try {
+    $soap_connection_id = perception_soapconnect_id();
+    $response = $GLOBALS['perceptionsoap'][$soap_connection_id]->delete_schedule($schedule_id);
+  } catch (Exception $e) {
+    log_error($e);
+    return FALSE;
+  }
+  return $response;
+}
+
+
+/**
  * SOAP call to create a schedule for a user given an assessment id and preferable times
  *
  * @param Integer $schedule_id Will be overwritten after but is required for call
