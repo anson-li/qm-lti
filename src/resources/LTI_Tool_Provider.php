@@ -2009,9 +2009,9 @@ class LTI_Outcome {
  */
   public function getAttempt($consumer, $resource_link, $schedule_id, $user_id) {
     error_log("check3");
-    $result = $consumer->getDataConnector()->Attempts_getAttemptIfExists($consumer, $resource_link, $schedule_id, $user_id);
+    $results = $consumer->getDataConnector()->Attempts_getAttemptIfExists($consumer, $resource_link, $schedule_id, $user_id);
     error_log("check4");
-    return $result;
+    return $results;
   }
 
 /**
