@@ -459,6 +459,7 @@ public function delete_schedule($schedule_id) {
   } catch(SoapFault $e) {
     throw new QMWiseException($e);
   }
+  error_log(print_r($response, 1));
   error_log("Done deleting");
   return $response;
 }
