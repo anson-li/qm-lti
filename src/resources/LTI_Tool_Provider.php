@@ -2008,8 +2008,8 @@ class LTI_Outcome {
  * @return boolean True if saved
  */
   public function getAttempt($consumer, $resource_link, $schedule_id, $user_id) {
-    $results = $consumer->getDataConnector()->Attempts_getAttemptIfExists($consumer, $resource_link, $schedule_id, $user_id);
-    return $results;
+    $result = $consumer->getDataConnector()->Attempts_getAttemptIfExists($consumer, $resource_link, $schedule_id, $user_id);
+    return $result;
   }
 
 /**

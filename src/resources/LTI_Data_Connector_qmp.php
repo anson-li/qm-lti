@@ -811,7 +811,6 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  * @return Integer schedule_id
  */
   public function Attempts_getAttemptIfExists($consumer_key, $resource_link, $schedule_id, $participant_id) {
-    error_log("Begin Query");
     $id = $resource_link->getId();
     $sql = 'SELECT COUNT(*) ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
