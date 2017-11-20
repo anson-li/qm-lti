@@ -32,6 +32,11 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   // initialise database
   $db = open_db();
 
+  // Activate SOAP Connection.
+  if (!isset($_SESSION['error'])) {
+    perception_soapconnect();
+  }
+
   // Catch any issues with using an incompatible lti.pip
   $post_required = array('lti_participant_id');
   foreach ($post_required as $field) {
