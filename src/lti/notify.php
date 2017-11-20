@@ -35,6 +35,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   // initialise database
   $db = open_db();
 
+  error_log(print_r($_SESSION, 1));
+
   // Activate SOAP Connection.
   if (!isset($_SESSION['error'])) {
     perception_soapconnect();
