@@ -823,6 +823,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     $ok = $query->execute();
     if ($ok) {
       $row = $query->fetch();
+      error_log($query->rowCount());
       if (!$row) {
         return FALSE;
       } else {
