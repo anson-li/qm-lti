@@ -810,6 +810,35 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  *
  * @return Integer schedule_id
  */
+  public function Attempts_getAttemptIfExists($consumer_key, $resource_link_id, $schedule_id, $participant_id) {
+    $sql = 'SELECT assessment_id ' .
+           'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule = :schedule_id) AND (participant_id = :participant)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
+    $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
+    $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    if ($ok) {
+      $row = $query->fetch();
+      if (!$row) {
+        return FALSE;
+      } else {
+        $assessment_id = $row['assessment_id'];
+      }
+    } else {
+      error_log(print_r($query->errorInfo(), 1));
+      return FALSE;
+    }
+    return $schedule_id;
+  }
+
+/**
+ *  Gets the latest external attempt ID for an assessment
+ *
+ * @return Integer schedule_id
+ */
   public function Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
     $sql = 'SELECT schedule_id ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
