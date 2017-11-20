@@ -654,6 +654,7 @@ function get_participant_list_by_group($group_id) {
  * @return Integer Schedule ID or FALSE
  */
 function delete_schedule($schedule_id) {
+  error_log("Testing deleting schedule");
   try {
     $soap_connection_id = perception_soapconnect_id();
     $response = $GLOBALS['perceptionsoap'][$soap_connection_id]->delete_schedule($schedule_id);
