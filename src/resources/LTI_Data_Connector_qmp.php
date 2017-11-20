@@ -811,6 +811,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  * @return Integer schedule_id
  */
   public function Attempts_getAttemptIfExists($consumer_key, $resource_link_id, $schedule_id, $participant_id) {
+    error_log("Begin Query");
     $sql = 'SELECT assessment_id ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
            'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule = :schedule_id) AND (participant_id = :participant)';
@@ -831,7 +832,8 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       error_log(print_r($query->errorInfo(), 1));
       return FALSE;
     }
-    return $schedule_id;
+    error_log("End Query");
+    return $assessment_id;
   }
 
 /**
