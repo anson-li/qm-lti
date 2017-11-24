@@ -1,6 +1,6 @@
 ; lti.pip
 ; PIP file for use with LTI connector to Perception
-; 9th September 2017
+; 22nd November 2017
 
 [Input]
 ; Moodle-specific parameters
