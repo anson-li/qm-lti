@@ -26,6 +26,10 @@ launch_container=launch_container
 instanceid=instanceid
 sesskey=sesskey
 
+[Security]
+Level=HmacSha256
+Key=%SERVER.KEY%
+
 [Settings]
 HEADER=Content-Type: application/x-www-form-urlencoded
 USEHOME=yes
