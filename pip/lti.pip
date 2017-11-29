@@ -1,6 +1,6 @@
 ; lti.pip
 ; PIP file for use with LTI connector to Perception
-; 27th November 2017
+; 22nd November 2017
 
 [Input]
 ; Moodle-specific parameters
@@ -25,10 +25,6 @@ course=course
 launch_container=launch_container
 instanceid=instanceid
 sesskey=sesskey
-
-[Security]
-Level=HmacSha256
-Key=%SERVER.KEY%
 
 [Settings]
 HEADER=Content-Type: application/x-www-form-urlencoded
