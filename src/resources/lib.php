@@ -389,6 +389,16 @@ EOD;
              'PRIMARY KEY (consumer_key, context_id, user_id))';
       $ok = $db->exec($sql) !== FALSE;
     }
+    if ($ok) {
+      $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
+      '(consumer_key VARCHAR(50) NOT NULL DEFAULT \'\',' .
+             ' participant_id VARCHAR(255),' .
+             ' assessment_id VARCHAR(255),' .
+             ' schedule_id VARCHAR(255),' .
+             ' context_id VARCHAR(255),' .
+             'PRIMARY KEY (schedule_id))';
+      $ok = $db->exec($sql) !== FALSE;
+    }
   } else {
     $ok = FALSE;
   }
