@@ -385,7 +385,7 @@ class Student {
   function createScheduleParticipant() {
     if (!isset($_SESSION['error'])) {
       $this->past_attempts = get_past_attempts($this->db, $this->resource_link_id, $this->assessment_id, $this->username);
-      $schedule_name = $this->assessment_id . ' for ' . $this->participant_name . ' - ' . $this->resource_link_id . '_' . ++$this->past_attempts;
+      $schedule_name = $this->assessment_id . '-' . $this->participant_name . '-' . $this->resource_link_id . '-' . ++$this->past_attempts;
       # Make the start time and end time difference about 30 seconds
       $schedule_starts = new DateTime('NOW');
       $schedule_stops = new DateTime('NOW');
