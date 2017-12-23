@@ -62,10 +62,6 @@ class Student {
  */
   protected $assessment_id = NULL;
 /**
- *  ID of schedule currently selected by resource link.
- */
-  protected $schedule_id = NULL;
-/**
  *  URL of LTI page to complete return process.
  */
   protected $return_url = NULL;
@@ -93,19 +89,11 @@ class Student {
  *  Additional parameters passed by the tool consumer.
  */
   protected $additional_params = NULL;
-/**
- *  Group that participant belongs to.
- */
-  protected $group = NULL;
-/**
- *  Group ID for the participant.
- */
-  protected $group_id = 0;
 
 /**
  * Class constructor
  *
- * @param mixed $session Session data for this instance.
+ * @param mixed   $session  Session data for this instance.
  */
   function __construct($session) {
     $this->db = open_db();
@@ -137,8 +125,6 @@ class Student {
 
 /**
  * Checks if user is a student.
- *
- * @return NULL or ERROR if user is not a student
  */
   function checkValid() {
     if (!$this->is_student) {
@@ -153,9 +139,7 @@ class Student {
 /**
  * If action was submitted, page is redirected to appropriate area.
  *
- * @param String $action
- *
- * @return URL redirect to either launch an assessment or view coaching report
+ * @param String action
  */
   function identifyAction($action) {
     // An action was previously selected
@@ -175,8 +159,6 @@ class Student {
 
 /**
  * Creates a participant in Perception.
- *
- * @return Student object holding student participant details
  */
   function createParticipant() {
     if (!isset($_SESSION['error']) && (($participant_details = get_participant_by_name($this->username)) !== FALSE)) {
@@ -186,13 +168,10 @@ class Student {
     } else {
     	$this->participant_id = FALSE;
     }
-    return $this;
   }
 
 /**
  * Adds a participant to a group. If group is not available, the group is created and the participant is added.
- *
- * @return Student object with group information
  */
   function joinGroup() {
     if (!isset($_SESSION['error']) && (($group = get_group_by_name($this->context_label)) !== FALSE)) {
@@ -200,7 +179,7 @@ class Student {
     } else if (!isset($_SESSION['error'])) {
       $this->group = create_group($this->context_label, $this->context_title, 0);
     } else {
-      error_log("Group not instantiated for participant " . $this->participant_id);
+      $this->group = FALSE;
     }
     if ($this->group != FALSE) {
       $this->group_list = get_participant_group_list($this->participant_id);
@@ -226,50 +205,6 @@ class Student {
         add_group_participant_list($this->group->Group_ID, $this->participant_id);
       }
     }
-    $this->group_id = $this->group->Group_ID;
-    return $this;
-  }
-
-/**
- * Gets the assessment attempt.
- *
- * @return NULL
- */
-  function getLatestAttempt() {
-    if (!isset($_SESSION['error'])) {
-      $this->schedule_id = get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username);
-    }
-    return $this;
-  }
-
-/**
- * Saves the assessment attempt until deleted later.
- *
- * @return NULL
- */
-  function setLatestAttempt() {
-    if (!isset($_SESSION['error'])) {
-      return set_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username, $this->schedule_id);
-    }
-    return false;
-  }
-
-/**
- * Checks if student has schedule id
- *
- * @return Boolean TRUE if schedule ID is not false
- */
-  function hasScheduleID() {
-    return (($this->schedule_id != null) && ($this->schedule_id != false));
-  }
-
-/**
- * Checks if student has schedule id
- *
- * @return Boolean TRUE if schedule ID is not false
- */
-  function getScheduleID() {
-    return $this->schedule_id;
   }
 
 /**
@@ -279,9 +214,6 @@ class Student {
  * @return Boolean TRUE if available.
  */
   function isCoachingReportAvailable() {
-    if ($this->hasAttemptInProgress()) {
-      $this->past_attempts--;
-    }
     return (($this->past_attempts > 0) && (is_coaching_report_available($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_name)));
   }
 
@@ -305,23 +237,9 @@ class Student {
  */
   function getAttemptDetails() {
     if (!isset($_SESSION['error'])) {
-      if ($this->hasAttemptInProgress()) { # Already has an attempt setup
-        $this->past_attempts++;
-      }
-    }
-    return $this->past_attempts;
-  }
-
-/**
- * Gets past attempts list
- *
- * @return Student
- */
-  function getPastAttempts() {
-    if (!isset($_SESSION['error'])) {
       $this->past_attempts = get_past_attempts($this->db, $this->resource_link_id, $this->assessment_id, $this->username);
     }
-    return $this;
+    return $this->past_attempts;
   }
 
 /**
@@ -334,42 +252,20 @@ class Student {
   }
 
 /**
- * Checks if user has attempt in progress.
- *
- * @return Boolean
- */
-  function hasAttemptInProgress() {
-    return (get_latest_attempt($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username) != false);
-  }
-
-/**
  * Checks whether or not launch is disabled due to maximum attempts taken.
  *
  * @return String UI disable string.
  */
   function checkLaunchDisabled() {
     if ($this->number_attempts != 'none') {
-      if (($this->past_attempts >= $this->number_attempts) && (!$this->hasAttemptInProgress())) {
+      if ($this->past_attempts >= $this->number_attempts) {
         return '';
       } else {
-        return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment"/>';
+        return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
       }
     } else {
       $this->parsed_attempts = 'No limit';
-      return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment"/>';
-    }
-  }
-
-/**
- * Provides a user-readable format for getting attempts in progress
- *
- * @return String text for attempt in progress details
- */
-  function getAttemptProgress() {
-    if ($this->hasAttemptInProgress()) {
-      return 'Yes';
-    } else {
-      return 'No';
+      return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
     }
   }
 
@@ -382,30 +278,15 @@ class Student {
     return $this->parsed_attempts;
   }
 
-  function createScheduleParticipant() {
-    if (!isset($_SESSION['error'])) {
-      $this->past_attempts = get_past_attempts($this->db, $this->resource_link_id, $this->assessment_id, $this->username);
-      $schedule_name = $this->assessment_id . ' for ' . $this->participant_name . ' - ' . $this->resource_link_id . '_' . ++$this->past_attempts;
-      # Make the start time and end time difference about 30 seconds
-      $schedule_starts = new DateTime('NOW');
-      $schedule_stops = new DateTime('NOW');
-      $schedule_stops->modify('+1 day');
-      $schedule_starts = $schedule_starts->format('Y-m-d\TH:i:s');
-      $schedule_stops = $schedule_stops->format('Y-m-d\TH:i:s');
-      $this->schedule_id = create_schedule_participant(0, $schedule_name, $this->assessment_id, $this->participant_id, 0, $schedule_starts, $schedule_stops, $this->group_id, $this->group_id, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0);
-    }
-    return $this;
-  }
-
 /**
  * Returns the URL for the assessment given participant details.
  *
  * @return String Assessment URL.
  */
-  function getAccessScheduleNotify() {
+  function getAccessAssessmentNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
-	    $url = get_access_schedule_notify($this->schedule_id, $this->username, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
+	    $url = get_access_assessment_notify($this->assessment_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
 	  return $url;
   }
