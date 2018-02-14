@@ -1,4 +1,4 @@
-<div id="body" class="container-fluid col-md-6">
+<div id="body" class="container-fluid col-md-6 offset-md-3">
 <h1>Student Portal</h1>
 <form action="student_nav.php" method="POST">
   <table class="DataTable table table-sm" cellpadding="0" cellspacing="0">
