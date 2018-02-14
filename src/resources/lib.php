@@ -1269,21 +1269,21 @@ function page_header($script='', $isFrame=FALSE) {
 
 EOD;
   if (!$isFrame) {
-    $html .= <<<EOD
-<div id="HeaderWrapper" class="header-top">
-  <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" style="width: 175px; height: 32px; margin-left: 10px" />
-</div>
+//     $html .= <<<EOD
+// <div id="HeaderWrapper" class="header-top">
+//   <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" style="width: 175px; height: 32px; margin-left: 10px" />
+// </div>
 
 EOD;
   }
-  $html .= <<<EOD
-<div id="MainContentWrapper">
-  <div id="ContentWrapper">
-    <div id="PageContent">
+//   $html .= <<<EOD
+// <div id="MainContentWrapper">
+//   <div id="ContentWrapper">
+//     <div id="PageContent">
 EOD;
-  if (!$isFrame && isset($_SESSION['lti_return_url']) && (strlen($_SESSION['lti_return_url']) > 0)) {
-    $html .= '        <br><br><br><div class="container-fluid"><p><button type="button" class="btn btn-default" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>' . "\n";
-  }
+  // if (!$isFrame && isset($_SESSION['lti_return_url']) && (strlen($_SESSION['lti_return_url']) > 0)) {
+  //   $html .= '        <br><br><br><div class="container-fluid"><p><button type="button" class="btn btn-default" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>' . "\n";
+  // }
   echo $html;
 }
 

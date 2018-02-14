@@ -60,6 +60,6 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
    header("Location: error.php");
   }
 
-  //page_header();
+  page_header();
   include_once("view/student_nav.php");
 ?>
