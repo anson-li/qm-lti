@@ -646,6 +646,9 @@ function get_participant_list_by_group($group_id) {
     $response = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_participant_list_by_group($group_id);
     if (!stdclass_empty($response->ParticipantList)) {
       $participant_list = $response->ParticipantList->Participant;
+      if (count((array) $participant_list) === 1) {
+        $participant_list = array($participant_list);
+      }
     } else {
       $participant_list = array();
     }
