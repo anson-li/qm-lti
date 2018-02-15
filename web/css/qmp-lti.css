@@ -26,6 +26,7 @@ body {
   box-shadow: 5px 50px 200px #ccc;
   border-radius: 5px;
   padding: 50px 50px 300px 50px;
+  margin-bottom: 200px;
 }
 
 @media (min-width: 576px) {
