@@ -52,6 +52,8 @@
         </div>
       </div>
     </div>
+    <hr>
+    <p><span id="Copyright"> © 2017 Questionmark Computing Ltd.</span>
   </div>
 </body>
 <?php

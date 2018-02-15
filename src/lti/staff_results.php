@@ -36,7 +36,7 @@ require_once('model/staff.php');
   $staff->setupAdministrator();
   $em_url = $staff->getLoginURL();
   $results = $staff->getResults();
-  
+
   if (!$staff->isOk()) {
     header('Location: error.php');
     exit;
@@ -51,5 +51,4 @@ EOD;
 
   page_header($script);
   include_once("view/staff_results.php");
-  page_footer();
 ?>
