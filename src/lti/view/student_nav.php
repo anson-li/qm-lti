@@ -1,39 +1,33 @@
-<div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
-  <div id="ContentWrapper">
-    <div id="HeaderWrapper" class="header-top padding-top-md">
-      <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" class="center-block" />
-    </div>
-    <hr class="qm-divider" />
-    <div id="PageContent" class="block-color">
-      <div class="container-fluid"><p><button type="button" class="btn btn-default" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>
-        <div id="body" class="container-fluid">
-        <h1>Student Portal</h1>
-        <form action="student_nav.php" method="POST">
-          <table class="DataTable table table-sm" cellpadding="0" cellspacing="0">
-            <tr class="GridHeader">
-              <th>Assessment Name</th>
-              <th>Launch</th>
-              <th># of Possible Attempts</th>
-              <th># of Attempts Taken</th>
-              <th>Attempt in Progress</th>
-            <?php if ($bool_coaching_report) { ?>
-              <th>Coaching Report</th>
-            <?php } ?>
-            </tr>
-            <tr class="GridRow">
-              <td><?php echo $assessment->Session_Name; ?></td>
-              <td><?php echo $launch; ?></td>
-              <td><?php echo $parsed_attempts; ?></td>
-              <td><?php echo $past_attempts; ?></td>
-              <td><?php echo $attempt_in_progress; ?></td>
-            <?php if ($bool_coaching_report) { ?>
-              <td><input class="btn btn-sm btn-link" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/></td>
-            <?php } ?>
-            </tr>
-          </table>
-        </form>
-        <br>
+<body style="background-color: #eee">
+<div id="Wrapper">
+  <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
+    <div id="ContentWrapper">
+      <div id="HeaderWrapper" class="header-top padding-top-md">
+        <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" class="center-block" />
+      </div>
+      <hr class="qm-divider" />
+      <div id="PageContent" class="block-color">
+        <div class="container-fluid"><p><button type="button" class="btn btn-default" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>
+          <div id="body" class="container-fluid">
+          <form action="student_nav.php" method="POST">
+            <div class="col-md-6">
+              <h2>Assessment</h2>
+              <hr class="qm-divider-sm">
+              <h1><?php echo $assessment->Session_Name; ?></h1>
+              <br><br>
+              <p>You have completed <?php echo $past_attempts; ?> out of <?php echo $parsed_attempts; ?> attempts.
+              <br><br>
+              <?php if ($attempt_in_progress === "Yes") { ?>
+                You currently have an attempt in progress.</p>
+                <?php } else { ?>
+                You currently do not have an attempt in progress.</p>
+              <?php } ?>
+            </div>
+          </form>
+          <br>
+        </div>
       </div>
     </div>
   </div>
 </div>
+</body>

@@ -1004,9 +1004,6 @@ function get_coaching_report($db, $consumer_key, $lti_outcome, $resource_link_id
 {$script}
 
 </head>
-<body>
-<div id="Wrapper">
-
 EOD;
   echo $html;
 }
