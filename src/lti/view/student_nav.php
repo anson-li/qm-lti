@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="col-md-12">
-      <p class="footer"><span id="Copyright"> © 2017 Questionmark Computing Ltd.</span></p>
+      <p class="footer"><span id="Copyright"> © 2018 Questionmark Computing Ltd.</span></p>
     </div>
   </div>
 </body>
