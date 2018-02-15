@@ -2,15 +2,26 @@
  * General
  */
 
+.mb-5 {
+  margin-bottom: 100px;
+}
+
 body {
   font-size: 12px;
   font-family: "Droid Sans", Helvetica, Arial, sans-serif;
   color: #333;
 }
 
+#logoImage {
+  height: 1em;
+}
+
 @media (min-width: 576px) {
   body {
     font-size: 16px;
+  }
+  #logoImage {
+    height: 3em;
   }
 }
 
@@ -29,6 +40,9 @@ body {
 @media (min-width: 1200px) {
   body {
     font-size: 12px;
+  }
+  #logoImage {
+    height: 1em;
   }
 }
 
@@ -100,7 +114,7 @@ a {
 
 .qm-divider-sm {
   margin: 10px 10px 10px 0px;
-  width: 50%;
+  width: 25%;
 }
 
 .qm-divider {

@@ -17,7 +17,7 @@
             </div>
             <br><br>
             <div class="col-md-12" style="padding: 35px 0px 0px 0px;">
-              <div class="col-md-6">
+              <div class="mb-5 col-md-6">
                 <p>You have completed <?php echo $past_attempts; ?> out of <?php echo $parsed_attempts; ?> attempts.
                 <br><br>
                 <?php if ($attempt_in_progress === "Yes") { ?>
