@@ -53,11 +53,13 @@ a {
 }
 
 .qm-divider {
-  border-top: 1px solid #666;
+  border-top: 1px solid #bbb;
 }
 
 .block-color {
   padding: 15px;
+  box-shadow: 5px 50px 100px #ccc;
+  border-radius: 5px;
 }
 
 /***
