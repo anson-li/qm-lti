@@ -25,13 +25,15 @@
             </div>
             <div class="col-md-6">
               <div class="top-block"></div>
-              <?php if ($launch) { ?>
-                 <input class="btn btn-sm btn-wide btn-success" type="submit" name="action" value="Start Test"/>
-              <?php } ?>
-              <br><br>
-              <?php // if ($bool_coaching_report) { ?>
-                <input class="btn btn-sm btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
-              <?php // } ?>
+              <div class="button-input">
+                <?php if ($launch) { ?>
+                   <input class="btn btn-wide btn-success" type="submit" name="action" value="Start Test"/>
+                <?php } ?>
+                <br><br>
+                <?php // if ($bool_coaching_report) { ?>
+                  <input class="btn btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
+                <?php // } ?>
+              </div>
             </div>
           </form>
           <br>
