@@ -10,11 +10,13 @@
         <div class="container-fluid"><p><button type="button" class="btn btn-default" style="background-color: #eee; border-color: #fff; color: #333;" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>
           <div id="body" class="container-fluid" style="padding: 0px">
           <form action="student_nav.php" method="POST">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <h2 style="font-weight: normal; color: #999;">Assessment</h2>
               <hr class="qm-divider-sm">
               <h1 style="margin: 0px"><?php echo $assessment->Session_Name; ?></h1>
-              <br><br>
+            </div>
+            <br><br>
+            <div class="col-md-6">
               <p>You have completed <?php echo $past_attempts; ?> out of <?php echo $parsed_attempts; ?> attempts.
               <br><br>
               <?php if ($attempt_in_progress === "Yes") { ?>
