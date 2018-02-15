@@ -8,7 +8,7 @@
       <hr class="qm-divider" />
       <div id="PageContent" class="block-color">
         <div class="container-fluid"><p><button type="button" class="btn btn-default" style="background-color: #eee; border-color: #fff; color: #333;" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>
-          <div id="body" class="container-fluid">
+          <div id="body" class="container-fluid" style="padding: 0px">
           <form action="student_nav.php" method="POST">
             <div class="col-md-6">
               <h2>Assessment</h2>
