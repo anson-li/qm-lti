@@ -8,6 +8,30 @@ body {
   color: #333;
 }
 
+@media (min-width: 576px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    font-size: 12px;
+  }
+}
+
 /***
  * Fonts
  */
@@ -156,3 +180,5 @@ input[type="text"], input[type="password"], input[type="checkbox"] {
   width: 100%;
   clear: both;
 }
+
+
