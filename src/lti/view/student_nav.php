@@ -16,7 +16,7 @@
               <h1 style="margin: 0px"><?php echo $assessment->Session_Name; ?></h1>
             </div>
             <br><br>
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding: 25px 0px 0px 0px;">
               <div class="col-md-6">
                 <p>You have completed <?php echo $past_attempts; ?> out of <?php echo $parsed_attempts; ?> attempts.
                 <br><br>
