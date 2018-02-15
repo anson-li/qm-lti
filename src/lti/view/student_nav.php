@@ -13,7 +13,7 @@
             <div class="col-md-12">
               <h2 style="font-weight: normal; color: #999;">Assessment</h2>
               <hr class="qm-divider-sm">
-              <h1 style="margin: 0px"><?php echo $assessment->Session_Name; ?></h1>
+              <h1 style="margin: 0px; color: #444"><?php echo $assessment->Session_Name; ?></h1>
             </div>
             <br><br>
             <div class="col-md-12" style="padding: 25px 0px 0px 0px;">
@@ -30,11 +30,11 @@
                 <div class="top-block"></div>
                 <div class="button-input">
                   <?php if ($launch) { ?>
-                     <input class="btn btn-wide btn-success" type="submit" name="action" value="Start Test"/>
+                     <input class="btn btn-wide btn-success btn-green" type="submit" name="action" value="Start Test"/>
                   <?php } ?>
                   <br><br>
                   <?php // if ($bool_coaching_report) { ?>
-                    <input class="btn btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
+                    <input class="btn btn-wide btn-info btn-blue" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
                   <?php // } ?>
                 </div>
               </div>
