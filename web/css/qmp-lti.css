@@ -47,8 +47,17 @@ a {
   margin-left: 0;
 }
 
+.qm-divider-sm {
+  margin: 10px 10px 10px 0px;
+  width: 50%;
+}
+
 .qm-divider {
   border-top: 1px solid #666;
+}
+
+.block-color {
+  padding: 15px;
 }
 
 /***
