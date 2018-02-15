@@ -11,10 +11,15 @@ body {
   height: 3em;
 }
 
-
 .mb-5 {
   margin-bottom: 100px;
 }
+
+.btn-wide {
+  width: 100%;
+  padding: 25px 0px;
+}
+
 
 @media (min-width: 576px) {
   body {
@@ -43,6 +48,9 @@ body {
   }
   .mb-5 {
     margin-bottom: 0px;
+  }
+  .btn-wide {
+    padding: 15px 0px;
   }
 }
 
@@ -93,11 +101,6 @@ a {
 
 .btn:hover {
   opacity: 1.0;
-}
-
-.btn-wide {
-  width: 100%;
-  padding: 25px 0px;
 }
 
 .form-control {
