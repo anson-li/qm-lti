@@ -34,6 +34,28 @@ a {
   font-size: 100%;
 }
 
+.btn-green {
+  background: #2ad64a; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #2ad64a 0%, #29d132 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #2ad64a 0%,#29d132 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #2ad64a 0%,#29d132 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ad64a', endColorstr='#29d132',GradientType=1 );
+}
+
+.btn-blue {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#307cf4+0,2e6aea+100 */
+  background: #307cf4; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #307cf4 0%, #2e6aea 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #307cf4 0%,#2e6aea 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #307cf4 0%,#2e6aea 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#307cf4', endColorstr='#2e6aea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  opacity: 0.8;
+}
+
+.btn:hover {
+  opacity: 1.0;
+}
+
 .btn-wide {
   width: 100%;
 }
