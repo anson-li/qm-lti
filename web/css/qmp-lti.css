@@ -29,7 +29,10 @@ body {
   margin-bottom: 50px;
 }
 
-.padding-bottom {
+.footer {
+  color: #999;
+  width: 100%;
+  text-align: center;
   margin-bottom: 150px;
 }
 

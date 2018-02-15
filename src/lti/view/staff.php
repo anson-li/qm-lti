@@ -1,6 +1,6 @@
 <body style="background-color: rgb(250, 250, 250);">
   <div id="Wrapper">
-    <div id="MainContentWrapper" class="col-md-8 col-md-offset-2" style="padding-top: 5em">
+    <div id="MainContentWrapper" class="col-md-10 col-md-offset-1" style="padding-top: 5em">
       <div id="ContentWrapper">
         <div id="HeaderWrapper" class="header-top padding-top-md">
           <img id="logoImage" src="/web/images/logo.png" alt="Questionmark" class="center-block" />
@@ -124,6 +124,9 @@
       </div>
     </div>
   </div>
+  <div class="col-md-10 col-md-offset-1">
+      <p><span id="Copyright" class="footer"> © 2017 Questionmark Computing Ltd.</span></p>
+  </div>
 </body>
 <?php
   } else {
@@ -131,6 +134,9 @@
         <p>No assessments available.</p>
       </div>
     </div>
+  </div>
+  <div class="col-md-10 col-md-offset-1">
+      <p><span id="Copyright" class="footer"> © 2017 Questionmark Computing Ltd.</span></p>
   </div>
 </body>
 <?php
