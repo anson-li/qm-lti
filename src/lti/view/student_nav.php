@@ -1,4 +1,4 @@
-<body style="background-color: #eee">
+<body style="background-image: url("/web/images/lti-bg.png"); background-color: #eee">
 <div id="Wrapper">
   <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
     <div id="ContentWrapper">
@@ -11,7 +11,7 @@
           <div id="body" class="container-fluid" style="padding: 0px">
           <form action="student_nav.php" method="POST">
             <div class="col-md-6">
-              <h2>Assessment</h2>
+              <h2 style="font-weight: normal; color: #999;">Assessment</h2>
               <hr class="qm-divider-sm">
               <h1 style="margin: 0px"><?php echo $assessment->Session_Name; ?></h1>
               <br><br>
