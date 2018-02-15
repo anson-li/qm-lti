@@ -1,4 +1,4 @@
-<div id="MainContentWrapper">
+<div id="MainContentWrapper" style="padding-top: 5em">
   <div id="ContentWrapper">
     <div id="HeaderWrapper" class="header-top padding-top-md">
       <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" class="center-block" style="width: 175px; height: 32px; margin-left: 10px" />
