@@ -52,8 +52,10 @@
         </div>
       </div>
     </div>
-    <hr>
-    <p><span id="Copyright"> © 2017 Questionmark Computing Ltd.</span>
+    <div class="col-md-8 col-md-offset-2">
+      <hr>
+      <p><span id="Copyright" class="padding-bottom"> © 2017 Questionmark Computing Ltd.</span>
+    </p>
   </div>
 </body>
 <?php
