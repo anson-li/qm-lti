@@ -1,4 +1,4 @@
-<body style="background-color: #eee">
+<body style="background-color: rgb(250, 250, 250);">
 <div id="Wrapper">
   <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
     <div id="ContentWrapper">
@@ -25,12 +25,12 @@
             </div>
             <div class="col-md-6">
               <?php if ($launch) { ?>
-                 <input class="btn btn-sm" type="submit" name="action" value="Launch Assessment"/>
+                 <input class="btn btn-sm btn-link btn-wide btn-success" type="submit" name="action" value="Launch Assessment"/>
               <?php } ?>
               <br>
-              <?php if ($bool_coaching_report) { ?>
-                <input class="btn btn-sm btn-link" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
-              <?php } ?>
+              <?php // if ($bool_coaching_report) { ?>
+                <input class="btn btn-sm btn-link btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
+              <?php // } ?>
             </div>
           </form>
           <br>
