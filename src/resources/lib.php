@@ -1264,9 +1264,6 @@ function page_header($script='', $isFrame=FALSE) {
 {$script}
 
 </head>
-<body>
-<div id="Wrapper">
-
 EOD;
   echo $html;
 }
