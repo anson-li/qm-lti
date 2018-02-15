@@ -121,16 +121,14 @@
         <br><br><br>
         <br><br><br>
         </form>
-        </div>
       </div>
     </div>
   </div>
-</div>
+</body
 <?php
   } else {
 ?>
         <p>No assessments available.</p>
-        </div>
       </div>
     </div>
   </div>
