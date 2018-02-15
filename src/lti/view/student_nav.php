@@ -25,11 +25,11 @@
             </div>
             <div class="col-md-6">
               <?php if ($launch) { ?>
-                 <input class="btn btn-sm btn-link btn-wide btn-success" type="submit" name="action" value="Launch Assessment"/>
+                 <input class="btn btn-sm btn-wide btn-success" type="submit" name="action" value="Launch Assessment"/>
               <?php } ?>
-              <br>
+              <br><br>
               <?php // if ($bool_coaching_report) { ?>
-                <input class="btn btn-sm btn-link btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
+                <input class="btn btn-sm btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
               <?php // } ?>
             </div>
           </form>
