@@ -16,25 +16,27 @@
               <h1 style="margin: 0px"><?php echo $assessment->Session_Name; ?></h1>
             </div>
             <br><br>
-            <div class="col-md-6">
-              <p>You have completed <?php echo $past_attempts; ?> out of <?php echo $parsed_attempts; ?> attempts.
-              <br><br>
-              <?php if ($attempt_in_progress === "Yes") { ?>
-                You currently have an attempt in progress.</p>
-                <?php } else { ?>
-                You currently do not have an attempt in progress.</p>
-              <?php } ?>
-            </div>
-            <div class="col-md-6">
-              <div class="top-block"></div>
-              <div class="button-input">
-                <?php if ($launch) { ?>
-                   <input class="btn btn-wide btn-success" type="submit" name="action" value="Start Test"/>
-                <?php } ?>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <p>You have completed <?php echo $past_attempts; ?> out of <?php echo $parsed_attempts; ?> attempts.
                 <br><br>
-                <?php // if ($bool_coaching_report) { ?>
-                  <input class="btn btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
-                <?php // } ?>
+                <?php if ($attempt_in_progress === "Yes") { ?>
+                  You currently have an attempt in progress.</p>
+                  <?php } else { ?>
+                  You currently do not have an attempt in progress.</p>
+                <?php } ?>
+              </div>
+              <div class="col-md-6">
+                <div class="top-block"></div>
+                <div class="button-input">
+                  <?php if ($launch) { ?>
+                     <input class="btn btn-wide btn-success" type="submit" name="action" value="Start Test"/>
+                  <?php } ?>
+                  <br><br>
+                  <?php // if ($bool_coaching_report) { ?>
+                    <input class="btn btn-wide btn-info" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
+                  <?php // } ?>
+                </div>
               </div>
             </div>
           </form>
