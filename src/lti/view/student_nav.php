@@ -4,7 +4,7 @@
       <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" class="center-block" />
     </div>
     <hr class="qm-divider" />
-    <div id="PageContent">
+    <div id="PageContent" class="jumbotron">
       <div class="container-fluid"><p><button type="button" class="btn btn-default" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>
         <div id="body" class="container-fluid">
         <h1>Student Portal</h1>
