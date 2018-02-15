@@ -122,6 +122,7 @@
         <br><br><br>
         </form>
       </div>
+      </div>
     </div>
   </div>
 </body>
@@ -129,6 +130,7 @@
   } else {
 ?>
         <p>No assessments available.</p>
+        </div>
       </div>
     </div>
   </div>
