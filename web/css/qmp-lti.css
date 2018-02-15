@@ -18,8 +18,15 @@ body {
 .btn-wide {
   width: 100%;
   padding: 25px 0px;
+  border-radius: 5px;
 }
 
+.block-color {
+  padding: 15px;
+  box-shadow: 5px 50px 200px #ccc;
+  border-radius: 5px;
+  padding: 50px 50px 300px 50px;
+}
 
 @media (min-width: 576px) {
   body {
@@ -51,6 +58,9 @@ body {
   }
   .btn-wide {
     padding: 15px 0px;
+  }
+  .block-color {
+    padding: 50px 50px 50px 50px;
   }
 }
 
@@ -123,13 +133,6 @@ a {
 
 .qm-divider {
   border-top: 3px solid #eee;
-}
-
-.block-color {
-  padding: 15px;
-  box-shadow: 5px 50px 200px #ccc;
-  border-radius: 5px;
-  padding: 50px;
 }
 
 /***
