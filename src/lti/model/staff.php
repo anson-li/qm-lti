@@ -414,7 +414,7 @@ function filterDisabledForExternal($obj) {
             }
           }
         } else { // Participant list contains only one participant
-          if ($assessment->Result->Participant == "$participant->Participant_Name") {
+          if ($assessment->Result->Participant == "$participant_list->Participant_Name") {
             $found = TRUE;
           }
         }
