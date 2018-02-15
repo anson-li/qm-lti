@@ -1,7 +1,7 @@
 <div id="MainContentWrapper">
   <div id="ContentWrapper">
-    <div id="HeaderWrapper" class="header-top">
-      <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" style="width: 175px; height: 32px; margin-left: 10px" />
+    <div id="HeaderWrapper" class="header-top padding-top-md">
+      <img id="logoImage" src="/web/images/logo.gif" alt="Questionmark" class="center-block" style="width: 175px; height: 32px; margin-left: 10px" />
     </div>
     <div id="PageContent">
       <div class="container-fluid"><p><button type="button" class="btn btn-default" onclick="location.href=\'' . $_SESSION['lti_return_url'] . '\';">Return to course environment</button></p></div>
