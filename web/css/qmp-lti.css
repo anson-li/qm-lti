@@ -58,8 +58,9 @@ a {
 
 .block-color {
   padding: 15px;
-  box-shadow: 5px 50px 100px #ccc;
+  box-shadow: 5px 50px 200px #ccc;
   border-radius: 5px;
+  padding: 50px;
 }
 
 /***
