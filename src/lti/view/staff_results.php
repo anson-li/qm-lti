@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="col-md-10 col-md-offset-1">
-      <p><span id="Copyright" class="footer"> © 2017 Questionmark Computing Ltd.</span></p>
+      <p class="footer"><span id="Copyright"> © 2017 Questionmark Computing Ltd.</span></p>
   </div>
 </body>
 <?php
