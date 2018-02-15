@@ -1,4 +1,4 @@
-<body style="background-image: url("/web/images/lti-bg.png"); background-color: #eee">
+<body style="background-color: #eee">
 <div id="Wrapper">
   <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
     <div id="ContentWrapper">
@@ -21,6 +21,15 @@
                 You currently have an attempt in progress.</p>
                 <?php } else { ?>
                 You currently do not have an attempt in progress.</p>
+              <?php } ?>
+            </div>
+            <div class="col-md-6">
+              <?php if ($launch) { ?>
+                 <input class="btn btn-sm" type="submit" name="action" value="Launch Assessment"/>
+              <?php } ?>
+              <br>
+              <?php if ($bool_coaching_report) { ?>
+                <input class="btn btn-sm btn-link" type="submit" name="action" value="View Coaching Report" formtarget="_blank"/>
               <?php } ?>
             </div>
           </form>

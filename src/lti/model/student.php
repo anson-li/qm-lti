@@ -259,13 +259,13 @@ class Student {
   function checkLaunchDisabled() {
     if ($this->number_attempts != 'none') {
       if ($this->past_attempts >= $this->number_attempts) {
-        return '';
+        return FALSE;
       } else {
-        return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
+        return TRUE;
       }
     } else {
-      $this->parsed_attempts = 'No limit';
-      return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
+      $this->parsed_attempts = 'unlimited';
+      return TRUE;
     }
   }
 
