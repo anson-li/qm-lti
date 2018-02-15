@@ -404,6 +404,7 @@ function filterDisabledForExternal($obj) {
   function getResults() {
     $result_list = get_assessment_result_list_by_assessment($this->assessment_id);
     $participant_list = get_participant_list_by_group($this->group_id);
+    error_log(print_r($participant_list, 1));
     if (($result_list != FALSE) && (!stdclass_empty($result_list)) && (!stdclass_empty($participant_list))) {
       foreach ($result_list->AssessmentResult as $assessment_key => $assessment) {
         $found = FALSE;
