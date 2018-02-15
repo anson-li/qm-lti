@@ -1,27 +1,24 @@
 /****
  * General
  */
-
-.mb-5 {
-  margin-bottom: 100px;
-}
-
 body {
-  font-size: 12px;
+  font-size: 30px;
   font-family: "Droid Sans", Helvetica, Arial, sans-serif;
   color: #333;
 }
 
 #logoImage {
-  height: 1em;
+  height: 3em;
+}
+
+
+.mb-5 {
+  margin-bottom: 100px;
 }
 
 @media (min-width: 576px) {
   body {
     font-size: 16px;
-  }
-  #logoImage {
-    height: 3em;
   }
 }
 
@@ -33,7 +30,7 @@ body {
 
 @media (min-width: 992px) {
   body {
-    font-size: 28px;
+    font-size: 14px;
   }
 }
 
@@ -42,7 +39,10 @@ body {
     font-size: 12px;
   }
   #logoImage {
-    height: 1em;
+    height: 2em;
+  }
+  .mb-5 {
+    margin-bottom: 0px;
   }
 }
 
