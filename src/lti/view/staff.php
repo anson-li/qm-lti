@@ -1,6 +1,6 @@
 <body style="background-color: rgb(250, 250, 250);">
   <div id="Wrapper">
-    <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
+    <div id="MainContentWrapper" class="col-md-8 col-md-offset-2" style="padding-top: 5em">
       <div id="ContentWrapper">
         <div id="HeaderWrapper" class="header-top padding-top-md">
           <img id="logoImage" src="/web/images/logo.png" alt="Questionmark" class="center-block" />
