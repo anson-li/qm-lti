@@ -1,3 +1,12 @@
+<body style="background-color: rgb(250, 250, 250);">
+  <div id="Wrapper">
+    <div id="MainContentWrapper" class="col-md-8 col-md-offset-2" style="padding-top: 5em">
+      <div id="ContentWrapper">
+        <div id="HeaderWrapper" class="header-top padding-top-md">
+          <img id="logoImage" src="/web/images/logo.png" alt="Questionmark" class="center-block" />
+        </div>
+        <hr class="qm-divider" />
+        <div id="PageContent" class="block-color">
         <div id="body" class="container-fluid">
         <p>
         <a class="btn btn-default" href="<?php echo $em_url; ?>" target="_blank" />Log into Questionmark Portal</a>&nbsp;&nbsp;
@@ -40,11 +49,21 @@
         <br><br><br>
         </form>
         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 <?php
   } else {
 ?>
         <p>No results available.</p>
         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 <?php
   }
 ?>
