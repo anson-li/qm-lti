@@ -51,5 +51,4 @@ EOD;
 
   page_header($script);
   include_once("view/staff_results.php");
-  page_footer();
 ?>
