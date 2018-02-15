@@ -144,7 +144,7 @@ class Student {
   function identifyAction($action) {
     // An action was previously selected
     if (isset($action)) {
-      if ($action == 'Launch Assessment') {
+      if ($action == 'Start Test') {
         // start assessment
         $redirect =  get_root_url() . '../lti/student.php';
         header("Location: {$redirect}");
