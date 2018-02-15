@@ -124,7 +124,7 @@
       </div>
     </div>
   </div>
-</body
+</body>
 <?php
   } else {
 ?>
