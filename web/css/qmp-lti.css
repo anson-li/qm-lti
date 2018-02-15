@@ -1,6 +1,6 @@
 /****
  * General
- */ 
+ */
 
 body {
   font-size: 12px;
@@ -45,6 +45,10 @@ a {
 
 .row {
   margin-left: 0;
+}
+
+.qm-divider {
+  background-color: #e4e4e4;
 }
 
 /***
