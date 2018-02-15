@@ -1,8 +1,16 @@
-
+<body style="background-color: rgb(250, 250, 250);">
+  <div id="Wrapper">
+    <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
+      <div id="ContentWrapper">
+        <div id="HeaderWrapper" class="header-top padding-top-md">
+          <img id="logoImage" src="/web/images/logo.png" alt="Questionmark" class="center-block" />
+        </div>
+        <hr class="qm-divider" />
+        <div id="PageContent" class="block-color">
         <div id="body" class="container-fluid">
         <p>
-        <a class="btn btn-default" href="<?php echo $em_url; ?>" target="_blank" />Log into Questionmark Portal</a>&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-default" href="staff_results.php" />View Assessment Results</a>
+          <a class="btn btn-default" href="<?php echo $em_url; ?>" target="_blank" />Log into Questionmark Portal</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-default" href="staff_results.php" />View Assessment Results</a>
         </p>
 <?php
   if (!$_SESSION['allow_outcome']) {
@@ -114,11 +122,19 @@
         <br><br><br>
         </form>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 <?php
   } else {
 ?>
         <p>No assessments available.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</body>
 <?php
   }
 ?>

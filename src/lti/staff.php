@@ -64,6 +64,6 @@ EOD;
 
   page_header($script);
   include_once("view/staff.php");
-  page_footer();
+  // page_footer();
 
 ?>
