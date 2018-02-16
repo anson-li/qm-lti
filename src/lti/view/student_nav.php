@@ -18,7 +18,7 @@
               <br><br>
               <div class="col-md-12" style="padding: 35px 0px 0px 0px;">
                 <div class="mb-5 col-md-6">
-                  <p>You have completed <span id="PastAttempts"><?php echo $past_attempts; ?></span> out of <span id="ParsedAttempts"><?php echo $parsed_attempts; ?></span> attempts.
+                  <p>You have attempted <span id="PastAttempts"><?php echo $past_attempts; ?></span> out of <span id="ParsedAttempts"><?php echo $parsed_attempts; ?></span> attempts.
                   <br><br>
                   <?php if ($attempt_in_progress === "Yes") { ?>
                     You currently have an attempt in progress.</p>
