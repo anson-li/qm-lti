@@ -145,7 +145,7 @@ a {
   color: #fff;
 }
 
-.btn:hover {
+.btn:not([disabled]):hover {
   opacity: 1.0;
 }
 
