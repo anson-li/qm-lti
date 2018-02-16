@@ -141,7 +141,7 @@ a {
 }
 
 .btn-grey:not([disabled]):hover {
-  background-color: #b3acef;
+  background-color: #cecece;
   color: #fff;
   border-color: #fff;
 }
