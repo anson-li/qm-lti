@@ -122,6 +122,12 @@ a {
   opacity: 0.8;
 }
 
+.btn-grey {
+  padding: 15px 35px;
+  background-color: #eee;
+  color: #333;
+}
+
 .btn:hover {
   opacity: 1.0;
 }
