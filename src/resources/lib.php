@@ -930,11 +930,14 @@ function create_participant($username, $firstname, $lastname, $email) {
     $data_connector = LTI_Data_Connector::getDataConnector(TABLE_PREFIX, $db, DATA_CONNECTOR);
     if ($data_connector->ReportConfig_loadAccessible($consumer_key, $resource_link_id, $assessment_id)) {
       if (get_result_id($user_id) != FALSE) {
+        error_log("Worked at 1");
         return TRUE;
       } else {
+        error_log("Failed at 2");
         return FALSE;
       }
     } else {
+      error_log("Failed at 3");
       return FALSE;
     }
   }

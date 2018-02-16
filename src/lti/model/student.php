@@ -288,6 +288,10 @@ class Student {
     } else {
       error_log("Not working!");
     }
+    error_log($this->consumer_key);
+    error_log($this->resource_link_id);
+    error_log($this->assessment_id);
+    error_log($this->participant_name);
     return (($this->past_attempts > 0) && (is_coaching_report_available($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_name)));
   }
 
