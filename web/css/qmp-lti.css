@@ -49,13 +49,16 @@ body {
 
 @media (min-width: 768px) {
   body {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 
 @media (min-width: 992px) {
   body {
     font-size: 14px;
+  }
+  .block-color {
+    padding: 50px 50px 50px 50px;
   }
 }
 
@@ -71,9 +74,6 @@ body {
   }
   .btn-wide {
     padding: 15px 0px;
-  }
-  .block-color {
-    padding: 50px 50px 50px 50px;
   }
   .spacer-lg {
     margin-bottom: 25px;
