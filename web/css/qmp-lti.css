@@ -140,8 +140,8 @@ a {
   margin: 10px;
 }
 
-.btn-grey:hover {
-  background-color: #18227c;
+.btn-grey:not([disabled]):hover {
+  background-color: #828ad8;
   color: #fff;
 }
 
