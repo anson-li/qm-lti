@@ -117,7 +117,7 @@
           </div>
         </div>
         <br><br><br>
-        <input class="button btn" type="submit" id="id_save" value="Save change" disabled="disabled" />
+        <input class="button btn btn-grey" type="submit" id="id_save" value="Save change" disabled="disabled" />
         </p>
         <br><br><br>
         <br><br><br>
