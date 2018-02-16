@@ -282,6 +282,12 @@ class Student {
     if ($this->hasAttemptInProgress()) {
       $this->past_attempts--;
     }
+    error_log($this->past_attempts);
+    if (is_coaching_report_available($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_name) {
+      error_log("Working!");
+    } else {
+      error_log("Not working!");
+    }
     return (($this->past_attempts > 0) && (is_coaching_report_available($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_name)));
   }
 
