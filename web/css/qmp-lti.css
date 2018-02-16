@@ -3,8 +3,11 @@
  */
 body {
   font-size: 30px;
-  font-family: "Droid Sans", Helvetica, Arial, sans-serif;
   color: #333;
+  font-family: 'Roboto', 'Helvetica Neue', 'Droid Sans', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.4px;
 }
 
 #logoImage {
@@ -64,7 +67,7 @@ body {
 
 @media (min-width: 1200px) {
   body {
-    font-size: 12px;
+    font-size: 13px;
   }
   #logoImage {
     height: 2.5em;
@@ -104,6 +107,8 @@ a {
 .btn {
   font-size: 100%;
   border-color: #fff;
+  font-weight: 100;
+  letter-spacing: 0.4px;
 }
 
 .btn-green {
@@ -126,8 +131,9 @@ a {
 
 .btn-grey {
   padding: 15px 35px;
-  background-color: #eee;
-  color: #333;
+  background-color: #fff;
+  border: 1px solid #18227c;
+  color: #18227c;
 }
 
 .btn:hover {
