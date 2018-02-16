@@ -21,6 +21,7 @@
   }
 ?>
         <h1>Assessments</h1>
+        <hr class="qm-divider-sm">
 <?php
   if ((count($assessments) !== 0) && !is_null($assessments[0])) {
 ?>
@@ -58,7 +59,7 @@
 ?>
           </tbody>
         </table>
-        <br><br>
+        <hr class="qm-divider-sm"><br>
         <p>
         <input type="hidden" id="id_coachingreport" name="id_coachingreport" value="0">
         <div class="row">
