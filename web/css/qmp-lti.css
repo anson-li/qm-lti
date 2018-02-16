@@ -110,6 +110,8 @@ a {
   border-color: #fff;
   font-weight: 100;
   letter-spacing: 0.4px;
+  padding: 15px;
+  white-space: normal;
 }
 
 .btn-green {
@@ -135,6 +137,12 @@ a {
   background-color: #fff;
   border: 1px solid #18227c;
   color: #18227c;
+  margin: 10px;
+}
+
+.btn-grey:hover {
+  background-color: #18227c;
+  color: #fff;
 }
 
 .btn:hover {
