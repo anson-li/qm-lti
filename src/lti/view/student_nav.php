@@ -1,4 +1,4 @@
-<body style="background-color: rgb(250, 250, 250);">
+<body class="bg-pattern" style="background-color: rgb(250, 250, 250);">
   <div id="Wrapper">
     <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
       <div id="ContentWrapper">
