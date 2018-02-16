@@ -76,7 +76,7 @@ body {
     padding: 50px 50px 50px 50px;
   }
   .spacer-lg {
-    padding-bottom: 150px;
+    margin-bottom: 25px;
   }
 }
 
@@ -108,19 +108,19 @@ a {
 
 .btn-green {
   background: #389e1c; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #389e1c 0%, #47ad41 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #389e1c 0%,#47ad41 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #389e1c 0%,#47ad41 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#389e1c', endColorstr='#47ad41',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: -moz-linear-gradient(-45deg, #47ad41 0%, #389e1c 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #47ad41 0%,#389e1c 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #47ad41 0%,#389e1c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#47ad41', endColorstr='#389e1c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   opacity: 0.8;
 }
 
 .btn-blue {
   background: #18227c; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #18227c 0%, #4f3d72 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #18227c 0%,#4f3d72 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #18227c 0%,#4f3d72 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18227c', endColorstr='#4f3d72',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: -moz-linear-gradient(-45deg, #4f3d72 0%, #18227c 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #4f3d72 0%,#18227c 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #4f3d72 0%,#18227c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f3d72', endColorstr='#18227c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   opacity: 0.8;
 }
 
