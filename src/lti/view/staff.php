@@ -9,8 +9,8 @@
         <div id="PageContent" class="block-color">
         <div id="body" class="container-fluid">
         <p>
-          <a class="btn btn-default btn-grey" href="<?php echo $return_url; ?>">Back to Course</button></a>&nbsp;&nbsp;&nbsp;
-          <a class="btn btn-default btn-grey" href="<?php echo $em_url; ?>" target="_blank" />Log into Questionmark Portal</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-default btn-grey" href="<?php echo $return_url; ?>">Back to Course</button></a>
+          <a class="btn btn-default btn-grey" href="<?php echo $em_url; ?>" target="_blank" />Log into Questionmark Portal</a>
           <a class="btn btn-default btn-grey" href="staff_results.php" />View Assessment Results</a>
         </p>
 <?php
