@@ -145,7 +145,7 @@ a {
 }
 
 .qm-divider {
-  border-top: 3px solid #eee;
+  opacity: 0;
 }
 
 /***
