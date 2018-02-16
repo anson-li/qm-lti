@@ -3,7 +3,7 @@
     <div id="MainContentWrapper" class="col-md-6 col-md-offset-3" style="padding-top: 5em">
       <div id="ContentWrapper">
         <div id="HeaderWrapper" class="header-top padding-top-md">
-          <img id="logoImage" src="/web/images/logo.png" alt="Questionmark" class="center-block" />
+          <a href="https://www.questionmark.com/"><img id="logoImage" src="/web/images/logo.png" alt="Questionmark" class="center-block" /></a>
         </div>
         <hr class="qm-divider" />
         <div id="PageContent" class="block-color">
