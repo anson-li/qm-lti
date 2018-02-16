@@ -148,6 +148,10 @@ a {
   opacity: 1.0;
 }
 
+.no-margin {
+  margin: 0px;
+}
+
 .form-control {
   font-size: 100%;
   height: auto;
