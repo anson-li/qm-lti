@@ -36,6 +36,11 @@ body {
   margin-bottom: 150px;
 }
 
+.bg-pattern {
+  background-image: url("data:image/svg+xml;/web/images/pattern.svg");
+  background-repeat: repeat;
+}
+
 @media (min-width: 576px) {
   body {
     font-size: 16px;
