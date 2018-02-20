@@ -111,11 +111,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       }
 
       $return_url = parse_url($_SESSION['lti_return_url']);
-      if (!empty($return_url)) {
-        parse_str($return_url['query'], $_SESSION['additional_params']);
-      } else {
-        $_SESSION['additional_params'] = array();
-      }
+      parse_str($return_url['query'], $_SESSION['additional_params']);
 
       // set redirect URL
       if ($is_student) {
