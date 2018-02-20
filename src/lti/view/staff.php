@@ -21,7 +21,7 @@
   }
 ?>
         <h1>Assessments</h1>
-        <hr class="qm-divider-sm">
+        <hr class="qm-divider-sm"><br>
 <?php
   if ((count($assessments) !== 0) && !is_null($assessments[0])) {
 ?>

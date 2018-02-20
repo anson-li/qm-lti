@@ -14,7 +14,7 @@
         <a class="btn btn-default btn-grey" href="staff.php" />Back to Assessment Configuration Page</a>
         </p>
         <h1>Assessment Results</h1>
-        <hr class="qm-divider-sm">
+        <hr class="qm-divider-sm"><br>
 <?php
   if (($results != NULL) && (count($results) > 0)) {
 ?>
