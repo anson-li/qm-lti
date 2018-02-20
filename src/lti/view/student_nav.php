@@ -20,11 +20,6 @@
                 <div class="mb-5 col-md-6">
                   <p>You have attempted <span id="PastAttempts"><?php echo $past_attempts; ?></span> out of <span id="ParsedAttempts"><?php echo $parsed_attempts; ?></span> attempts.
                   <br><br>
-                  <?php if ($attempt_in_progress === "Yes") { ?>
-                    You currently have an attempt in progress.</p>
-                    <?php } else { ?>
-                    You currently do not have an attempt in progress.</p>
-                  <?php } ?>
                 </div>
                 <div class="col-md-6">
                   <div class="top-block"></div>
