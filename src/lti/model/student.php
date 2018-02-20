@@ -282,7 +282,7 @@ class Student {
     if ($this->hasAttemptInProgress()) {
       $this->past_attempts--;
     }
-    return (($this->past_attempts > 0) && (is_coaching_report_available($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->username)));
+    return (($this->past_attempts > 0) && (is_coaching_report_available($this->db, $this->consumer_key, $this->resource_link_id, $this->assessment_id, $this->participant_name)));
   }
 
 /**
@@ -405,7 +405,7 @@ class Student {
   function getAccessScheduleNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
-	    $url = get_access_schedule_notify($this->schedule_id, $this->username, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
+	    $url = get_access_schedule_notify($this->schedule_id, $this->participant_name, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
 	  return $url;
   }
