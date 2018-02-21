@@ -996,6 +996,7 @@ function get_coaching_report($db, $consumer_key, $lti_outcome, $resource_link_id
 <meta charset="utf-8" />
 <title>QMP - LTI</title>
 
+<link rel="stylesheet" href="/web/css/fonts/glyphicons-halflings-regular.ttf" type="text/css">
 <link rel="stylesheet" href="/web/css/bootstrap.min.css">
 <link href="/web/css/qmp-lti.css" type="text/css" rel="stylesheet" />
 
