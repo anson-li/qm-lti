@@ -405,7 +405,7 @@ class Student {
   function getAccessScheduleNotify() {
   	$url = '';
   	if (!isset($_SESSION['error'])) {
-	    $url = get_access_schedule_notify($this->schedule_id, "{$this->firstname} {$this->lastname}", $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, "{$this->firstname} {$this->lastname}", $this->additional_params);
+	    $url = get_access_schedule_notify($this->schedule_id, $this->username, $this->consumer_key, $this->resource_link_id, $this->result_id, $this->notify_url, $this->return_url, $this->username, $this->additional_params);
 	  }
 	  return $url;
   }
