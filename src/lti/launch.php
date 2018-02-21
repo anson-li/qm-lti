@@ -60,9 +60,9 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     $firstname = substr($tool_provider->user->firstname, 0, MAX_NAME_LENGTH);
     $lastname = substr($tool_provider->user->lastname, 0, MAX_NAME_LENGTH);
     if ($tool_provider->user->username != '') {
-      $username = $prefix . $tool_provider->user->username . ' (' $firstname . ' ' . $lastname . ')';
+      $username = $prefix . $tool_provider->user->username . ' (' . $firstname . ' ' . $lastname . ')';
     } else {
-      $username = $prefix . $tool_provider->user->getId()  . ' (' $firstname . ' ' . $lastname . ')';
+      $username = $prefix . $tool_provider->user->getId()  . ' (' . $firstname . ' ' . $lastname . ')';
     }
     // remove invalid characters in username
     $username = strtr($username, INVALID_USERNAME_CHARS, str_repeat('-', strlen(INVALID_USERNAME_CHARS)));
