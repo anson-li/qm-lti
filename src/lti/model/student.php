@@ -144,11 +144,11 @@ class Student {
   function identifyAction($action) {
     // An action was previously selected
     if (isset($action)) {
-      if ($action == 'Launch Assessment') {
+      if ($action === 'Start Test') {
         // start assessment
         $redirect =  get_root_url() . '../lti/student.php';
         header("Location: {$redirect}");
-      } else if ($action == 'View Coaching Report') {
+      } else if ($action === 'View Coaching Report') {
         // view coaching report
         $resultID = get_accessed_result($this->db, $this->consumer, $this->resource_link, $this->username);
         $coachingreport = get_report_url($resultID);
@@ -259,13 +259,13 @@ class Student {
   function checkLaunchDisabled() {
     if ($this->number_attempts != 'none') {
       if ($this->past_attempts >= $this->number_attempts) {
-        return '';
+        return FALSE;
       } else {
-        return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
+        return TRUE;
       }
     } else {
-      $this->parsed_attempts = 'No limit';
-      return '<input class="btn btn-sm" type="submit" name="action" value="Launch Assessment" <?php echo $launch_disabled; />';
+      $this->parsed_attempts = 'unlimited';
+      return TRUE;
     }
   }
 
