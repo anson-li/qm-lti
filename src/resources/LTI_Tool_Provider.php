@@ -192,8 +192,8 @@ class LTI_Tool_Provider {
 /**
  * Class constructor
  *
- * @param mixed   $callbackHandler String containing name of callback function for connect request, or associative array of callback functions for each request type
- * @param mixed   $data_connector  String containing table name prefix, or database connection object, or array containing one or both values (optional, default is a blank prefix and MySQL)
+ * @param mixed $callbackHandler String containing name of callback function for connect request, or associative array of callback functions for each request type
+ * @param mixed $data_connector String containing table name prefix, or database connection object, or array containing one or both values (optional, default is a blank prefix and MySQL)
  */
   function __construct($callbackHandler, $data_connector = '') {
 
@@ -234,9 +234,9 @@ class LTI_Tool_Provider {
 /**
  * Add a parameter constraint to be checked on launch
  *
- * @param string Name of parameter to be checked
- * @param boolean True if parameter is required
- * @param int Maximum permitted length of parameter value (optional, default is NULL)
+ * @param string $name
+ * @param boolean $required
+ * @param int $max_length Maximum permitted length of parameter value (optional, default is NULL)
  */
   public function setParameterConstraint($name, $required, $max_length = NULL) {
     $name = trim($name);
@@ -259,7 +259,7 @@ class LTI_Tool_Provider {
 /**
  * Get an array of fully qualified user roles
  *
- * @param string Comma-separated list of roles
+ * @param string $rolesString Comma-separated list of roles
  *
  * @return array Array of roles
  */
@@ -1781,7 +1781,6 @@ EOF;
     $resp = '';
     // Try using curl if available
     if (function_exists('curl_init')) {
-      // Start of Bart issue
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
       if (!empty($header)) {
@@ -1809,7 +1808,6 @@ EOF;
       }
       $this->ext_request_headers = str_replace("\r\n", "\n", curl_getinfo($ch, CURLINFO_HEADER_OUT));
       curl_close($ch);
-      // End of Bart issue
     } else {
       // Try using fopen if curl was not available or did not work (could have been an SSL certificate issue)
       $opts = array('method' => 'POST',
@@ -1974,7 +1972,6 @@ class LTI_Outcome {
     $this->type = 'decimal';
   }
 
-
 /**
  * Clears accessed result in Results database
  *
@@ -1987,8 +1984,6 @@ class LTI_Outcome {
   public function clearAccessedResult($consumer, $resource_link, $user_id) {
     return $consumer->getDataConnector()->Results_clearAccessedResult($consumer, $resource_link, $user_id);
   }
-
-
 
 /**
  * Saves the results in outcome to Results database
@@ -2003,6 +1998,33 @@ class LTI_Outcome {
     return $consumer->getDataConnector()->Results_save($this, $consumer, $resource_link, $user_id, $is_accessed, $result_sourcedid);
   }
 
+/**
+ * Saves the results in outcome to Results database
+ *
+ * @param consumer_tool Consumer tool used to connect to database
+ * @param resoure_link
+ * @param participant
+ *
+ * @return boolean True if saved
+ */
+  public function getAttempt($consumer, $resource_link, $schedule_id, $user_id) {
+    $result = $consumer->getDataConnector()->Attempts_getAttemptIfExists($consumer, $resource_link, $schedule_id, $user_id);
+    return $result;
+  }
+
+/**
+ * Saves the results in outcome to Results database
+ *
+ * @param consumer_tool Consumer tool used to connect to database
+ * @param resoure_link
+ * @param participant
+ *
+ * @return boolean True if saved
+ */
+  public function deleteAttempt($consumer, $resource_link, $schedule_id, $user_id) {
+    $result = $consumer->getDataConnector()->Attempts_deleteLatestAttempt($consumer, $resource_link, $schedule_id, $user_id);
+    return $result;
+  }
 
 /**
  * Get the result sourcedid value.
@@ -2061,9 +2083,7 @@ class LTI_Outcome {
     $this->resultid = $resultid;
   }
 
-
 }
-
 
 /**
  * Class to represent a tool consumer nonce
@@ -2151,7 +2171,6 @@ class LTI_Consumer_Nonce {
   }
 
 }
-
 
 /**
  * Class to represent a tool consumer resource link share key
@@ -2403,7 +2422,6 @@ class LTI_Context_Share extends LTI_Resource_Link_Share {
   }
 
 }
-
 
 /**
  * Class to represent a tool consumer user
@@ -2690,7 +2708,6 @@ class LTI_User {
 
 }
 
-
 /**
  * Class to represent an OAuth datastore
  *
@@ -2788,7 +2805,6 @@ class LTI_OAuthDataStore extends OAuthDataStore {
 
 }
 
-
 /**
  * Abstract class to provide a connection to a persistent store for LTI objects
  *
@@ -2830,7 +2846,10 @@ abstract class LTI_Data_Connector {
  * Default name for database table used to store student result values
  */
   const RESULTS_TABLE_NAME = 'lti_results';
-
+/**
+ * Default name for database table used to store student attempts
+ */
+  const ATTEMPTS_TABLE_NAME = 'lti_attempts';
 /**
  * SQL date format (default = 'Y-m-d')
  */
