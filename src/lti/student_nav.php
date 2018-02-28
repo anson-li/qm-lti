@@ -33,8 +33,12 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   session_name(SESSION_NAME);
   session_start();
 
+  error_log("Testing 0");
+
   $student = new Student($_SESSION);
   $student->checkValid();
+
+  error_log("Testing 1");
 
   if (isset($_SESSION['error'])) {
     error_log("Error reached at 1: " . $_SESSION['error']);
@@ -45,6 +49,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     perception_soapconnect();
   }
 
+  error_log("Testing 2");
+
   if (isset($_SESSION['error'])) {
     error_log("Error reached at 2: " . $_SESSION['error']);
   }
@@ -52,6 +58,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   if (isset($_POST['action'])) {
     $student->identifyAction($_POST['action']);
   }
+
+  error_log("Testing 3");
 
   if (isset($_SESSION['error'])) {
     error_log("Error reached at 3: " . $_SESSION['error']);
