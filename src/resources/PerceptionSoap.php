@@ -736,12 +736,16 @@ public function delete_schedule($schedule_id) {
       ), SOAP_ENC_OBJECT, 'Participant', 'http://questionmark.com/QMWISe/', NULL, 'http://questionmark.com/QMWISe/');
     $participant = new stdClass();
     $participant->Participant = new SoapVar($participant2, SOAP_ENC_OBJECT, NULL, NULL, 'Participant', 'http://questionmark.com/QMWISe/');
+    error_log(print_r($participant, 1));
     $params = new SoapVar($participant, SOAP_ENC_OBJECT, NULL, 'http://questionmark.com/QMWISe/');
+    error_log(print_r($params, 1));
     try {
       $participant = $this->soap->CreateParticipant($params);
+      error_log("Finished participant call w/o issue");
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
     }
+    error_log("Finished create participant fn");
     return $participant;
   }
 }

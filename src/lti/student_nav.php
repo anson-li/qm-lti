@@ -57,6 +57,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     error_log("Error reached at 3: " . $_SESSION['error']);
   }
 
+  error_log("Testing Create Participant");
+
   $student = $student->createParticipant();
 
   if (isset($_SESSION['error'])) {
