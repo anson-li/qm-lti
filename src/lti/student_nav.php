@@ -36,15 +36,34 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   $student = new Student($_SESSION);
   $student->checkValid();
 
+  if (isset($_SESSION['error'])) {
+    error_log("Error reached at 1: " . $_SESSION['error']);
+  }
+
   // Activate SOAP Connection.
   if (!isset($_SESSION['error'])) {
     perception_soapconnect();
   }
 
+  if (isset($_SESSION['error'])) {
+    error_log("Error reached at 2: " . $_SESSION['error']);
+  }
+
   if (isset($_POST['action'])) {
     $student->identifyAction($_POST['action']);
   }
+
+  if (isset($_SESSION['error'])) {
+    error_log("Error reached at 3: " . $_SESSION['error']);
+  }
+
   $student = $student->createParticipant();
+
+  if (isset($_SESSION['error'])) {
+    error_log("Error reached at 4: " . $_SESSION['error']);
+  }
+
+
   $student = $student->joinGroup();
 
   $assessment = $student->getAssessment();
