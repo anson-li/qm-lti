@@ -111,6 +111,10 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       }
 
       $return_url = parse_url($_SESSION['lti_return_url']);
+
+      error_log(print_r($_SESSION, 1));
+      error_log(print_r($return_url, 1));
+
       if (!empty($return_url)) {
         parse_str($return_url['query'], $_SESSION['additional_params']);
       } else {
