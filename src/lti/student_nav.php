@@ -44,18 +44,16 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   if (isset($_POST['action'])) {
     $student->identifyAction($_POST['action']);
   }
-  $student = $student->createParticipant();
-  $student = $student->joinGroup();
+  $student->createParticipant();
+  $student->joinGroup();
 
   $assessment = $student->getAssessment();
-  $student = $student->getPastAttempts();
   $past_attempts = $student->getAttemptDetails();
   $bool_coaching_report = $student->isCoachingReportAvailable();
   $number_attempts = $student->getNumberAttempts();
   $launch = $student->checkLaunchDisabled();
   $parsed_attempts = $student->getParsedAttempts();
   $return_url = $_SESSION['lti_return_url'];
-  $attempt_in_progress = $student->getAttemptProgress();
 
   if (isset($_SESSION['error'])) {
    header("Location: error.php");
