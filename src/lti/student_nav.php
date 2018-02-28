@@ -62,9 +62,11 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   if (isset($_SESSION['error'])) {
     error_log("Error reached at 4: " . $_SESSION['error']);
   }
+  error_log("Test error message after createParticipant");
 
 
   $student = $student->joinGroup();
+ error_log("Test error message after joinGroup");
 
   $assessment = $student->getAssessment();
   $student = $student->getPastAttempts();
