@@ -41,10 +41,18 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     header('Location: error.php');
     exit;
   }
+
+  error_log("Test -1.5");
+
   // process launch request
   $data_connector = LTI_Data_Connector::getDataConnector(TABLE_PREFIX, $db, DATA_CONNECTOR);
   $tool = new LTI_Tool_Provider('doLaunch', $data_connector);
+
+  error_log("Test -1.2");
+
   $tool->execute();
+
+  error_log("Test -1.1");
   exit;
 
   error_log("Test 0");
