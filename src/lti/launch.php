@@ -31,6 +31,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   session_name(SESSION_NAME);
   session_start();
 
+  error_log("Test -1");
+
   // initialise database
   $db = open_db();
   if ($db === FALSE) {
@@ -42,6 +44,8 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   $tool = new LTI_Tool_Provider('doLaunch', $data_connector);
   $tool->execute();
   exit;
+
+  error_log("Test 0");
 
   // process validated connection
   function doLaunch($tool_provider) {
@@ -78,7 +82,11 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
 
     $ok = ($resource_link_id && $username && ($tool_provider->user->isLearner() || $tool_provider->user->isStaff()));
 
+    error_log("Test 1");
+
     if ($ok) {
+
+      error_log("Test 2");
       // initialise session
       session_unset();
       $_SESSION['username'] = $username;
@@ -110,20 +118,24 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
         $_SESSION['qmwise_checksum'] = $customer['qmwise_checksum'];
       }
 
+      error_log("Test 3");
+
       $return_url = parse_url($_SESSION['lti_return_url']);
       parse_str($return_url['query'], $_SESSION['additional_params']);
-
+          error_log("Test 4");
       // set redirect URL
       if ($is_student) {
         $page = 'student_nav';
       } else {
         $page = 'staff';
       }
+
+          error_log("Test 5");
       $ok = get_root_url() . "../lti/{$page}.php";
     } else {
       $tool_provider->reason = 'Missing data';
     }
-
+    error_log("Test 6");
     return $ok;
 
   }
