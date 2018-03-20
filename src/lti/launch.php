@@ -59,12 +59,18 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
 
   // process validated connection
   function doLaunch($tool_provider) {
+
+    error_log("Test A");
+
     global $db;
     if (defined('QMWISE_URL')) {
       $prefix = QM_USERNAME_PREFIX;
     } else {
       $prefix = $tool_provider->consumer->custom['username_prefix'];
     }
+
+        error_log("Test B");
+
     $consumer_key = $tool_provider->consumer->getKey();
     $resource_link_id = $tool_provider->resource_link->getId();
     $context_id = $tool_provider->resource_link->lti_context_id;
