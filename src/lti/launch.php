@@ -28,6 +28,8 @@
 require_once('../resources/lib.php');
 require_once('../resources/LTI_Data_Connector_qmp.php');
 
+  error_log("Test -2");
+
   session_name(SESSION_NAME);
   session_start();
 
