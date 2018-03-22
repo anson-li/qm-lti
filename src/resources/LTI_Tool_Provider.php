@@ -219,15 +219,21 @@ class LTI_Tool_Provider {
  */
   public function execute() {
     # Initialise data connector
+    error_log("Starting execute 1 ");
     $this->data_connector = LTI_Data_Connector::getDataConnector($this->data_connector);
     # Set return URL if available
+    error_log("Starting execute 2 ");
     if (isset($_POST['launch_presentation_return_url'])) {
+      error_log("Starting execute 3 ");
       $this->return_url = $_POST['launch_presentation_return_url'];
     }
     # Perform action
+    error_log("Starting execute 4 ");
     if ($this->authenticate()) {
+      error_log("Starting execute 5 ");
       $this->doCallback();
     }
+    error_log("Starting execute 6 ");
     $this->result();
   }
 
