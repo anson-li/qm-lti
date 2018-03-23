@@ -426,6 +426,10 @@ EOD;
  */
   function perception_soapconnect() {
     require_once(  dirname(__FILE__) . '/PerceptionSoap.php');
+    error_log("Connecing to perceptionsoap");
+    error_log($_SESSION['qmwise_url']);
+    error_log($_SESSION['qmwise_client_id']);
+    error_log($_SESSION['qmwise_checksum']);
     $ok = TRUE;
     $soap_connection_id = perception_soapconnect_id();
     if (!isset($GLOBALS['perceptionsoap']) ||
@@ -437,6 +441,7 @@ EOD;
           'debug'              => DEBUG_MODE
         ));
       } catch(Exception $e) {
+        error_log("Failed to connect to perceptionsoap");
         log_error($e);
         $ok = FALSE;
       }
