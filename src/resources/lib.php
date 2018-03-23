@@ -426,10 +426,6 @@ EOD;
  */
   function perception_soapconnect() {
     require_once(  dirname(__FILE__) . '/PerceptionSoap.php');
-    error_log("Connecing to perceptionsoap");
-    error_log($_SESSION['qmwise_url']);
-    error_log($_SESSION['qmwise_client_id']);
-    error_log($_SESSION['qmwise_checksum']);
     $ok = TRUE;
     $soap_connection_id = perception_soapconnect_id();
     if (!isset($GLOBALS['perceptionsoap']) ||
@@ -441,7 +437,6 @@ EOD;
           'debug'              => DEBUG_MODE
         ));
       } catch(Exception $e) {
-        error_log("Failed to connect to perceptionsoap");
         log_error($e);
         $ok = FALSE;
       }
@@ -476,6 +471,7 @@ EOD;
       $admin_details = $GLOBALS['perceptionsoap'][$soap_connection_id]->create_administrator_with_password($username, $firstname, $lastname, $email, $profile);
       $admin_id = $admin_details->Administrator_ID;
     } catch (Exception $e) {
+      error_log("create_administrator_with_password");
       log_error($e);
     }
     return $admin_id;
@@ -493,6 +489,7 @@ EOD;
       $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_administrator($username);
       $url = $access->URL;
     } catch (Exception $e) {
+      error_log("get_access_administrator");
       log_error($e);
     }
     return $url;
@@ -508,6 +505,7 @@ EOD;
       $soap_connection_id = perception_soapconnect_id();
       $assessment = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_assessment($assessment_id);
     } catch (Exception $e) {
+      error_log("3");
       log_error($e);
       $assessment = FALSE;
     }
@@ -524,6 +522,7 @@ EOD;
       $soap_connection_id = perception_soapconnect_id();
       $assessments = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_assessment_list(0);
     } catch (Exception $e) {
+      error_log("4");
       log_error($e);
       $assessments = FALSE;
     }
@@ -540,6 +539,7 @@ EOD;
       $soap_connection_id = perception_soapconnect_id();
       $assessments = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_assessment_list_by_administrator($id, 0, 1);
     } catch (Exception $e) {
+      error_log("5");
       log_error($e);
       $assessments = FALSE;
     }
@@ -556,6 +556,7 @@ EOD;
       $soap_connection_id = perception_soapconnect_id();
       $response = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_assessment_result_list_by_participant($participant_name);
     } catch (Exception $e) {
+      error_log("6");
       log_error($e);
       return FALSE;
     }
@@ -581,6 +582,7 @@ EOD;
       $soap_connection_id = perception_soapconnect_id();
       $report_url = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_report_url($report_id);
     } catch (Exception $e) {
+      error_log("7");
       log_error($e);
       $report_url = FALSE;
     }
@@ -597,6 +599,7 @@ EOD;
       $soap_connection_id = perception_soapconnect_id();
       $assessment_results = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_assessment_result_list_by_assessment($assessment_id);
     } catch (Exception $e) {
+      error_log("8");
       log_error($e);
       $assessment_results = FALSE;
     }
@@ -619,6 +622,7 @@ EOD;
         $participant_list = array();
       }
     } catch (Exception $e) {
+      error_log("9");
       log_error($e);
       $participant_list = FALSE;
     }
@@ -636,6 +640,7 @@ EOD;
       $access = $GLOBALS['perceptionsoap'][$soap_connection_id]->get_access_assessment_notify($assessment_id, $participant_name, $consumer_key, $resource_link_id, $result_id, $notify_url, $home_url, $participant_id, $additional_params);
       $url = $access->URL;
     } catch (Exception $e) {
+      error_log("10");
       log_error($e);
       $url = FALSE;
     }
