@@ -826,7 +826,7 @@ class LTI_Tool_Consumer {
     if (!empty($key)) {
       $this->load($key, $autoEnable);
     } else {
-      $this->secret = LTI_Data_Connector::getRandomString(8);
+      $this->secret = LTI_Data_Connector::getRandomString(32);
     }
   }
 
