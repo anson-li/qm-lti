@@ -476,6 +476,12 @@ EOD;
       $admin_details = $GLOBALS['perceptionsoap'][$soap_connection_id]->create_administrator_with_password($username, $firstname, $lastname, $email, $profile);
       $admin_id = $admin_details->Administrator_ID;
     } catch (Exception $e) {
+      error_log("Capturing admin details");
+      error_log($username);
+      error_log($firstname);
+      error_log($lastname);
+      error_log($email);
+      error_log($profile);
       log_error($e);
     }
     return $admin_id;
