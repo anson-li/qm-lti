@@ -86,7 +86,7 @@ abstract class OAuthSignatureMethod {
     error_log("Checking OAuthSignatureMethod's operation");
     $built = $this->build_signature($request, $consumer, $token);
 
-    error_log(print_r($build, 1));
+    error_log(print_r($built, 1));
     error_log(print_r($signature, 1));
 
     // Check for zero length, although unlikely here
