@@ -2760,7 +2760,7 @@ class LTI_OAuthDataStore extends OAuthDataStore {
       $ok = $nonce->save();
     }
     if (!$ok) {
-      error_log($consumer);
+      error_log(print_r($consumer, 1));
       error_log($nonce);
       error_log($value);
       $this->tool_provider->reason = 'Invalid nonce.';
