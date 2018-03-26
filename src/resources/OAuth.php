@@ -86,8 +86,12 @@ abstract class OAuthSignatureMethod {
     error_log("Checking OAuthSignatureMethod's operation");
     $built = $this->build_signature($request, $consumer, $token);
 
+    error_log(print_r($request, 1));
+    error_log(print_r($consumer, 1));
+    error_log(print_r($token, 1));
     error_log(print_r($built, 1));
     error_log(print_r($signature, 1));
+    error_log("######");
 
     // Check for zero length, although unlikely here
     if (strlen($built) == 0 || strlen($signature) == 0) {
@@ -231,13 +235,6 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
 
     // Release the key resource
     openssl_free_key($publickeyid);
-
-
-    error_log("Checking OAuthSignatureMethod_RSA_SHA1's operation");
-    error_log(print_r($OK, 1));
-    error_log(print_r($base_string, 1));
-    error_log(print_r($decoded_sig, 1));
-    error_log(print_r($publickeyid, 1));
 
     return $ok == 1;
   }
@@ -672,13 +669,6 @@ class OAuthServer {
     $signature_method = $this->get_signature_method($request);
 
     $signature = $request->get_parameter('oauth_signature');
-
-    error_log("Printing signature details");
-    error_log(print_r($request, 1));
-    error_log(print_r($consumer, 1));
-    error_log(print_r($token, 1));
-    error_log(print_R($signature, 1));
-    error_log("Complete signature");
 
     $valid_sig = $signature_method->check_signature(
       $request,
