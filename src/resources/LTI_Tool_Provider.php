@@ -424,6 +424,7 @@ class LTI_Tool_Provider {
         $request = OAuthRequest::from_request();
         $res = $server->verify_request($request);
       } catch (Exception $e) {
+        error_log(print_r($e, 1));
         $this->isOK = FALSE;
         if (empty($this->reason)) {
           if ($this->debugMode) {
@@ -2757,18 +2758,11 @@ class LTI_OAuthDataStore extends OAuthDataStore {
     $nonce = new LTI_Consumer_Nonce($this->tool_provider->consumer, $value);
     $ok = !$nonce->load();
     if ($ok) {
-      error_log("Attempting to save now");
       $ok = $nonce->save();
-    } else {
-      error_log("Failed to load");
     }
     if (!$ok) {
-      error_log(print_r($consumer, 1));
-      error_log($nonce);
-      error_log($value);
       $this->tool_provider->reason = 'Invalid nonce.';
     }
-    return false;
     return !$ok;
   }
 
