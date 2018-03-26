@@ -28,12 +28,8 @@
 require_once('../resources/lib.php');
 require_once('../resources/LTI_Data_Connector_qmp.php');
 
-  error_log("Test -2");
-
   session_name(SESSION_NAME);
   session_start();
-
-  error_log("Test -1");
 
   // initialise database
   $db = open_db();
@@ -42,20 +38,12 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     exit;
   }
 
-  error_log("Test -1.5");
-
   // process launch request
   $data_connector = LTI_Data_Connector::getDataConnector(TABLE_PREFIX, $db, DATA_CONNECTOR);
   $tool = new LTI_Tool_Provider('doLaunch', $data_connector);
 
-  error_log("Test -1.2");
-
   $tool->execute();
-
-  error_log("Test -1.1");
   exit;
-
-  error_log("Test 0");
 
   // process validated connection
   function doLaunch($tool_provider) {

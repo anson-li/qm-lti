@@ -169,6 +169,12 @@ class PerceptionSoap {
     $admin->Administrator = new SoapVar($admin2, SOAP_ENC_OBJECT, NULL, NULL, 'Administrator', 'http://questionmark.com/QMWISe/');
     $params = new SoapVar($admin, SOAP_ENC_OBJECT, NULL, 'http://questionmark.com/QMWISe/');
     try {
+      error_log($username);
+      error_log($password);
+      error_log($email);
+      error_log($firstname);
+      error_log($lastname);
+      error_log(print_r($params));
       $administrator = $this->soap->CreateAdministratorWithPassword($params);
     } catch(SoapFault $e) {
       throw new QMWiseException($e);
