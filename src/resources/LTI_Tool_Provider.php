@@ -636,6 +636,10 @@ class LTI_Tool_Provider {
       # Persist changes to resource link
       $this->resource_link->save();
     }
+
+    error_log("Connecting to user");
+    error_log("Reason:");
+    error_log($this->reason);
     return $this->isOK;
   }
 
@@ -2758,7 +2762,6 @@ class LTI_OAuthDataStore extends OAuthDataStore {
     if (!$ok) {
       $this->tool_provider->reason = 'Invalid nonce.';
     }
-    return false;
     return !$ok;
   }
 
