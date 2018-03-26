@@ -2757,7 +2757,10 @@ class LTI_OAuthDataStore extends OAuthDataStore {
     $nonce = new LTI_Consumer_Nonce($this->tool_provider->consumer, $value);
     $ok = !$nonce->load();
     if ($ok) {
+      error_log("Attempting to save now");
       $ok = $nonce->save();
+    } else {
+      error_log("Failed to load");
     }
     if (!$ok) {
       error_log(print_r($consumer, 1));
