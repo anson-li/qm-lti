@@ -422,6 +422,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  * Save the consumer nonce in the database
  */
   public function Consumer_Nonce_save($nonce) {
+    error_log("Saving consumer nonce now");
     $value = $nonce->getValue();
     $expires = date('Y-m-d H:i:s', $nonce->expires);
     if (defined('CONSUMER_KEY')) {
@@ -438,6 +439,9 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $query->bindValue('expires', $expires, PDO::PARAM_STR);
     }
     $ok = $query->execute();
+    if (!ok) {
+      error_log(print_r($query->errorInfo()));
+    }
     return $ok;
   }
 
