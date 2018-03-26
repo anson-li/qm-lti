@@ -439,7 +439,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $query->bindValue('expires', $expires, PDO::PARAM_STR);
     }
     $ok = $query->execute();
-    if (!ok) {
+    if (!$ok) {
       error_log(print_r($query->errorInfo()));
     }
     return $ok;
