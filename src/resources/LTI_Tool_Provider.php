@@ -502,6 +502,11 @@ class LTI_Tool_Provider {
       }
     }
     if ($this->isOK) {
+      error_log("OK 1");
+    } else {
+      error_log("Not ok 1");
+    }
+    if ($this->isOK) {
       # Set the request context/resource link
       if (isset($_POST['resource_link_id'])) {
         $this->resource_link = new LTI_Resource_Link($this->consumer, trim($_POST['resource_link_id']));
@@ -630,6 +635,11 @@ class LTI_Tool_Provider {
         $doSaveConsumer = TRUE;
       }
     }
+    if ($this->isOK) {
+      error_log("OK 2");
+    } else {
+      error_log("Not ok 2");
+    }
     # Persist changes to consumer
     if ($doSaveConsumer) {
       $this->consumer->save();
@@ -640,7 +650,11 @@ class LTI_Tool_Provider {
       # Persist changes to resource link
       $this->resource_link->save();
     }
-    error_log($this->reason);
+    if ($this->isOK) {
+      error_log("OK 3");
+    } else {
+      error_log("Not ok 3");
+    }
     return $this->isOK;
   }
 
