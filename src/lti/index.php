@@ -59,6 +59,9 @@ require_once('../resources/lib.php');
 
   if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
     $action = $_POST['action'];
+    if (isset($_POST['reduced_checksum'])) {
+      $_SESSION['reduced_checksum'] = 1;
+    }
     if (isset($_POST['debug'])) {
       $customer['customer_id'] = $_POST['customer_id'];
     } else {
@@ -229,6 +232,14 @@ EOD;
           </div>
           <div class="col2">
             <input type="checkbox" id="debug" name="debug" value="1" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col1">
+            Use truncated checksum
+          </div>
+          <div class="col2">
+            <input type="checkbox" id="reduced_checksum" name="reduced_checksum" value="1" />
           </div>
         </div>
         <br><br>
