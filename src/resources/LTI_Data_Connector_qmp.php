@@ -70,7 +70,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
         $row = $query->fetch();
         $ok = ($row !== FALSE);
       } else {
-        error_log("No ok AA")
+        error_log("No ok AA");
       }
       if ($ok) {
         $consumer->secret = $row['secret'];
@@ -85,7 +85,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
         $consumer->created = strtotime($row['created']);
         $consumer->updated = strtotime($row['updated']);
       } else {
-        error_log("No ok Ab")
+        error_log("No ok Ab");
       }
     }
     return $ok;
