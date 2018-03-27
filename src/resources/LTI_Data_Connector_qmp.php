@@ -73,6 +73,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
         error_log("No ok AA");
       }
       if ($ok) {
+        error_log(print_r($row, 1));
         $consumer->secret = $row['secret'];
         $consumer->enabled = TRUE;
         $consumer->consumer_name = $row['consumer_name'];
