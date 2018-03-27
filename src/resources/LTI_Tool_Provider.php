@@ -226,7 +226,10 @@ class LTI_Tool_Provider {
     }
     # Perform action
     if ($this->authenticate()) {
+      error_log("authenticate properly");
       $this->doCallback();
+    } else {
+      error_log("Did not authenticate properly");
     }
     $this->result();
   }
