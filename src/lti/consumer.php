@@ -276,10 +276,10 @@ EOD;
               </div>
             </div>
             <div class="row">
-              <div class="col1">
+              <div class="col-sm-3">
                 Use truncated checksum
               </div>
-              <div class="col2">
+              <div class="col-sm-4">
                 <input type="checkbox" id="reduced_checksum" name="reduced_checksum" value="1" />
               </div>
             </div>
