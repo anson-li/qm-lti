@@ -64,6 +64,8 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
              'WHERE consumer_key = :key';
       $query = $this->db->prepare($sql);
       $key = $consumer->getKey();
+      error_log('Key: ' . $key);
+      error_log($sql);
       $query->bindValue('key', $key, PDO::PARAM_STR);
       $ok = $query->execute();
       if ($ok) {
