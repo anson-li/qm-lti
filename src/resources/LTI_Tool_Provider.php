@@ -640,6 +640,7 @@ class LTI_Tool_Provider {
       # Persist changes to resource link
       $this->resource_link->save();
     }
+    error_log($this->reason);
     return $this->isOK;
   }
 
