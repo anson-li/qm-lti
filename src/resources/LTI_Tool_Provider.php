@@ -381,6 +381,11 @@ class LTI_Tool_Provider {
     $doSaveConsumer = FALSE;
     # Check all required launch parameter constraints
     $this->isOK = isset($_POST['oauth_consumer_key']);
+    if ($this->isOK) {
+      error_log("OK a");
+    } else {
+      error_log("Not ok a");
+    }
     if (!$this->isOK) {
       $this->reason = 'Missing consumer key.';
     } else {
@@ -390,16 +395,31 @@ class LTI_Tool_Provider {
       }
     }
     if ($this->isOK) {
+      error_log("OK b");
+    } else {
+      error_log("Not ok b");
+    }
+    if ($this->isOK) {
       $this->isOK = isset($_POST['lti_version']) && in_array($_POST['lti_version'], $this->LTI_VERSIONS);
       if ($this->debugMode && !$this->isOK) {
         $this->reason = 'Invalid or missing lti_version parameter.';
       }
+    }
+    if ($this->isOK) {
+      error_log("OK c");
+    } else {
+      error_log("Not ok c");
     }
     if ($this->isOK && ($_POST['lti_message_type'] != 'ContentItemSelectionRequest')) {
       $this->isOK = isset($_POST['resource_link_id']) && (strlen(trim($_POST['resource_link_id'])) > 0);
       if ($this->debugMode && !$this->isOK) {
         $this->reason = 'Missing resource link ID.';
       }
+    }
+    if ($this->isOK) {
+      error_log("OK d");
+    } else {
+      error_log("Not ok d");
     }
     // Check consumer key
     if ($this->isOK) {
@@ -408,6 +428,11 @@ class LTI_Tool_Provider {
       if ($this->debugMode && !$this->isOK) {
         $this->reason = 'Invalid consumer key.';
       }
+    }
+    if ($this->isOK) {
+      error_log("OK e");
+    } else {
+      error_log("Not ok e");
     }
     $now = time();
     if ($this->isOK) {
@@ -446,6 +471,11 @@ class LTI_Tool_Provider {
         }
       }
     }
+    if ($this->isOK) {
+      error_log("OK f");
+    } else {
+      error_log("Not ok f");
+    }
     if ($this->isOK && $this->consumer->protected) {
       if (!is_null($this->consumer->consumer_guid)) {
         $this->isOK = isset($_POST['tool_consumer_instance_guid']) && !empty($_POST['tool_consumer_instance_guid']) &&
@@ -476,6 +506,11 @@ class LTI_Tool_Provider {
       } else if ($this->debugMode) {
         $this->reason = 'Tool consumer access is not yet available.';
       }
+    }
+    if ($this->isOK) {
+      error_log("OK g");
+    } else {
+      error_log("Not ok g");
     }
     # Validate launch parameters
     if ($this->isOK) {
