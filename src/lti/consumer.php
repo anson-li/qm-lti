@@ -82,8 +82,9 @@ require_once('../resources/lib.php');
   if (!isset($_SESSION['consumer_key'])) {
     if (isset($_SESSION['reduced_checksum'])) {
       $_SESSION['consumer_key'] = create_shortened_guid();
+    } else {
+      $_SESSION['consumer_key'] = create_guid();
     }
-    $_SESSION['consumer_key'] = create_guid();
     $_SESSION['secret'] = getRandomString(32);
   }
   if (!isset($consumer->secret)) {
