@@ -426,7 +426,7 @@ class LTI_Tool_Provider {
       $this->consumer = new LTI_Tool_Consumer($_POST['oauth_consumer_key'], $this->data_connector);
       error_log(print_r($this->consumer));
       error_log($_POST['oauth_consumer_key']);
-      // $this->isOK = !is_null($this->consumer->created);
+      $this->isOK = !is_null($this->consumer->created);
       if ($this->debugMode && !$this->isOK) {
         $this->reason = 'Invalid consumer key.';
       }

@@ -51,6 +51,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  */
   public function Tool_Consumer_load($consumer) {
     $ok = TRUE;
+    error_log("Grabbing consumer key now");
     if (defined('CONSUMER_KEY')) {
       $consumer->secret = CONSUMER_SECRET;
       $consumer->enabled = TRUE;
@@ -68,6 +69,8 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       if ($ok) {
         $row = $query->fetch();
         $ok = ($row !== FALSE);
+      } else {
+        error_log("No ok AA")
       }
       if ($ok) {
         $consumer->secret = $row['secret'];
@@ -81,6 +84,8 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
         }
         $consumer->created = strtotime($row['created']);
         $consumer->updated = strtotime($row['updated']);
+      } else {
+        error_log("No ok Ab")
       }
     }
     return $ok;
