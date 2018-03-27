@@ -275,6 +275,14 @@ EOD;
                 <input type="text" class="form-control" id="id_username_prefix" name="username_prefix" value="<?php echo htmlentities($consumer->custom['username_prefix']); ?>" size="10" maxlength="10" onchange="doChange(this);" />
               </div>
             </div>
+            <div class="row">
+              <div class="col1">
+                Use truncated checksum
+              </div>
+              <div class="col2">
+                <input type="checkbox" id="reduced_checksum" name="reduced_checksum" value="1" />
+              </div>
+            </div>
           </div>
           <br>
           <div class="panel-footer">
