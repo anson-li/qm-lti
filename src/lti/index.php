@@ -116,9 +116,70 @@ require_once('../resources/lib.php');
 
   $script = <<< EOD
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-  });
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+if (!String.prototype.trim) {
+ String.prototype.trim = function() {
+  return this.replace(/^\s+|\s+$/g,'');
+ }
+}
+
+function toggleShow(el) {
+  var el2 = document.getElementById(el.id.substring(0, el.id.length - 5));
+  try {
+    if (el2.type.toLowerCase() == 'password') {
+      el2.type = 'text';
+    } else {
+      el2.type = 'password';
+    }
+  } catch (err) {
+    var show_text = el2.getAttribute('type') == 'password';
+    var new_input = document.createElement('input');
+    with (new_input) {
+      id        = el2.id;
+      name      = el2.name;
+      value     = el2.value;
+      size      = el2.size;
+      className = el2.className;
+      type      = show_text ? 'text' : 'password';
+    }
+    el2.parentNode.replaceChild(new_input, el2);
+  }
+}
+
+function confirmDelete() {
+  return confirm('Are you sure you want to delete the LTI connector app for this repository?\\n\\nAll existing assessment links from Learning Management Systems configured with this connector will be removed.');
+}
+
+function checkForm() {
+  var el = document.getElementById('id_customer_id');
+  el.value = el.value.trim();
+  var ok = el.value.length > 0;
+  if (!ok) {
+    alert('Please enter a Customer ID or URL');
+    el.focus();
+  } else {
+    el = document.getElementById('id_qmwise_client_id');
+    el.value = el.value.trim();
+    var ok = el.value.length > 0;
+    if (!ok) {
+      alert('Please enter a QMWISe User Name');
+      el.focus();
+    }
+  }
+  if (ok) {
+    el = document.getElementById('id_qmwise_checksum');
+    el.value = el.value.trim();
+    var ok = el.value.length > 0;
+    if (!ok) {
+      alert('Please enter a QMWISe Password');
+      el.focus();
+    }
+  }
+  return ok;
+}
 </script>
 EOD;
 
