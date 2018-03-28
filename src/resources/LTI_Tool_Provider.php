@@ -226,7 +226,10 @@ class LTI_Tool_Provider {
     }
     # Perform action
     if ($this->authenticate()) {
+      error_log("authenticate properly");
       $this->doCallback();
+    } else {
+      error_log("Did not authenticate properly");
     }
     $this->result();
   }
@@ -378,6 +381,11 @@ class LTI_Tool_Provider {
     $doSaveConsumer = FALSE;
     # Check all required launch parameter constraints
     $this->isOK = isset($_POST['oauth_consumer_key']);
+    if ($this->isOK) {
+      error_log("OK a");
+    } else {
+      error_log("Not ok a");
+    }
     if (!$this->isOK) {
       $this->reason = 'Missing consumer key.';
     } else {
@@ -387,10 +395,20 @@ class LTI_Tool_Provider {
       }
     }
     if ($this->isOK) {
+      error_log("OK b");
+    } else {
+      error_log("Not ok b");
+    }
+    if ($this->isOK) {
       $this->isOK = isset($_POST['lti_version']) && in_array($_POST['lti_version'], $this->LTI_VERSIONS);
       if ($this->debugMode && !$this->isOK) {
         $this->reason = 'Invalid or missing lti_version parameter.';
       }
+    }
+    if ($this->isOK) {
+      error_log("OK c");
+    } else {
+      error_log("Not ok c");
     }
     if ($this->isOK && ($_POST['lti_message_type'] != 'ContentItemSelectionRequest')) {
       $this->isOK = isset($_POST['resource_link_id']) && (strlen(trim($_POST['resource_link_id'])) > 0);
@@ -398,13 +416,25 @@ class LTI_Tool_Provider {
         $this->reason = 'Missing resource link ID.';
       }
     }
+    if ($this->isOK) {
+      error_log("OK d");
+    } else {
+      error_log("Not ok d");
+    }
     // Check consumer key
     if ($this->isOK) {
       $this->consumer = new LTI_Tool_Consumer($_POST['oauth_consumer_key'], $this->data_connector);
+      error_log(print_r($this->consumer));
+      error_log($_POST['oauth_consumer_key']);
       $this->isOK = !is_null($this->consumer->created);
       if ($this->debugMode && !$this->isOK) {
         $this->reason = 'Invalid consumer key.';
       }
+    }
+    if ($this->isOK) {
+      error_log("OK e");
+    } else {
+      error_log("Not ok e");
     }
     $now = time();
     if ($this->isOK) {
@@ -424,6 +454,7 @@ class LTI_Tool_Provider {
         $request = OAuthRequest::from_request();
         $res = $server->verify_request($request);
       } catch (Exception $e) {
+        error_log(print_r($e, 1));
         $this->isOK = FALSE;
         if (empty($this->reason)) {
           if ($this->debugMode) {
@@ -441,6 +472,11 @@ class LTI_Tool_Provider {
           }
         }
       }
+    }
+    if ($this->isOK) {
+      error_log("OK f");
+    } else {
+      error_log("Not ok f");
     }
     if ($this->isOK && $this->consumer->protected) {
       if (!is_null($this->consumer->consumer_guid)) {
@@ -473,6 +509,11 @@ class LTI_Tool_Provider {
         $this->reason = 'Tool consumer access is not yet available.';
       }
     }
+    if ($this->isOK) {
+      error_log("OK g");
+    } else {
+      error_log("Not ok g");
+    }
     # Validate launch parameters
     if ($this->isOK) {
       $invalid_parameters = array();
@@ -496,6 +537,11 @@ class LTI_Tool_Provider {
           $this->reason = 'Invalid parameter(s): ' . implode(', ', $invalid_parameters) . '.';
         }
       }
+    }
+    if ($this->isOK) {
+      error_log("OK 1");
+    } else {
+      error_log("Not ok 1");
     }
     if ($this->isOK) {
       # Set the request context/resource link
@@ -626,6 +672,11 @@ class LTI_Tool_Provider {
         $doSaveConsumer = TRUE;
       }
     }
+    if ($this->isOK) {
+      error_log("OK 2");
+    } else {
+      error_log("Not ok 2");
+    }
     # Persist changes to consumer
     if ($doSaveConsumer) {
       $this->consumer->save();
@@ -635,6 +686,11 @@ class LTI_Tool_Provider {
       $this->isOK = $this->checkForShare();
       # Persist changes to resource link
       $this->resource_link->save();
+    }
+    if ($this->isOK) {
+      error_log("OK 3");
+    } else {
+      error_log("Not ok 3");
     }
     return $this->isOK;
   }

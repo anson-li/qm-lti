@@ -51,6 +51,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
  */
   public function Tool_Consumer_load($consumer) {
     $ok = TRUE;
+    error_log("Grabbing consumer key now");
     if (defined('CONSUMER_KEY')) {
       $consumer->secret = CONSUMER_SECRET;
       $consumer->enabled = TRUE;
@@ -63,13 +64,18 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
              'WHERE consumer_key = :key';
       $query = $this->db->prepare($sql);
       $key = $consumer->getKey();
+      error_log('Key: ' . $key);
+      error_log($sql);
       $query->bindValue('key', $key, PDO::PARAM_STR);
       $ok = $query->execute();
       if ($ok) {
         $row = $query->fetch();
         $ok = ($row !== FALSE);
+      } else {
+        error_log("No ok AA");
       }
       if ($ok) {
+        error_log(print_r($row, 1));
         $consumer->secret = $row['secret'];
         $consumer->enabled = TRUE;
         $consumer->consumer_name = $row['consumer_name'];
@@ -81,6 +87,8 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
         }
         $consumer->created = strtotime($row['created']);
         $consumer->updated = strtotime($row['updated']);
+      } else {
+        error_log("No ok Ab");
       }
     }
     return $ok;
@@ -438,6 +446,9 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $query->bindValue('expires', $expires, PDO::PARAM_STR);
     }
     $ok = $query->execute();
+    if (!$ok) {
+      error_log(print_r($query->errorInfo()));
+    }
     return $ok;
   }
 
@@ -719,6 +730,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $row = $query->fetch();
       $result_id = $row['result_id'];
     } else {
+      error_log(print_r($query->errorInfo(), true));
       return FALSE;
     }
     return $result_id;
