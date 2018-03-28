@@ -178,9 +178,9 @@ EOD;
         <div class="row">
           <div class="col1">
               Use reduced checksum
-            <div id='rowchecksum' data-toggle="tooltip" title="Some learning management systems use a version of the LTI that requires the checksum to be reduced. Enabling this feature could lower the security of your LTI connector.">
-              <i class="fa fa-question-circle"></i>
-            </div>
+            <a href="#" data-toggle="tooltip" title="Some learning management systems use a version of the LTI that requires the checksum to be reduced. Enabling this feature could lower the security of your LTI connector.">
+              <span class="glyphicon glyphicon-question-sign"></span>
+            </a>
           </div>
           <div class="col2">
             <input type="checkbox" id="reduced_checksum" name="reduced_checksum" value="1" />
