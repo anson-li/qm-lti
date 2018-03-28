@@ -1470,7 +1470,7 @@ EOD;
  */
   function create_shortened_guid() {
     $md5 = strtoupper(md5(uniqid(rand(), true)));
-    $guid = '{' . substr($md5, 0, 8) . '-' . substr($md5, 8, 4) . '}';
+    $guid = '{' . substr($md5, 0, 8) . '-' . substr($md5, 8, 8) . '}';
     return $guid;
   }
 
