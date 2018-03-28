@@ -236,7 +236,9 @@ EOD;
         </div>
         <div class="row">
           <div class="col1">
-            Use truncated checksum
+            <a href="#" data-toggle="tooltip" title="Some learning management systems use an older version of the LTI that requires the checksum to be reduced. Enabling this feature could lower the security of your LTI connector.">
+              Use reduced checksum
+            </a>
           </div>
           <div class="col2">
             <input type="checkbox" id="reduced_checksum" name="reduced_checksum" value="1" />
