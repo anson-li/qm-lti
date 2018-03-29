@@ -49,7 +49,9 @@ require_once('../resources/lib.php');
     $action = $_POST['action'];
     $consumer = loadConsumer($db, $_SESSION['customer_id'], $_SESSION['consumer_key']);
     $consumer->secret = $_POST['secret'];
-    $consumer->consumer_name = $_POST['consumer_name'];
+    if ($_POST['consumer_name'] != null) {
+      $consumer->consumer_name = $_POST['consumer_name'];
+    }
     $consumer->custom['username_prefix'] = $_POST['username_prefix'];
     if ($action == 'Cancel') {
       header('Location: index.php');
