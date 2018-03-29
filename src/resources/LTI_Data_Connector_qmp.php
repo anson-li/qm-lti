@@ -89,7 +89,7 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 /*
  *    Save the tool consumer to the database
  */
-  public function Tool_Consumer_save($consumer, $changeConsumerName) {
+  public function Tool_Consumer_save($consumer, $changeConsumerName = TRUE) {
     $ok = TRUE;
     if (defined('CONSUMER_KEY')) {
       $consumer->updated = time();
