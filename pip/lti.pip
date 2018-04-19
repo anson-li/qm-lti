@@ -26,7 +26,7 @@ instanceid=instanceid
 sesskey=sesskey
 
 [Security]
-; HOSTS=qm-lti.azurewebsites.net lti.tools *.questionmark.com
+HOSTS=qm-lti.azurewebsites.net qm-lti-dev-2.azurewebsites.net *.questionmark.com *.questionmark.eu
 
 [Settings]
 HEADER=Content-Type: application/x-www-form-urlencoded
