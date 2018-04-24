@@ -278,6 +278,18 @@ CREATE TABLE [dbo].[{$tc_users_table_name}] (
 EOD;
         $db->exec($sql);
       }
+      $sessions_table_name = TABLE_PREFIX . LTI_Data_Connector::SESSION_TABLE_NAME;
+      if ($ok && !sqlsrv_table_exists($db, $sessions_table_name)) {
+        $sql = <<< EOD
+CREATE TABLE [dbo].[{$sessions_table_name}] (
+  [id] VARCHAR(50) NOT NULL,
+  [access] INT,
+  [data] VARCHAR(255),
+ CONSTRAINT [PK_{$sessions_table_name}] PRIMARY KEY (id))
+)
+EOD;
+        $db->exec($sql);
+      }
     } else if (($db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql') || ($db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'sqlite')) {
       if (!defined('CONSUMER_KEY')) {
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . 'lti_customer ' .
@@ -384,6 +396,14 @@ EOD;
                ' updated DATETIME,' .
                ' lti_result_sourcedid VARCHAR(255), ' .
                'PRIMARY KEY (consumer_key, context_id, user_id))';
+        $ok = $db->exec($sql) !== FALSE;
+      }
+      if ($ok) {
+        $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
+        '(id VARCHAR(50) NOT NULL,' .
+               ' access INT,' .
+               ' data VARCHAR(255),' .
+               'PRIMARY KEY (id))';
         $ok = $db->exec($sql) !== FALSE;
       }
     } else {
