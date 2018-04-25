@@ -24,17 +24,21 @@
 */
 
 require_once('../resources/lib.php');
-
-  session_name(SESSION_NAME);
-  session_start();
+require_once('../resources/LTI_Session_Handler.php');
 
   // initialise database
   $db = open_db();
   if ($db === FALSE) {
-    $_SESSION['frame'] = TRUE;
     header('Location: error.php');
     exit;
-  } else if (!isset($_SESSION['customer_id']) && !isset($_POST['customer_id'])) {
+  }
+
+  $sessionHandler = new LTI_Session_Handler($db, TABLE_PREFIX);
+  $sessionHandler.process_session_handlers();
+  session_name(SESSION_NAME);
+  session_start();
+
+  if (!isset($_SESSION['customer_id']) && !isset($_POST['customer_id'])) {
     $_SESSION['error'] = 'Your session has expired.';
     header('Location: error.php');
     exit;

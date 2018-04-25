@@ -30,13 +30,17 @@ if (isset($_POST['oauth_consumer_key'])) {
 }
 
 require_once('../resources/lib.php');
-
-  session_name(SESSION_NAME);
-  session_start();
+require_once('../resources/LTI_Session_Handler.php');
 
 // initialise database
   $db = open_db();
   $ok = ($db !== FALSE);
+
+  $sessionHandler = new LTI_Session_Handler($db, TABLE_PREFIX);
+  $sessionHandler.process_session_handlers();
+  session_name(SESSION_NAME);
+  session_start();
+
   if (!$ok) {
     $_SESSION['error'] = 'Unable to open database.';
   } else {
@@ -55,7 +59,7 @@ require_once('../resources/lib.php');
     exit;
   }
 
-  if ($_SESSION['message'] !== NULL && $_SESSION['alert'] !== NULL) {
+  if (array_key_exists('message', $_SESSION) && array_key_exists('alert', $_SESSION)) {
     $message = $_SESSION['message'];
     $alert = $_SESSION['alert'];
     $_SESSION['message'] = NULL;
