@@ -37,7 +37,7 @@ require_once('../resources/LTI_Session_Handler.php');
   $ok = ($db !== FALSE);
 
   $sessionHandler = new LTI_Session_Handler($db, TABLE_PREFIX);
-  $sessionHandler.process_session_handlers();
+  $sessionHandler->process_session_handlers();
   session_name(SESSION_NAME);
   session_start();
 
