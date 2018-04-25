@@ -36,10 +36,12 @@ class LTI_Session_Handler implements SessionHandlerInterface {
            'WHERE (id = :id)';
     $query = $this->db->prepare($sql);
     $query->bindValue('id', $id, PDO::PARAM_STR);
-    $ok = $query->execute();
-    if ($ok) {
+    if ($query->execute()) {
       $row = $query->fetch();
       $data = $row['data'];
+      if (is_null($data)) {
+        return '';
+      }
     } else {
       return '';
     }
