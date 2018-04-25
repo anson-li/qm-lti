@@ -62,6 +62,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
     $numColumns = $query->fetchColumn();
     error_log($numColumns);
     if ($numColumns === 0) {
+      error_log("***herer***");
       $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
              '(id, access, data) ' .
              'VALUES (:id, :access, :data)';
