@@ -79,7 +79,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
     }
     $ok = $query->execute();
     if (!$ok) {
-      print_r($query->errorInfo(), 1);
+      error_log(print_r($query->errorInfo(), 1));
     }
     return $ok;
   }
