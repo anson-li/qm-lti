@@ -20,12 +20,12 @@ class LTI_Session_Handler {
     if ($this->db === false) {
       return false;
     }
-    session_set_save_handler('_open',
-                             '_close',
-                             '_read',
-                             '_write',
-                             '_destroy',
-                             '_clean');
+    session_set_save_handler(array('LTI_Session_Handler', '_open'),
+                             array('LTI_Session_Handler', '_close'),
+                             array('LTI_Session_Handler', '_read'),
+                             array('LTI_Session_Handler', '_write'),
+                             array('LTI_Session_Handler', '_destroy'),
+                             array('LTI_Session_Handler', '_clean'));
   }
 
   /*
