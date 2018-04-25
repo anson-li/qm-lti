@@ -66,7 +66,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
              'VALUES (:id, :access, :data)';
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
-      $query->bindValue('access', $now, PDO::PARAM_INT);
+      $query->bindValue('access', $now, PDO::PARAM_STR);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     } else {
       $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
@@ -74,7 +74,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
            'WHERE id = :id';
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
-      $query->bindValue('access', $now, PDO::PARAM_INT);
+      $query->bindValue('access', $now, PDO::PARAM_STR);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     }
     $ok = $query->execute();
@@ -104,7 +104,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (access < :old)';
     $query = $this->db->prepare($sql);
-    $query->bindValue('old', $old, PDO::PARAM_INT);
+    $query->bindValue('old', $old, PDO::PARAM_STR);
     $ok = $query->execute();
     return $ok;
   }
