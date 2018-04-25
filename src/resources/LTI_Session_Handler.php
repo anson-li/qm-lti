@@ -68,11 +68,11 @@ class LTI_Session_Handler implements SessionHandlerInterface {
       $query->bindValue('data', $data, PDO::PARAM_STR);
     } else {
       $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
-           'SET data = :data, access = :access' .
+           'SET data = :data, access = 0' .
            'WHERE id = :id';
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
-      $query->bindValue('access', $now, PDO::PARAM_INT);
+      //$query->bindValue('access', $now, PDO::PARAM_INT);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     }
     $ok = $query->execute();
