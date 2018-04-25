@@ -60,6 +60,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
     $query->bindValue('id', $id, PDO::PARAM_STR);
     $ok = $query->execute();
     $numColumns = $query->fetchColumn();
+    error_log($numColumns);
     if ($numColumns === 0) {
       $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
              '(id, access, data) ' .
