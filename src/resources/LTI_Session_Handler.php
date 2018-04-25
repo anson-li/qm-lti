@@ -73,9 +73,10 @@ class LTI_Session_Handler implements SessionHandlerInterface {
            'SET data = :data, access = :access' .
            'WHERE id = :id';
       error_log(print_r($sql, 1));
+      error_log(print_r($time(), 1));
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
-      $query->bindValue('access', $now, PDO::PARAM_STR);
+      $query->bindValue('access', '24040404', PDO::PARAM_STR);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     }
     $ok = $query->execute();
