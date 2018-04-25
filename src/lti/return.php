@@ -27,9 +27,6 @@
 
 require_once('../resources/lib.php');
 
-  session_name(SESSION_NAME);
-  session_start();
-
   $script = <<< EOD
 <script type="text/javascript">
 <!--

@@ -26,9 +26,13 @@
 */
 
 require_once('../resources/lib.php');
+require_once('../resources/LTI_Session_Handler.php');
 
+  $sessionHandler = new LTI_Session_Handler($db, TABLE_PREFIX);
+  session_set_save_handler($sessionHandler, TRUE);
   session_name(SESSION_NAME);
   session_start();
+
 
   if (isset($_SESSION['error'])) {
     $error = $_SESSION['error'];

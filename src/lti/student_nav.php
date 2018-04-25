@@ -29,7 +29,17 @@
 require_once('../resources/lib.php');
 require_once('model/student.php');
 require_once('../resources/LTI_Data_Connector_qmp.php');
+require_once('../resources/LTI_Session_Handler.php');
 
+  // initialise database
+  $db = open_db();
+  if ($db === FALSE) {
+    header('Location: error.php');
+    exit;
+  }
+
+  $sessionHandler = new LTI_Session_Handler($db, TABLE_PREFIX);
+  session_set_save_handler($sessionHandler, TRUE);
   session_name(SESSION_NAME);
   session_start();
 

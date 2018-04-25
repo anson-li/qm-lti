@@ -80,7 +80,7 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
   $outcome->setValue($score);
   $outcome->setResultID($report_id);
   $outcome->type = 'percentage';
-  
+
   if ($is_saved) {
     if ($resource_link->hasOutcomesService()) {
       // Save result

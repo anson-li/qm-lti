@@ -27,9 +27,7 @@
 
 require_once('../resources/lib.php');
 require_once('../resources/LTI_Data_Connector_qmp.php');
-
-  session_name(SESSION_NAME);
-  session_start();
+require_once('../resources/LTI_Session_Handler.php');
 
   // initialise database
   $db = open_db();
@@ -37,6 +35,12 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     header('Location: error.php');
     exit;
   }
+
+  $sessionHandler = new LTI_Session_Handler($db, TABLE_PREFIX);
+  session_set_save_handler($sessionHandler, TRUE);
+  session_name(SESSION_NAME);
+  session_start();
+
   // process launch request
   $data_connector = LTI_Data_Connector::getDataConnector(TABLE_PREFIX, $db, DATA_CONNECTOR);
   $tool = new LTI_Tool_Provider('doLaunch', $data_connector);
