@@ -284,7 +284,7 @@ EOD;
 CREATE TABLE [dbo].[{$sessions_table_name}] (
   [id] VARCHAR(50) NOT NULL,
   [access] INT,
-  [data] VARCHAR(255),
+  [data] VARCHAR(MAX),
  CONSTRAINT [PK_{$sessions_table_name}] PRIMARY KEY (id))
 )
 EOD;
@@ -402,7 +402,7 @@ EOD;
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
         '(id VARCHAR(50) NOT NULL,' .
                ' access INT,' .
-               ' data VARCHAR(255),' .
+               ' data VARCHAR(MAX),' .
                'PRIMARY KEY (id))';
         $ok = $db->exec($sql) !== FALSE;
       }
