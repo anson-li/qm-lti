@@ -72,6 +72,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
       $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'SET data = :data, access = :access' .
            'WHERE id = :id';
+      error_log(print_r($sql, 1));
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
       $query->bindValue('access', $now, PDO::PARAM_STR);
