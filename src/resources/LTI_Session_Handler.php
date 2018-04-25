@@ -1,6 +1,6 @@
 <?php
 
-class LTI_Session_Handler {
+class LTI_Session_Handler implements SessionHandlerInterface {
 
   private $dbTableNamePrefix = '';
   private $db = false;
@@ -11,21 +11,6 @@ class LTI_Session_Handler {
   function __construct($db, $dbTableNamePrefix = '') {
     $this->db = $db;
     $this->dbTableNamePrefix = $dbTableNamePrefix;
-  }
-
- /*
-  * Setup session handler details to work through DB
-  */
-  public function process_session_handlers() {
-    if ($this->db === false) {
-      return false;
-    }
-    session_set_save_handler(array('LTI_Session_Handler', '_open'),
-                             array('LTI_Session_Handler', '_close'),
-                             array('LTI_Session_Handler', '_read'),
-                             array('LTI_Session_Handler', '_write'),
-                             array('LTI_Session_Handler', '_destroy'),
-                             array('LTI_Session_Handler', '_clean'));
   }
 
   /*
@@ -64,7 +49,7 @@ class LTI_Session_Handler {
   /*
    * Write the session value.
    */
-  function _write($id, $data) {
+  static function _write($id, $data) {
     $sql = 'SELECT count(*) ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (id = :id)';
