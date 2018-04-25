@@ -2801,6 +2801,10 @@ abstract class LTI_Data_Connector {
  */
   const CONSUMER_TABLE_NAME = 'lti_consumer';
 /**
+ * Default name for database table used to store tool consumers.
+ */
+  const SESSION_TABLE_NAME = 'lti_sessions';
+/**
  * Default name for database table used to store resource links.
  */
   const RESOURCE_LINK_TABLE_NAME = 'lti_context';
