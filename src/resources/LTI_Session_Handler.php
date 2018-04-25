@@ -41,7 +41,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
       $row = $query->fetch();
       $data = $row['data'];
     } else {
-      return FALSE;
+      return '';
     }
     return $data;
   }
