@@ -55,63 +55,11 @@ require_once('../resources/lib.php');
     exit;
   }
 
-  $customer = array();
-
-  if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
-    $action = $_POST['action'];
-    if (isset($_POST['reduced_checksum'])) {
-      $_SESSION['reduced_checksum'] = 1;
-    }
-    if (isset($_POST['debug'])) {
-      $customer['customer_id'] = $_POST['customer_id'];
-    } else {
-      $customer['customer_id'] = getCustomerId($_POST['customer_id']);
-    }
-    $customer['qmwise_client_id'] = $_POST['qmwise_client_id'];
-    $customer['qmwise_checksum'] = $_POST['qmwise_checksum'];
-    $ok = checkCustomer($customer);
-    if (!$ok) {
-      $message = 'Unable to confirm QMWISe credentials, please check data and try again.';
-      $alert = '<p class="alert alert-danger col-md-6">';
-    } else if ($action == 'Delete') {
-      if (deleteCustomer($db, $customer)) {
-        $message = 'SUCCESS: Access to the LTI Connector App has been removed.';
-        $alert = '<p class="alert alert-success col-md-6">';
-        $customer = array();
-        $customer['customer_id'] = '';
-        $customer['qmwise_client_id'] = '';
-        $customer['qmwise_checksum'] = '';
-      } else {
-        $message = 'Unable to remove customer, please check data and try again.';
-        $alert = '<p class="alert alert-danger col-md-6">';
-      }
-    } else if ($action != 'Configure') {
-      $message = 'Request not recognised.';
-      $alert = '<p class="alert alert-danger col-md-6">';
-    } else {
-      $ok = saveCustomer($db, $customer);
-      if (!$ok) {
-        $message = 'Unable to save details, please check data and try again.';
-        $alert = '<p class="alert alert-danger col-md-6">';
-      } else {
-        if (!isset($_SESSION['customer_id']) || ($_SESSION['customer_id'] != $customer['customer_id'])) {
-          $_SESSION['customer_id'] = $customer['customer_id'];
-          unset($_SESSION['lti_consumer_key']);
-        }
-        header('Location: consumer.php');
-        exit;
-      }
-    }
-  } else if (isset($_GET['customer_id'])) {
-    $customer['customer_id'] = $_GET['customer_id'];
-    unset($_SESSION['customer_id']);
-    unset($_SESSION['lti_consumer_key']);
-  } else if (isset($_SESSION['customer_id'])) {
-    $customer = loadCustomer($db, $_SESSION['customer_id']);
-  } else {
-    $customer['customer_id'] = '';
-    $customer['qmwise_client_id'] = '';
-    $customer['qmwise_checksum'] = '';
+  if ($_SESSION['message'] !== NULL && $_SESSION['alert'] !== NULL) {
+    $message = $_SESSION['message'];
+    $alert = $_SESSION['alert'];
+    $_SESSION['message'] = NULL;
+    $_SESSION['alert'] = NULL;
   }
 
   $script = <<< EOD
@@ -197,13 +145,13 @@ EOD;
     echo "        <p style=\"clear: left;\">&nbsp;</p>\n";
   }
 ?>
-        <form action="index.php" method="POST" onsubmit="return checkForm()">
+        <form action="consumer.php" method="POST" onsubmit="return checkForm()">
         <div class="row">
           <div class="col1">
             Questionmark Customer ID (or URL): *
           </div>
           <div class="col2">
-            <input type="text" class="form-control" id="id_customer_id" name="customer_id" value="<?php echo htmlentities($customer['customer_id']); ?>" size="75" />
+            <input type="text" class="form-control" id="id_customer_id" name="customer_id" size="75" />
           </div>
         </div>
         <div class="row">
@@ -211,7 +159,7 @@ EOD;
             QMWISe User Name: *
           </div>
           <div class="col2">
-            <input type="text" class="form-control" id="id_qmwise_client_id" name="qmwise_client_id" value="<?php echo htmlentities($customer['qmwise_client_id']); ?>" size="20" maxlength="20" />
+            <input type="text" class="form-control" id="id_qmwise_client_id" name="qmwise_client_id" size="20" maxlength="20" />
           </div>
         </div>
         <div class="row">
@@ -219,7 +167,7 @@ EOD;
             QMWISe Password: *
           </div>
           <div class="col2">
-           <input type="password" class="form-control" id="id_qmwise_checksum" name="qmwise_checksum" value="<?php echo htmlentities($customer['qmwise_checksum']); ?>" size="50" maxlength="32" />
+           <input type="password" class="form-control" id="id_qmwise_checksum" name="qmwise_checksum" size="50" maxlength="32" />
           </div>
         </div>
         <div class="row">

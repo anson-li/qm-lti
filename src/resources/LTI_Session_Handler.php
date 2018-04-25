@@ -43,14 +43,33 @@ class LTI_Session_Handler {
    * Read the session value, given the ID.
    */
   function _read($id) {
-    return '';
+    $sql = 'SELECT data ' .
+           'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
+           'WHERE (id = :id)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('id', $id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    if ($ok) {
+      $row = $query->fetch();
+      $data = $row['data'];
+    } else {
+      return FALSE;
+    }
+    return $data;
   }
 
   /*
    * Write the session value.
    */
   function _write($id, $data) {
-    if (is_null($consumer->created)) {
+    $sql = 'SELECT count(*) ' .
+           'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
+           'WHERE (id = :id)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('id', $id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    $numColumns = $query->fetchColumn();
+    if ($numColumns === 0) {
       $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
              '(id, access, data) ' .
              'VALUES (:id, :access, :data)';
@@ -71,12 +90,29 @@ class LTI_Session_Handler {
     return $ok;
   }
 
-  function _destroy() {
-    return true;
+  /*
+   * Destroy session data given ID
+   */
+  function _destroy($id) {
+    $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
+           'WHERE (id = :id)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('id', $id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    return $ok;
   }
 
-  function _clean() {
-    return true;
+  /*
+   * Remove any expired sessions
+   */
+  function _clean($max) {
+    $old = time() - $max;
+    $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
+           'WHERE (access < :old)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('old', $old, PDO::PARAM_STR);
+    $ok = $query->execute();
+    return $ok;
   }
 
 }

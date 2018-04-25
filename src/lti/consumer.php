@@ -34,52 +34,91 @@ require_once('../resources/lib.php');
     $_SESSION['frame'] = TRUE;
     header('Location: error.php');
     exit;
-  } else if (!isset($_SESSION['customer_id'])) {
-    // $_SESSION['frame'] = TRUE;
+  } else if (!isset($_SESSION['customer_id']) && !isset($_POST['customer_id'])) {
     $_SESSION['error'] = 'Your session has expired.';
     header('Location: error.php');
     exit;
   }
 
-  $url =  substr( get_root_url(), 0, -14 );
+  $url = get_root_url();
   if (isset($_GET['consumer_key'])) {
     $_SESSION['consumer_key'] = $_GET['consumer_key'];
   }
+
   if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
     $action = $_POST['action'];
-    $consumer = loadConsumer($db, $_SESSION['customer_id'], $_SESSION['consumer_key']);
-    $consumer->secret = $_POST['secret'];
-    $consumer->consumer_name = $_POST['consumer_name'];
-    $consumer->custom['username_prefix'] = $_POST['username_prefix'];
-    if ($action == 'Cancel') {
-      header('Location: index.php');
-      exit;
-    } else if ($action == 'Delete Profile') {
-      if ($consumer->delete()) {
-        $message = '*** SUCCESS *** Consumer profile has been deleted.';
-        unset($_SESSION['consumer_key']);
-        $consumer->initialise();
-      } else {
-        $message = '*** ERROR *** Unable to delete Consumer profile, please try again.';
-      }
-    } else if ($action == 'Apply') {
-      $ok = $consumer->save();
-      if (!$ok) {
-        $message = '*** ERROR *** Unable to save details, please check data and try again.';
-      }
-    } else {
-      $message = '*** ERROR *** Request not recognised.';
+    switch ($action) {
+      case 'Delete':
+        $customer = validateCustomerOnLoad();
+        if (deleteCustomer($db, $customer)) {
+          $_SESSION['message'] = 'SUCCESS: Access to the LTI Connector App has been removed.';
+          $_SESSION['alert'] = '<p class="alert alert-success col-md-6">';
+          header('Location: index.php');
+          exit;
+        } else {
+          $_SESSION['message'] = 'Unable to remove customer, please check data and try again.';
+          $_SESSION['alert'] = '<p class="alert alert-danger col-md-6">';
+          header('Location: index.php');
+          exit;
+        }
+        break;
+      case 'Configure':
+        $customer = validateCustomerOnLoad();
+        $ok = saveCustomer($db, $customer);
+        if (!$ok) {
+          $_SESSION['message'] = 'Unable to save details, please check data and try again.';
+          $_SESSION['alert'] = '<p class="alert alert-danger col-md-6">';
+          header('Location: index.php');
+          exit;
+        } else {
+          if (!isset($_SESSION['customer_id']) || ($_SESSION['customer_id'] != $customer['customer_id'])) {
+            $_SESSION['customer_id'] = $customer['customer_id'];
+            unset($_SESSION['lti_consumer_key']);
+          }
+        }
+        break;
+      case 'Cancel':
+        header('Location: index.php');
+        break;
+      case 'Delete Profile':
+        $consumer = generateConsumer($db);
+        if ($consumer->delete()) {
+          $message = '*** SUCCESS *** Consumer profile has been deleted.';
+          unset($_SESSION['consumer_key']);
+          $consumer->initialise();
+        } else {
+          $message = '*** ERROR *** Unable to delete Consumer profile, please try again.';
+        }
+        break;
+      case 'Apply':
+        $consumer = generateConsumer($db);
+        $ok = $consumer->save();
+        if (!$ok) {
+         $message = '*** ERROR *** Unable to save details, please check data and try again.';
+        }
+        break;
+      default:
+        $_SESSION['message'] = 'Unable to process request, please try again.';
+        $_SESSION['alert'] = '<p class="alert alert-danger col-md-6">';
+        header('Location: index.php');
+        break;
     }
-  } else if (isset($_SESSION['consumer_key'])) {
+  }
+
+  if (isset($_SESSION['consumer_key'])) {
     $consumer = loadConsumer($db, $_SESSION['customer_id'], $_SESSION['consumer_key']);
   } else {
     $consumer = loadConsumer($db, $_SESSION['customer_id'], NULL);
   }
+
   $consumers = loadConsumers($db, $_SESSION['customer_id']);
   if (isset($_SESSION['consumer_key']) && !isset($consumers[$_SESSION['consumer_key']])) {
     unset($_SESSION['consumer_key']);
   }
   if (!isset($_SESSION['consumer_key'])) {
+    if (isset($_POST['reduced_checksum'])) {
+      $_SESSION['reduced_checksum'] = 1;
+    }
     if (isset($_SESSION['reduced_checksum'])) {
       $_SESSION['consumer_key'] = create_shortened_guid();
     } else {
@@ -171,6 +210,32 @@ function checkForm() {
 EOD;
 
   page_header($script, TRUE);
+
+  function validateCustomerOnLoad() {
+    $customer = array();
+    if (isset($_POST['debug'])) {
+      $customer['customer_id'] = $_POST['customer_id'];
+    } else {
+      $customer['customer_id'] = getCustomerId($_POST['customer_id']);
+    }
+    $customer['qmwise_client_id'] = $_POST['qmwise_client_id'];
+    $customer['qmwise_checksum'] = $_POST['qmwise_checksum'];
+    if (!checkCustomer($customer)) {
+      $_SESSION['message'] = 'Unable to confirm QMWISe credentials, please check data and try again.';
+      $_SESSION['alert'] = '<p class="alert alert-danger col-md-6">';
+      header('Location: index.php');
+      exit;
+    }
+    return $customer;
+  }
+
+  function generateConsumer($db) {
+    $consumer = loadConsumer($db, $_SESSION['customer_id'], $_SESSION['consumer_key']);
+    if (isset($_POST['secret'])) $consumer->secret = $_POST['secret'];
+    if (isset($_POST['consumer_name'])) $consumer->consumer_name = $_POST['consumer_name'];
+    if (isset($_POST['username_prefix'])) $consumer->custom['username_prefix'] = $_POST['username_prefix'];
+    return $consumer;
+  }
 
 ?>
       <div class="col-md-12">
