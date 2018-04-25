@@ -16,21 +16,21 @@ class LTI_Session_Handler implements SessionHandlerInterface {
   /*
    * Defaults to true, since opening DB is processed before the session values are opened.
    */
-  function _open() {
+  public function open($save_path, $session_name) {
     return true;
   }
 
   /*
    * Defaults to true, since DB is set to be open passively, the _close operation shouldn't be used.
    */
-  function _close() {
+  public function close() {
     return true;
   }
 
   /*
    * Read the session value, given the ID.
    */
-  function _read($id) {
+  public function read($id) {
     $sql = 'SELECT data ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (id = :id)';
@@ -49,7 +49,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
   /*
    * Write the session value.
    */
-  static function _write($id, $data) {
+  public function write($id, $data) {
     $sql = 'SELECT count(*) ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (id = :id)';
@@ -81,7 +81,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
   /*
    * Destroy session data given ID
    */
-  function _destroy($id) {
+  public function destroy($id) {
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (id = :id)';
     $query = $this->db->prepare($sql);
@@ -93,7 +93,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
   /*
    * Remove any expired sessions
    */
-  function _clean($max) {
+  public function gc($max) {
     $old = time() - $max;
     $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (access < :old)';
