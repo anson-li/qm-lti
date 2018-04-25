@@ -50,6 +50,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
    * Write the session value.
    */
   public function write($id, $data) {
+    $now = time();
     $sql = 'SELECT count(*) ' .
            'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'WHERE (id = :id)';
@@ -63,7 +64,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
              'VALUES (:id, :access, :data)';
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
-      $query->bindValue('access', time(), PDO::PARAM_STR);
+      $query->bindValue('access', $now, PDO::PARAM_STR);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     } else {
       $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
@@ -71,10 +72,13 @@ class LTI_Session_Handler implements SessionHandlerInterface {
            'WHERE id = :id';
       $query = $this->db->prepare($sql);
       $query->bindValue('id', $id, PDO::PARAM_STR);
-      $query->bindValue('access', time(), PDO::PARAM_STR);
+      $query->bindValue('access', $now, PDO::PARAM_STR);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     }
     $ok = $query->execute();
+    if (!$ok) {
+      print_r($query->errorInfo(), 1);
+    }
     return $ok;
   }
 
