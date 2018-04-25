@@ -61,7 +61,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
     $ok = $query->execute();
     $numColumns = $query->fetchColumn();
     error_log($numColumns);
-    if ($numColumns === 0) {
+    if ($numColumns === '0') {
       error_log("***herer***");
       $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
              '(id, access, data) ' .
@@ -71,6 +71,7 @@ class LTI_Session_Handler implements SessionHandlerInterface {
       $query->bindValue('access', $now, PDO::PARAM_STR);
       $query->bindValue('data', $data, PDO::PARAM_STR);
     } else {
+      error_log(message)
       $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::SESSION_TABLE_NAME . ' ' .
            'SET data = :data, access = :access ' .
            'WHERE id = :id';
