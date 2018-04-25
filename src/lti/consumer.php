@@ -44,7 +44,7 @@ require_once('../resources/LTI_Session_Handler.php');
     exit;
   }
 
-  $url = get_root_url();
+  $url =  substr( get_root_url(), 0, -14 );
   if (isset($_GET['consumer_key'])) {
     $_SESSION['consumer_key'] = $_GET['consumer_key'];
   }
