@@ -17,7 +17,7 @@ class LTI_Session_Handler {
   * Setup session handler details to work through DB
   */
   public function process_session_handlers() {
-    if ($db === false) {
+    if ($this->db === false) {
       return false;
     }
     session_set_save_handler('_open',
