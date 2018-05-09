@@ -17,9 +17,16 @@ Your Tenant ID
 [CmdletBinding()]
 param
 (
-  [Parameter(Position=0, Mandatory=$true)]
   [ValidateNotNullOrEmpty()]
-  [string] $TenantIDOrURL
+  [string] $TenantIDOrURL,
+  [parameter(Mandatory=$true)]
+  [string] $DB_SERVER,
+  [parameter(Mandatory=$true)]
+  [string] $DB_NAME,
+  [parameter(Mandatory=$true)]
+  [string] $DB_PASSWORD,
+  [parameter(Mandatory=$true)]
+  [string] $DB_USERNAME
 )
 
 # Load shared functions
@@ -29,14 +36,9 @@ Import-Module $PSScriptRoot\Functions.psm1
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-# Load QMODHelper
-Write-Host "Initialising QMODHelper..."
-Import-Module QMODHelper
-
-$dbInfo = Get-QM_DatabaseInfo -DatabaseType lti
 $SQLParameters = @{
-  ServerInstance  = $dbInfo.InstanceName
-  Database        = $dbInfo.DatabaseName
+  ServerInstance  = $DB_SERVER
+  Database        = $DB_NAME
   OutputSqlErrors = $true
 }
 
@@ -64,4 +66,3 @@ catch
 {
   Write-Error "Error occurred executing scheduled task:`n$_" -ErrorAction Continue
 }
-
