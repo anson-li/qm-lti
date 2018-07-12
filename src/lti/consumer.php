@@ -243,7 +243,7 @@ EOD;
                 Profile Name:
               </div>
               <div class="col-sm-4">
-                <input type="text" class="form-control" id="id_consumer_name" name="consumer_name" value="<?php echo htmlentities($consumer->consumer_name); ?>" size="25" maxlength="20" onchange="doChange(this);" />
+                <input type="text" class="form-control" id="id_consumer_name" autocomplete="new-password" name="consumer_name" value="<?php echo htmlentities($consumer->consumer_name); ?>" size="25" maxlength="20" onchange="doChange(this);" />
               </div>
             </div>
             <div class="row">
@@ -251,7 +251,7 @@ EOD;
                 LTI Consumer Secret:
               </div>
               <div class="col-sm-4">
-                <input type="password" class="form-control col-md-8" id="id_secret" name="secret" value="<?php echo htmlentities($consumer->secret); ?>" size="60" maxlength="50" onchange="doChange(this);" />&nbsp;
+                <input type="password" class="form-control col-md-8" id="id_secret" name="secret" autocomplete="new-password" value="<?php echo htmlentities($consumer->secret); ?>" size="60" maxlength="50" onchange="doChange(this);" />&nbsp;
               </div>
             </div>
             <div class="row">
@@ -268,7 +268,7 @@ EOD;
                 Username Prefix:
               </div>
               <div class="col-sm-4">
-                <input type="text" class="form-control" id="id_username_prefix" name="username_prefix" value="<?php echo htmlentities($consumer->custom['username_prefix']); ?>" size="10" maxlength="10" onchange="doChange(this);" />
+                <input type="text" class="form-control" id="id_username_prefix" name="username_prefix" autocomplete="new-password" value="<?php echo htmlentities($consumer->custom['username_prefix']); ?>" size="10" maxlength="10" onchange="doChange(this);" />
               </div>
             </div>
           </div>
