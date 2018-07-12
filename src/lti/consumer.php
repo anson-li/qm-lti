@@ -81,7 +81,7 @@ require_once('../resources/lib.php');
   }
   if (!isset($_SESSION['consumer_key'])) {
     $_SESSION['consumer_key'] = create_guid();
-    $_SESSION['secret'] = getRandomString(32);
+    $_SESSION['secret'] = '';
   }
   if (!isset($consumer->secret)) {
     $consumer->secret = $_SESSION['secret'];
