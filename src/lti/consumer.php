@@ -148,14 +148,14 @@ function checkForm() {
     el.value = el.value.trim();
     var ok = el.value.length > 0;
     if (!ok) {
-      alert('Please enter a name for the profile');
+      alert('Please enter a valid name for the profile.');
       el.focus();
     } else {
       el = document.getElementById('id_secret');
       el.value = el.value.trim();
       var ok = el.value.length > 0;
       if (!ok) {
-        alert('Please enter a secret');
+        alert('Please enter a valid secret.');
         el.focus();
       }
     }
