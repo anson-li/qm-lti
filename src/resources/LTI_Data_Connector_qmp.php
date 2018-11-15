@@ -46,8 +46,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 ###  LTI_Tool_Consumer methods
 ###
 
-/*
+/**
  * Load the tool consumer from the database
+ *
+ * @return Boolean for success or fail
  */
   public function Tool_Consumer_load($consumer) {
     $ok = TRUE;
@@ -86,8 +88,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
- *    Save the tool consumer to the database
+/**
+ * Save the tool consumer to the database
+ *
+ * @return Boolean for success or fail
  */
   public function Tool_Consumer_save($consumer) {
     $ok = TRUE;
@@ -141,8 +145,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Delete the tool consumer from the database
+ *
+ * @return Boolean for success or fail
  */
   public function Tool_Consumer_delete($consumer) {
     $ok = TRUE;
@@ -175,8 +181,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Load all tool consumers from the database
+ *
+ * @return Array of list of customers
  */
   public function Tool_Consumer_list() {
     $consumers = array();
@@ -212,8 +220,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 ###  LTI_Resource_Link methods
 ###
 
-/*
+/**
  * Load the resource link from the database
+ *
+ * @return Boolean for success or fail
  */
   public function Resource_Link_load($resource_link) {
 
@@ -253,8 +263,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Save the resource link to the database
+ *
+ * @return Boolean for success or fail
  */
   public function Resource_Link_save($resource_link) {
     $time = time();
@@ -305,8 +317,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
- *    Delete the resource link from the database
+/**
+ * Delete the resource link from the database
+ *
+ * @return Boolean for success or fail
  */
   public function Resource_Link_delete($resource_link) {
     $id = $resource_link->getId();
@@ -331,9 +345,11 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Obtain an array of LTI_User objects for users with a result sourcedId.  The array may include users from other
  * resource links which are sharing this resource link.  It may also be optionally indexed by the user ID of a specified scope.
+ *
+ * @return Array of LTI_User objects
  */
   public function Resource_Link_getUserResultSourcedIDs($resource_link, $resource_link_only, $id_scope) {
     if ($resource_link_only) {
@@ -373,8 +389,11 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $users;
   }
 
-/*
- * Get an array of LTI_Resource_Link_Share objects for each resource link which is sharing this context*
+/**
+ * Get an array of LTI_Resource_Link_Share objects for each resource link which is sharing this context.
+ * This process has since been deprecated.
+ *
+ * @return Array
  */
   public function Resource_Link_getShares($resource_link) {
     $shares = array();
@@ -385,8 +404,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 ###  LTI_Consumer_Nonce methods
 ###
 
-/*
- * Load the consumer nonce from the database
+/**
+ * Load the consumer nonce from the database.
+ *
+ * @return Boolean for success or fail
  */
   public function Consumer_Nonce_load($nonce) {
     # Delete any expired nonce values
@@ -418,8 +439,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Save the consumer nonce in the database
+ *
+ * @return Boolean for success or fail
  */
   public function Consumer_Nonce_save($nonce) {
     $value = $nonce->getValue();
@@ -445,22 +468,31 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 ###  LTI_Resource_Link_Share_Key methods
 ###
 
-/*
+/**
  * Load the resource link share key from the database
+ * Currently unused
+ *
+ * @return FALSE
  */
   public function Resource_Link_Share_Key_load($share_key) {
     return FALSE;
   }
 
-/*
+/**
  * Save the resource link share key to the database
+ * Currently unused
+ *
+ * @return TRUE
  */
   public function Resource_Link_Share_Key_save($share_key) {
     return TRUE;
   }
 
-/*
+/**
  * Delete the resource link share key from the database
+ * Currently unused
+ *
+ * @return Boolean for success or fail
  */
   public function Resource_Link_Share_Key_delete($share_key) {
     return TRUE;
@@ -470,8 +502,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 ###  LTI_Result methods
 ###
 
-/*
+/**
  * Clears the accessed result from db
+ *
+ * @return Boolean for success or fail
  */
   public function Results_clearAccessedResult($consumer, $resource_link, $user_id) {
     $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::RESULTS_TABLE_NAME . ' ' .
@@ -487,8 +521,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Clears the accessed result from db
+ *
+ * @return Boolean for success or fail
  */
   public function Results_setAccessedResult($consumer, $resource_link, $result_id) {
     $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::RESULTS_TABLE_NAME . ' ' .
@@ -504,8 +540,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
- *  Gets the number of results a participant has previously taken an assessment
+/**
+ * Gets the number of results a participant has previously taken an assessment
+ *
+ * @return Integer count
  */
   public function Results_getResultsByParticipant($resource_link_id, $assessment_id, $user_id) {
     $sql = 'SELECT COUNT(*) ' .
@@ -524,8 +562,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $count;
   }
 
-/*
+/**
  * Saves the current result into the Results table.
+ *
+ * @return Boolean for success or fail
  */
   public function Results_save($outcome, $consumer, $resource_link, $user_id, $is_accessed, $result_sourcedid) {
     $time = time();
@@ -549,8 +589,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Gets latest result for participant given assessment id
+ *
+ * @return String result_id
  */
   public function Results_getLatestResult($consumer, $resource_link, $user_id) {
     $id = $resource_link->getId();
@@ -573,8 +615,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $result_id;
   }
 
-/*
+/**
  * Gets sourcedid for LMS
+ *
+ * @return String results_sourcedid
  */
   public function Results_getSourcedIDbyResultID($consumer, $resource_link, $result_id) {
     $id = $resource_link->getId();
@@ -597,8 +641,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $result_sourcedid;
   }
 
-/*
+/**
  * Gets score given result ID
+ *
+ * @return Float score
  */
   public function Results_getScorebyResultID($consumer, $resource_link, $result_id) {
     $id = $resource_link->getId();
@@ -621,8 +667,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $score;
   }
 
-/*
+/**
  * Gets latest result for participant given assessment id
+ *
+ * @return Float score
  */
   public function Results_getScore($consumer, $resource_link, $user_id, $order) {
     $id = $resource_link->getId();
@@ -656,8 +704,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $score;
   }
 
-/*
+/**
  * Gets latest result for participant given assessment id
+ *
+ * @return Integer result id
  */
   public function Results_getResultByParam($consumer, $resource_link, $user_id, $param, $order) {
     $id = $resource_link->getId();
@@ -691,8 +741,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $result;
   }
 
-/*
+/**
  * Gets result id of result currently used by LMS
+ *
+ * @return Integer result id
  */
   public function Results_getAccessedResult($consumer, $resource_link, $user_id) {
     $id = $resource_link->getId();
@@ -719,14 +771,16 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
       $row = $query->fetch();
       $result_id = $row['result_id'];
     } else {
-      error_log(print_r($query->errorInfo(), true));
+      error_log(print_r($query->errorInfo(), 1));
       return FALSE;
     }
     return $result_id;
   }
 
-/*
+/**
  * Gets array of participants given a specific context and assessment
+ *
+ * @return Array of participants
  */
   public function Results_getParticipantsByResource($consumer, $resource_link, $assessment_id) {
     $id = $resource_link->getId();
@@ -748,11 +802,106 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
   }
 
 ###
+###  lTI_Attempts methods
+###
+
+/**
+ *  Gets the latest external attempt ID for an assessment
+ *
+ * @return Integer schedule_id
+ */
+  public function Attempts_getAttemptIfExists($consumer_key, $resource_link, $schedule_id, $participant_id) {
+    $id = $resource_link->getId();
+    $sql = 'SELECT COUNT(*) ' .
+           'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule_id = :schedule) AND (participant_id = :participant)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
+    $query->bindValue('context', $id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
+    $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
+    if ($query->execute()) {
+      $row = $query->fetch();
+      $count = $row[0];
+      if ($count === 0) {
+        return FALSE;
+      }
+    } else {
+      return FALSE;
+    }
+    return $count;
+  }
+
+/**
+ *  Gets the latest external attempt ID for an assessment
+ *
+ * @return Integer schedule_id
+ */
+  public function Attempts_getLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $participant_id) {
+    $sql = 'SELECT schedule_id ' .
+           'FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (assessment_id = :assessment) AND (participant_id = :participant)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
+    $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
+    $query->bindValue('assessment', $assessment_id, PDO::PARAM_STR);
+    $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    if ($ok) {
+      $row = $query->fetch();
+      $schedule_id = $row['schedule_id'];
+    } else {
+      error_log(print_r($query->errorInfo(), 1));
+      return FALSE;
+    }
+    return $schedule_id;
+  }
+
+/**
+ *  Gets the latest external attempt ID for an assessment
+ *
+ * @return Boolean for success or fail
+ */
+  public function Attempts_setLatestAttempt($consumer_key, $resource_link_id, $assessment_id, $schedule_id, $participant_id) {
+    $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME .
+            ' (consumer_key, context_id, assessment_id, schedule_id, participant_id) ' .
+            'VALUES (:consumer, :context, :assessment, :schedule, :participant)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('consumer', $consumer_key, PDO::PARAM_STR);
+    $query->bindValue('context', $resource_link_id, PDO::PARAM_STR);
+    $query->bindValue('assessment', $assessment_id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
+    $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    return $ok;
+  }
+
+/**
+ * Gets the latest external attempt ID for an assessment
+ *
+ * @return Boolean for success or fail
+ */
+  public function Attempts_deleteLatestAttempt($consumer_key, $resource_link, $schedule_id, $participant_id) {
+    $id = $resource_link->getId();
+    $sql = 'DELETE FROM ' . $this->dbTableNamePrefix . LTI_Data_Connector::ATTEMPTS_TABLE_NAME . ' ' .
+           'WHERE (consumer_key = :consumer) AND (context_id = :context) AND (schedule_id = :schedule) AND (participant_id = :participant)';
+    $query = $this->db->prepare($sql);
+    $query->bindValue('consumer', $consumer_key->getKey(), PDO::PARAM_STR);
+    $query->bindValue('context', $id, PDO::PARAM_STR);
+    $query->bindValue('schedule', $schedule_id, PDO::PARAM_STR);
+    $query->bindValue('participant', $participant_id, PDO::PARAM_STR);
+    $ok = $query->execute();
+    return $ok;
+  }
+
+###
 ###  lTI_Reports methods
 ###
 
-/*
+/**
  * Checks to see if report config is already loaded for specific build
+ *
+ * @return Boolean identifying if the report is accessible
  */
   public function ReportConfig_loadAccessible($consumer_key, $resource_link_id, $assessment_id) {
     $sql = 'SELECT is_accessible ' .
@@ -772,8 +921,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $is_accessible;
   }
 
-/*
+/**
  * Inserts the report configuration to the database
+ *
+ * @return Boolean for success or fail
  */
   public function ReportConfig_insert($consumer_key, $resource_link_id, $assessment_id, $is_accessible) {
     $sql = 'INSERT INTO ' . $this->dbTableNamePrefix . LTI_Data_Connector::REPORTS_TABLE_NAME . ' (consumer_key, context_id, ' .
@@ -788,8 +939,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Updates the report configuration to the database
+ *
+ * @return Boolean for success or fail
  */
   public function ReportConfig_update($consumer_key, $resource_link_id, $assessment_id, $is_accessible) {
     $sql = 'UPDATE ' . $this->dbTableNamePrefix . LTI_Data_Connector::REPORTS_TABLE_NAME . ' ' .
@@ -808,8 +961,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
 ###  LTI_User methods
 ###
 
-/*
- *  Loads list of users available on LTI by context
+/**
+ * Loads list of users available on LTI by context
+ *
+ * @return Array of users
  */
   public function User_loadUsersbyContext($consumer_key, $context_id) {
     $sql = 'SELECT user_id, firstname, lastname, fullname, email, roles, created, updated, lti_result_sourcedid ' .
@@ -826,8 +981,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $users;
   }
 
-/*
- *  loads list of users available on Tool Consumer by context
+/**
+ * loads list of users available on Tool Consumer by context
+ *
+ * @return Array of users
  */
   public function TCUser_loadUsersbyContext($consumer_key, $context_id) {
     $sql = 'SELECT user_id, firstname, lastname, fullname, email, roles, created, updated, lti_result_sourcedid ' .
@@ -844,8 +1001,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $users;
   }
 
-/*
- *  loads list of users available on Tool Consumer by context
+/**
+ * loads list of users available on Tool Consumer by context
+ *
+ * @return Array of users
  */
   public function TCUser_loadUsers($consumer_key) {
     $sql = 'SELECT user_id, firstname, lastname, fullname, email, roles, created, updated, lti_result_sourcedid ' .
@@ -861,8 +1020,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $users;
   }
 
-/*
- *  loads list of users available on Tool Consumer by context
+/**
+ * loads list of users available on Tool Consumer by context
+ *
+ * @return Array of users
  */
   public function User_loadUsers($consumer_key) {
     $sql = 'SELECT user_id, firstname, lastname, fullname, email, roles, created, updated, lti_result_sourcedid ' .
@@ -878,8 +1039,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $users;
   }
 
-/*
+/**
  * Load the user from the database
+ *
+ * @return Boolean for success or fail
  */
   public function User_load($user) {
     $key = $user->getResourceLink()->getKey();
@@ -911,8 +1074,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Save the user to the database
+ *
+ * @return Boolean for success or fail
  */
   public function User_save($user) {
 
@@ -951,8 +1116,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Delete the user from the database
+ *
+ * @return Boolean for success or fail
  */
   public function User_delete($user) {
     $key = $user->getResourceLink()->getKey();
@@ -971,8 +1138,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Load the user from the database
+ *
+ * @return Boolean for success or fail
  */
   public function TCUser_load($user) {
     $key = $user->getResourceLink()->getKey();
@@ -1004,8 +1173,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Save the user to the tool consumer database
+ *
+ * @return Boolean for success or fail
  */
   public function TCUser_save($user) {
     $time = time();
@@ -1044,8 +1215,10 @@ class LTI_Data_Connector_QMP extends LTI_Data_Connector {
     return $ok;
   }
 
-/*
+/**
  * Delete the user from the database
+ *
+ * @return Boolean for success or fail
  */
   public function TCUser_delete($user) {
     $key = $user->getResourceLink()->getKey();

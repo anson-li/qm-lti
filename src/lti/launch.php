@@ -57,16 +57,16 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
     $context_title = $tool_provider->resource_link->lti_context_title;
     $context_label = $tool_provider->resource_link->lti_context_label;
     $supports_outcomes = $tool_provider->resource_link->hasOutcomesService();
+    $firstname = substr($tool_provider->user->firstname, 0, MAX_NAME_LENGTH);
+    $lastname = substr($tool_provider->user->lastname, 0, MAX_NAME_LENGTH);
     if ($tool_provider->user->username != '') {
-      $username = $prefix . $tool_provider->user->username;
+      $username = $prefix . $tool_provider->user->username . ' (' . $firstname . ' ' . $lastname . ')';
     } else {
-      $username = $prefix . $tool_provider->user->getId();
+      $username = $prefix . $tool_provider->user->getId()  . ' (' . $firstname . ' ' . $lastname . ')';
     }
     // remove invalid characters in username
     $username = strtr($username, INVALID_USERNAME_CHARS, str_repeat('-', strlen(INVALID_USERNAME_CHARS)));
     $username = substr($username, 0, MAX_NAME_LENGTH);
-    $firstname = substr($tool_provider->user->firstname, 0, MAX_NAME_LENGTH);
-    $lastname = substr($tool_provider->user->lastname, 0, MAX_NAME_LENGTH);
     $email = substr($tool_provider->user->email, 0, MAX_EMAIL_LENGTH);
     $is_student = $tool_provider->user->isLearner();
     $result_id = $tool_provider->user->lti_result_sourcedid;
@@ -111,7 +111,11 @@ require_once('../resources/LTI_Data_Connector_qmp.php');
       }
 
       $return_url = parse_url($_SESSION['lti_return_url']);
-      parse_str($return_url['query'], $_SESSION['additional_params']);
+      if (!empty($return_url)) {
+        parse_str($return_url['query'], $_SESSION['additional_params']);
+      } else {
+        $_SESSION['additional_params'] = array();
+      }
 
       // set redirect URL
       if ($is_student) {
